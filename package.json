@@ -4,9 +4,21 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "swc src -d dist --strip-leading-paths"
 	},
 	"keywords": [],
 	"author": "Abiria",
-	"license": "ISC"
+	"license": "ISC",
+	"dependencies": {
+		"react": "19.0.0-beta-26f2496093-20240514",
+		"react-dom": "19.0.0-beta-26f2496093-20240514"
+	},
+	"devDependencies": {
+		"@swc/cli": "^0.3.12",
+		"@swc/core": "^1.5.7",
+		"@types/react": "^18.3.2",
+		"@types/react-dom": "^18.3.0",
+		"typescript": "^5.4.5"
+	}
 }
