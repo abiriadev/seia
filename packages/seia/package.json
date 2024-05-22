@@ -17,8 +17,10 @@
 	"author": "Abiria",
 	"license": "MIT",
 	"dependencies": {
+		"@hono/node-server": "^1.11.1",
 		"@rollup/pluginutils": "^5.1.0",
 		"@vitejs/plugin-react": "^4.2.1",
+		"hono": "^4.3.9",
 		"react": "19.0.0-beta-26f2496093-20240514",
 		"react-dom": "19.0.0-beta-26f2496093-20240514",
 		"react-server-dom-webpack": "19.0.0-beta-26f2496093-20240514",
