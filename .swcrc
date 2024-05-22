@@ -12,6 +12,6 @@
 		"target": "es2022"
 	},
 	"module": {
-		"type": "commonjs"
+		"type": "es6"
 	}
 }
