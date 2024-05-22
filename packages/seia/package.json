@@ -3,7 +3,13 @@
 	"version": "0.0.0",
 	"description": "Lightweight SSR framework for React Server Components",
 	"type": "module",
-	"main": "./dist/index.js",
+	"exports": {
+		".": "./dist/index.js",
+		"./runtime": "./dist/runtime.js"
+	},
+	"bin": {
+		"seia": "./dist/cli.js"
+	},
 	"scripts": {
 		"build": "swc src -d dist --strip-leading-paths"
 	},
@@ -25,6 +31,7 @@
 		"@types/node": "^20.12.12",
 		"@types/react": "^18.3.2",
 		"@types/react-dom": "^18.3.0",
+		"chokidar": "^3.6.0",
 		"rollup": "^4.17.2",
 		"typescript": "^5.4.5"
 	}
