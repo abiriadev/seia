@@ -1,16 +1,28 @@
 import './webpack-global.js'
 import { renderToReadableStream } from 'react-server-dom-webpack/server.edge'
-import { parentPort, workerData } from 'node:worker_threads'
+import {
+	parentPort,
+	workerData,
+	type TransferListItem,
+} from 'node:worker_threads'
 import { jsx } from 'react/jsx-runtime'
-;(async () => {
-	const component = await import(workerData.componentUrl)
 
-	const rs = renderToReadableStream(
-		jsx(component.App, {}),
+const component = await import(workerData.componentUrl)
+
+const rs = renderToReadableStream(
+	jsx(component.App, {}),
+	new Proxy(
 		{},
-	)
+		{
+			get(_target, encodedId: string) {
+				console.log('builder', _target)
+			},
+		},
+	),
+)
 
-	const text = await new Response(rs).text()
+parentPort?.postMessage(rs, [
+	rs as unknown as TransferListItem,
+])
 
-	parentPort?.postMessage(text)
-})()
+parentPort?.on('message', console.log)
