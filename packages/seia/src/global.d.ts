@@ -1,3 +1,10 @@
+interface TemporaryReference<T> {}
+
+type TemporaryReferenceSet = WeakMap<
+	TemporaryReference<any>,
+	string
+>
+
 declare module 'react-server-dom-webpack/node-loader' {
 	export type Source = string
 
@@ -32,19 +39,12 @@ declare module 'react-server-dom-webpack/server.edge' {
 		[id: string]: ClientReferenceManifestEntry
 	}
 
-	interface TemporaryReference<T> {}
-
-	type TemporaryReferenceSet = WeakMap<
-		TemporaryReference<any>,
-		string
-	>
-
 	type Options = {
 		environmentName?: string
 		identifierPrefix?: string
 		signal?: any // AbortSignal
 		temporaryReferences?: TemporaryReferenceSet
-		onError?: (error: mixed) => void
+		onError?: (error: any) => void
 		onPostpone?: (reason: string) => void
 	}
 
@@ -53,4 +53,23 @@ declare module 'react-server-dom-webpack/server.edge' {
 		webpackMap: ClientManifest,
 		options?: Options,
 	): ReadableStream
+}
+
+declare module 'react-server-dom-webpack/client.edge' {
+	type SSRManifest = {
+		moduleMap: any
+		moduleLoading: any
+	}
+
+	export type Options = {
+		ssrManifest: SSRManifest
+		nonce?: string
+		encodeFormAction?: any // EncodeFormActionCallback
+		temporaryReferences?: any // TemporaryReferenceSet
+	}
+
+	export function createFromReadableStream(
+		stream: ReadableStream,
+		options: Options,
+	): ReactNode
 }
