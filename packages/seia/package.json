@@ -22,6 +22,7 @@
 		"react": "19.0.0-beta-26f2496093-20240514",
 		"react-dom": "19.0.0-beta-26f2496093-20240514",
 		"react-server-dom-webpack": "19.0.0-beta-26f2496093-20240514",
+		"rollup-plugin-node-externals": "^7.1.2",
 		"ts-pattern": "^5.1.1",
 		"vite": "^5.2.11"
 	},
