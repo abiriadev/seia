@@ -32,7 +32,6 @@
 		"@types/react": "^18.3.2",
 		"@types/react-dom": "^18.3.0",
 		"chokidar": "^3.6.0",
-		"rollup": "^4.17.2",
 		"typescript": "^5.4.5"
 	}
 }
