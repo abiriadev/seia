@@ -7,7 +7,11 @@ import { pathToFileURL } from 'node:url'
 import { logger } from 'hono/logger'
 import { ComponentType } from 'react'
 import { renderRscDom } from './renderer.js'
-import { renderToString } from 'react-dom/server'
+import {
+	renderToString,
+	renderToReadableStream,
+} from 'react-dom/server.edge'
+import { jsx } from 'react/jsx-runtime'
 
 let entry: null | { App: ComponentType } = null
 
@@ -18,12 +22,16 @@ app.use(logger())
 /** @jsxImportSource hono/jsx */
 app.get('/', async c => {
 	const entryFile = pathToFileURL(
-		join(cwd(), './dist/App.mjs'),
+		join(cwd(), './dist/App.js'),
 	).href
 
-	const dom = await renderRscDom(entryFile)
+	const [worker, dom] = await renderRscDom(entryFile)
 
-	const __html = renderToString(dom)
+	const ren = await renderToReadableStream(dom)
+
+	const __html = await new Response(ren).text()
+
+	await worker.terminate()
 
 	return c.html(
 		(
