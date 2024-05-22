@@ -29,7 +29,7 @@ const execWorker = async (
 
 export const renderRscDom = async (
 	componentUrl: string,
-): Promise<ReactNode> => {
+): Promise<[Worker, ReactNode]> => {
 	const [worker, rs] = await execWorker(componentUrl)
 
 	const dom = await createFromReadableStream(rs, {
@@ -46,7 +46,5 @@ export const renderRscDom = async (
 		},
 	})
 
-	await worker.terminate()
-
-	return dom
+	return [worker, dom]
 }
