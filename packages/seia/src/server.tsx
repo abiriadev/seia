@@ -3,17 +3,9 @@ import { Hono } from 'hono'
 import { serve as nodeServe } from '@hono/node-server'
 import { cwd } from 'node:process'
 import { join } from 'node:path'
-import { pathToFileURL } from 'node:url'
 import { logger } from 'hono/logger'
-import { ComponentType } from 'react'
 import { renderRscDom } from './renderer.js'
-import {
-	renderToString,
-	renderToReadableStream,
-} from 'react-dom/server.edge'
-import { jsx } from 'react/jsx-runtime'
-
-let entry: null | { App: ComponentType } = null
+import { renderToReadableStream } from 'react-dom/server.edge'
 
 const app = new Hono()
 
@@ -21,9 +13,7 @@ app.use(logger())
 
 /** @jsxImportSource hono/jsx */
 app.get('/', async c => {
-	const entryFile = pathToFileURL(
-		join(cwd(), './dist/App.js'),
-	).href
+	const entryFile = join(cwd(), './dist/App.js#App')
 
 	const [worker, dom] = await renderRscDom(entryFile)
 
