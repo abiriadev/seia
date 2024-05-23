@@ -26,6 +26,11 @@ const execWorker = async (
 		worker.on('message', rs => resolve([worker, rs]))
 	})
 
+export const renderRscPayloadStream = async (
+	componentAnchorId: string,
+): Promise<[Worker, ReadableStream]> =>
+	await execWorker(componentAnchorId)
+
 export const renderRscDom = async (
 	componentAnchorId: string,
 ): Promise<[Worker, ReactNode]> => {
