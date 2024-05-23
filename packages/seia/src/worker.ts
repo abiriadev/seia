@@ -6,16 +6,29 @@ import {
 	type TransferListItem,
 } from 'node:worker_threads'
 import { jsx } from 'react/jsx-runtime'
+import { AnchorId, mustParseAnchorId } from './anchor.js'
 
-const component = await import(workerData.componentUrl)
+const { path, anchor } = mustParseAnchorId(
+	workerData as AnchorId,
+)
+
+const component = await import(path)
 
 const rs = renderToReadableStream(
-	jsx(component.App, {}),
+	jsx(component[anchor], {}),
 	new Proxy(
 		{},
 		{
-			get(_target, encodedId: string) {
-				console.log('builder', _target)
+			get(_, anchorId: string) {
+				const { anchor } =
+					mustParseAnchorId(anchorId)
+				const id = 'C.js'
+				return {
+					id,
+					name: anchor,
+					chunks: [id],
+					async: true,
+				}
 			},
 		},
 	),
