@@ -38,4 +38,4 @@ parentPort?.postMessage(rs, [
 	rs as unknown as TransferListItem,
 ])
 
-parentPort?.on('message', console.log)
+parentPort?.on('message', () => {})
