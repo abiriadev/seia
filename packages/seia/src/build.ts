@@ -1,22 +1,53 @@
 import './webpack-global.js'
 import { build as vite } from 'vite'
-import react from '@vitejs/plugin-react'
 import { nodeExternals } from 'rollup-plugin-node-externals'
 import { seia } from './vite-plugin-seia.js'
 
 export const build = async () => {
-	await vite({
-		plugins: [nodeExternals(), seia(), react()],
+	const entry = [
+		'./src/App.tsx',
+		'./src/A.tsx',
+		'./src/B.tsx',
+		'./src/C.tsx',
+		'./src/D.tsx',
+	]
+
+	const plugins = [nodeExternals()]
+
+	const defaultConfig = {
+		plugins,
 		build: {
 			target: 'esnext',
-			emptyOutDir: false,
-			rollupOptions: {
-				input: ['./src/App.tsx'],
-				output: {
-					dir: '.',
-				},
-				external: /node:/,
+			emptyOutDir: true,
+			lib: {
+				entry,
+				formats: ['es'],
 			},
+		},
+	}
+
+	// RSC
+	await vite({
+		...defaultConfig,
+		plugins: [plugins, seia()],
+		build: {
+			outDir: 'dist/rsc',
+		},
+	})
+
+	// SSR
+	await vite({
+		...defaultConfig,
+		build: {
+			outDir: 'dist/ssr',
+		},
+	})
+
+	// Hydration
+	await vite({
+		...defaultConfig,
+		build: {
+			outDir: 'dist/client',
 		},
 	})
 }
