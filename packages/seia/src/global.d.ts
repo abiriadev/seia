@@ -74,6 +74,17 @@ declare module 'react-server-dom-webpack/client.edge' {
 	): ReactNode
 }
 
+declare module 'react-dom/server.edge' {
+	type ReactDOMServerReadableStream = ReadableStream & {
+		allReady: Promise<void>
+	}
+
+	export function renderToReadableStream(
+		children: ReactNode,
+		options?: any,
+	): Promise<ReactDOMServerReadableStream>
+}
+
 declare var __webpack_module_loading__: Map<string, any>
 declare var __webpack_module_cache__: Map<string, any>
 declare var __webpack_chunk_load__: (
