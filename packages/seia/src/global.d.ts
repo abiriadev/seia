@@ -73,3 +73,12 @@ declare module 'react-server-dom-webpack/client.edge' {
 		options: Options,
 	): ReactNode
 }
+
+declare var __webpack_module_loading__: Map<string, any>
+declare var __webpack_module_cache__: Map<string, any>
+declare var __webpack_chunk_load__: (
+	id: string,
+) => Promise<any>
+declare var __webpack_require__: (
+	id: string,
+) => Promise<any>
