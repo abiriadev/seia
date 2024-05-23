@@ -1,5 +1,5 @@
 import './webpack-global.js'
-import { build as vite } from 'vite'
+import { build as vite, mergeConfig } from 'vite'
 import { nodeExternals } from 'rollup-plugin-node-externals'
 import { seia } from './vite-plugin-seia.js'
 
@@ -27,27 +27,30 @@ export const build = async () => {
 	}
 
 	// RSC
-	await vite({
-		...defaultConfig,
-		plugins: [plugins, seia()],
-		build: {
-			outDir: 'dist/rsc',
-		},
-	})
+	await vite(
+		mergeConfig(defaultConfig, {
+			plugins: [plugins, seia()],
+			build: {
+				outDir: 'dist/rsc',
+			},
+		}),
+	)
 
 	// SSR
-	await vite({
-		...defaultConfig,
-		build: {
-			outDir: 'dist/ssr',
-		},
-	})
+	await vite(
+		mergeConfig(defaultConfig, {
+			build: {
+				outDir: 'dist/ssr',
+			},
+		}),
+	)
 
 	// Hydration
-	await vite({
-		...defaultConfig,
-		build: {
-			outDir: 'dist/client',
-		},
-	})
+	await vite(
+		mergeConfig(defaultConfig, {
+			build: {
+				outDir: 'dist/client',
+			},
+		}),
+	)
 }
