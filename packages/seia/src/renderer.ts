@@ -3,6 +3,7 @@ import { Worker } from 'node:worker_threads'
 import { fileURLToPath } from 'node:url'
 import { join } from 'node:path'
 import { ReactNode } from 'react'
+import { cwd } from 'node:process'
 
 const workerUrl = join(
 	fileURLToPath(new URL('.', import.meta.url)),
@@ -10,13 +11,11 @@ const workerUrl = join(
 )
 
 const execWorker = async (
-	componentUrl: string,
+	componentAnchorId: string,
 ): Promise<[Worker, ReadableStream]> =>
 	new Promise((resolve, reject) => {
 		const worker = new Worker(workerUrl, {
-			workerData: {
-				componentUrl,
-			},
+			workerData: componentAnchorId,
 			execArgv: ['-C', 'react-server'],
 		})
 
@@ -28,18 +27,50 @@ const execWorker = async (
 	})
 
 export const renderRscDom = async (
-	componentUrl: string,
+	componentAnchorId: string,
 ): Promise<[Worker, ReactNode]> => {
-	const [worker, rs] = await execWorker(componentUrl)
+	const [worker, rs] = await execWorker(componentAnchorId)
 
 	const dom = await createFromReadableStream(rs, {
 		ssrManifest: {
 			moduleMap: new Proxy(
 				{},
 				{
-					get(target, p, receiver) {
-						console.log(target)
-					},
+					get: (_, file) =>
+						new Proxy(
+							{},
+							{
+								get(_, name) {
+									const id = 'ssr/C.js'
+
+									if (
+										!__webpack_module_loading__.has(
+											id,
+										)
+									) {
+										__webpack_module_loading__.set(
+											id,
+											import(
+												cwd() +
+													'/dist/ssr/C.js'
+											).then(
+												(m: any) =>
+													__webpack_module_cache__.set(
+														id,
+														m,
+													),
+											),
+										)
+									}
+
+									return {
+										id,
+										name,
+										chunks: [id],
+									}
+								},
+							},
+						),
 				},
 			),
 			moduleLoading: null,
