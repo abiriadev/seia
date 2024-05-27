@@ -50,6 +50,9 @@ importers:
       react-server-dom-webpack:
         specifier: 19.0.0-beta-26f2496093-20240514
         version: 19.0.0-beta-26f2496093-20240514(react-dom@19.0.0-beta-26f2496093-20240514)(react@19.0.0-beta-26f2496093-20240514)(webpack@5.91.0)
+      rollup:
+        specifier: ^4.18.0
+        version: 4.18.0
       rollup-plugin-node-externals:
         specifier: ^7.1.2
         version: 7.1.2(rollup@4.18.0)
