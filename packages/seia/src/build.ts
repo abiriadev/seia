@@ -1,56 +1,72 @@
 import './webpack-global.js'
-import { build as vite, mergeConfig } from 'vite'
-import { nodeExternals } from 'rollup-plugin-node-externals'
-import { seia } from './vite-plugin-seia.js'
+import {
+	build as vite,
+	mergeConfig,
+	type UserConfig,
+} from 'vite'
+import { detectBoundaries } from './plugins/detect-boundaries.js'
+import { P, match } from 'ts-pattern'
+import type { OutputAsset } from 'rollup'
+
+const defaultConfig = {
+	build: {
+		target: 'esnext',
+		lib: {
+			formats: ['es'],
+		},
+	},
+}
 
 export const build = async () => {
-	const entry = [
-		'./src/App.tsx',
-		'./src/A.tsx',
-		'./src/B.tsx',
-		'./src/C.tsx',
-		'./src/D.tsx',
-	]
+	const entry = 'src/App.tsx'
 
-	const plugins = [nodeExternals()]
-
-	const defaultConfig = {
-		plugins,
-		build: {
-			target: 'esnext',
-			emptyOutDir: true,
-			lib: {
-				entry,
-				formats: ['es'],
-			},
-		},
-	}
-
-	// RSC
-	await vite(
+	const boundariesOutput = await vite(
 		mergeConfig(defaultConfig, {
-			plugins: [plugins, seia()],
+			plugins: [detectBoundaries()],
 			build: {
-				outDir: 'dist/rsc',
+				lib: {
+					entry,
+				},
+				ssr: true,
+				ssrEmitAssets: true,
+				write: false,
 			},
-		}),
+		} satisfies UserConfig),
 	)
 
-	// SSR
-	await vite(
-		mergeConfig(defaultConfig, {
-			build: {
-				outDir: 'dist/ssr',
-			},
-		}),
-	)
+	const boundariesManifest = match(boundariesOutput)
+		.with(
+			[
+				{
+					output: P.select(),
+				},
+			],
+			output =>
+				match(
+					output.find(
+						(file): file is OutputAsset =>
+							match(file)
+								.with(
+									{
+										type: 'asset',
+										fileName:
+											'boundaries-manifest.json',
+									},
+									() => true,
+								)
+								.otherwise(() => false),
+					)?.source,
+				)
+					.with(
+						P.string,
+						source =>
+							JSON.parse(
+								source,
+							) as Array<string>,
+					)
+					.run(),
+		)
+		.run()
 
-	// Hydration
-	await vite(
-		mergeConfig(defaultConfig, {
-			build: {
-				outDir: 'dist/client',
-			},
-		}),
-	)
+	console.log(boundariesManifest)
 }
