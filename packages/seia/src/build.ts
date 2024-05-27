@@ -110,6 +110,7 @@ export const build = async () => {
 			build: {
 				lib: {
 					entry: '\0client.js',
+					fileName: 'client',
 				},
 				emptyOutDir: false,
 			},
