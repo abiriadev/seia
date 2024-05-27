@@ -69,6 +69,7 @@ export const build = async () => {
 		)
 		.run()
 
+	// RSC
 	await vite(
 		mergeConfig(defaultConfig, {
 			plugins: [rscTransform()],
@@ -76,7 +77,26 @@ export const build = async () => {
 				lib: {
 					entry,
 				},
+				outDir: 'dist/rsc',
 				ssr: true,
+				emptyOutDir: true,
+			},
+			ssr: {
+				external: true,
+			},
+		} satisfies UserConfig),
+	)
+
+	// SSR
+	await vite(
+		mergeConfig(defaultConfig, {
+			build: {
+				lib: {
+					entry: boundariesManifest,
+				},
+				outDir: 'dist/ssr',
+				ssr: true,
+				emptyOutDir: true,
 			},
 			ssr: {
 				external: true,
