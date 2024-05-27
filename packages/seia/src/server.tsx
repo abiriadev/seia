@@ -61,7 +61,7 @@ app.get('/', async c => {
 					<title>Seia SSR</title>
 					<script
 						type="module"
-						src="/@seia/client/"
+						src="/@seia/client.js"
 					/>
 				</head>
 				<body>
