@@ -2,10 +2,12 @@ import { Plugin } from 'vite'
 import { match } from 'ts-pattern'
 
 export const detectBoundaries = (): Plugin => {
+	const boundaries = new Set<string>()
+
 	return {
 		name: 'seia:detect-boundaries',
-		moduleParsed(info) {
-			const isClient = !!info.ast?.body.filter(node =>
+		moduleParsed({ id, ast }) {
+			ast?.body.filter(node =>
 				match(node)
 					.with(
 						{
@@ -18,7 +20,7 @@ export const detectBoundaries = (): Plugin => {
 						() => true,
 					)
 					.otherwise(() => false),
-			)
+			)?.length && boundaries.add(id)
 		},
 		onLog(level, log) {
 			if (
@@ -27,6 +29,14 @@ export const detectBoundaries = (): Plugin => {
 				log.message.includes('use client')
 			)
 				return false
+		},
+		buildEnd() {
+			this.emitFile({
+				type: 'asset',
+				name: 'boundaries-manifest.json',
+				needsCodeReference: false,
+				source: JSON.stringify([...boundaries]),
+			})
 		},
 	}
 }
