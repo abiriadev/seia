@@ -1,14 +1,18 @@
 import { transformSource } from 'react-server-dom-webpack/node-loader'
 import { type Plugin } from 'vite'
 
-export const seia = (): Plugin => {
+export const rscTransform = (): Plugin => {
+	let base: string | null = null
+
 	return {
-		name: 'seia',
-		buildStart() {
-			console.log(`セイア Builder`)
+		name: 'seia:rsc-transform',
+		configResolved({ base: _base }) {
+			base = _base
 		},
 		async transform(code, id) {
-			if (!id.endsWith('.tsx')) return null
+			if (!(base && id.startsWith(base))) {
+				return null
+			}
 
 			const { source } = await transformSource(
 				code,
