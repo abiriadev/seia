@@ -6,6 +6,14 @@ export const detectBoundaries = (): Plugin => {
 
 	return {
 		name: 'seia:detect-boundaries',
+		onLog(level, { code, message }) {
+			if (
+				level === 'warn' &&
+				code === 'MODULE_LEVEL_DIRECTIVE' &&
+				message.includes('use client')
+			)
+				return false
+		},
 		moduleParsed({ id, ast }) {
 			ast?.body.filter(node =>
 				match(node)
@@ -21,14 +29,6 @@ export const detectBoundaries = (): Plugin => {
 					)
 					.otherwise(() => false),
 			)?.length && boundaries.add(id)
-		},
-		onLog(level, log) {
-			if (
-				level === 'warn' &&
-				log.code === 'MODULE_LEVEL_DIRECTIVE' &&
-				log.message.includes('use client')
-			)
-				return false
 		},
 		buildEnd() {
 			this.emitFile({
