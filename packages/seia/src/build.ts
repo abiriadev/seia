@@ -80,7 +80,6 @@ export const build = async () => {
 				},
 				outDir: 'dist/rsc',
 				ssr: true,
-				emptyOutDir: true,
 			},
 			ssr: {
 				external: true,
@@ -97,7 +96,6 @@ export const build = async () => {
 				},
 				outDir: 'dist/ssr',
 				ssr: true,
-				emptyOutDir: true,
 			},
 			ssr: {
 				external: true,
@@ -111,8 +109,9 @@ export const build = async () => {
 			plugins: [injectClient()],
 			build: {
 				lib: {
-					entry: 'client.js',
+					entry: '\0client.js',
 				},
+				emptyOutDir: false,
 			},
 		} satisfies UserConfig),
 	)
