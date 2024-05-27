@@ -74,6 +74,30 @@ declare module 'react-server-dom-webpack/client.edge' {
 	): ReactNode
 }
 
+declare module 'react-server-dom-webpack/client.browser' {
+	type CallServerCallback = <A, T>(
+		string,
+		args: A,
+	) => Promise<T>
+
+	interface Reference {}
+
+	type TemporaryReferenceSet = Map<
+		string,
+		Reference | symbol
+	>
+
+	export type Options = {
+		callServer?: CallServerCallback
+		temporaryReferences?: TemporaryReferenceSet
+	}
+
+	export async function createFromReadableStream(
+		stream: ReadableStream,
+		options?: Options,
+	): Promise<ReactNode>
+}
+
 declare module 'react-dom/server.edge' {
 	type ReactDOMServerReadableStream = ReadableStream & {
 		allReady: Promise<void>
