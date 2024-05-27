@@ -1,5 +1,7 @@
 import { transformSource } from 'react-server-dom-webpack/node-loader'
 import { type Plugin } from 'vite'
+// TODO: use swc
+// import { parse } from '@swc/core'
 
 export const rscTransform = (): Plugin => {
 	let base: string | null = null
@@ -10,9 +12,7 @@ export const rscTransform = (): Plugin => {
 			base = _base
 		},
 		async transform(code, id) {
-			if (!(base && id.startsWith(base))) {
-				return null
-			}
+			if (!(base && id.startsWith(base))) return null
 
 			const { source } = await transformSource(
 				code,
@@ -23,8 +23,18 @@ export const rscTransform = (): Plugin => {
 				async (source: string) => ({ source }),
 			)
 
+			// TODO: use swc transformer?
+			// but swc deprecated transformer
+			// const res = await parse(source, {
+			// 	target: 'es2022',
+			// 	syntax: 'typescript',
+			// 	tsx: true,
+			// 	decorators: true,
+			// 	dynamicImport: true,
+			// })
+
 			return source.replace(
-				'react-server-dom-webpack/server',
+				/react-server-dom-webpack\/server(\.\w+)?/,
 				'seia-js/runtime',
 			)
 		},
