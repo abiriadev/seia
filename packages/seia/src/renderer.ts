@@ -46,7 +46,7 @@ export const renderRscDom = async (
 							{},
 							{
 								get(_, name) {
-									const id = 'ssr/C.js'
+									const id = `${file.toString()}#${name.toString()}`
 
 									if (
 										!__webpack_module_loading__.has(
@@ -57,7 +57,7 @@ export const renderRscDom = async (
 											id,
 											import(
 												cwd() +
-													'/dist/ssr/C.js'
+													`/dist/ssr/${file.toString()}`
 											).then(
 												(m: any) =>
 													__webpack_module_cache__.set(
