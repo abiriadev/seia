@@ -1,6 +1,6 @@
 import { isAbsolute } from 'node:path'
 import { cwd } from 'node:process'
-import { z } from 'zod'
+import { unknown, z } from 'zod'
 
 export type SeiaConfig = z.infer<typeof SeiaConfigSchema>
 
@@ -56,24 +56,58 @@ export const resolveSeiaConfig = (
 	return ResolvedSeiaConfigSchema.parse(config)
 }
 
-// TODO: make it recursive when the config type got complicated later
+const isObject = (
+	value: unknown,
+): value is Record<string, any> =>
+	Object.prototype.toString.call(value) ===
+	'[object Object]'
+
+// heavily inspired by: https://github.com/vitejs/vite/blob/15a6ebb414e3155583e3e9ad970afbdb598b0609/packages/vite/src/node/utils.ts#L1071-L1128
+const mergeConfigRecursively = (
+	defaults: Record<string, any>,
+	overrides: Record<string, any>,
+): Record<string, any> => {
+	const merged: Record<string, any> = { ...defaults }
+
+	for (const key in overrides) {
+		const value = overrides[key]
+
+		// ignore nullish
+		if (value === undefined || value === null) continue
+
+		const existing = merged[key]
+
+		// accept new when existing one is nullish
+		if (existing === undefined || existing === null) {
+			merged[key] = value
+			continue
+		}
+
+		// recursively merge objects
+		if (isObject(existing) && isObject(value)) {
+			merged[key] = mergeConfigRecursively(
+				existing,
+				value,
+			)
+			continue
+		}
+
+		merged[key] = value
+	}
+
+	return merged
+}
+
 export const mergeSeiaConfig = (
 	defaults: SeiaConfig,
 	overrides: SeiaConfig,
-): SeiaConfig => {
-	return {
-		...defaults,
-		...overrides,
-	}
-}
+): SeiaConfig => mergeConfigRecursively(defaults, overrides)
 
-// TODO: make it recursive when the config type got complicated later
 export const extendResolvedSeiaConfig = (
 	defaults: ResolvedSeiaConfig,
 	overrides: SeiaConfig,
-): ResolvedSeiaConfig => {
-	return {
-		...defaults,
-		...overrides,
-	}
-}
+): ResolvedSeiaConfig =>
+	mergeConfigRecursively(
+		defaults,
+		overrides,
+	) as ResolvedSeiaConfig
