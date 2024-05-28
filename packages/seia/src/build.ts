@@ -9,6 +9,7 @@ import { P, match } from 'ts-pattern'
 import type { OutputAsset } from 'rollup'
 import { rscTransform } from './plugins/rsc-transform.js'
 import { injectClient } from './plugins/inject-client.js'
+import { ResolvedSeiaConfig } from './config.js'
 
 const defaultConfig = {
 	build: {
@@ -19,7 +20,7 @@ const defaultConfig = {
 	},
 }
 
-export const build = async () => {
+export const build = async (config: ResolvedSeiaConfig) => {
 	const entry = 'src/App.tsx'
 
 	const boundariesOutput = await vite(
@@ -106,13 +107,19 @@ export const build = async () => {
 	// Hydration
 	await vite(
 		mergeConfig(defaultConfig, {
-			plugins: [injectClient()],
+			plugins: [
+				injectClient({
+					clientBoundaries: boundariesManifest,
+					config,
+				}),
+			],
 			build: {
 				lib: {
 					entry: '\0client.js',
 					fileName: 'client',
 				},
 				emptyOutDir: false,
+				minify: false,
 			},
 		} satisfies UserConfig),
 	)
