@@ -36,21 +36,11 @@ export const renderRscPayloadStream = async (
 ): Promise<[Worker, ReadableStream]> =>
 	await execWorker(componentAnchorId, config)
 
-export const renderRscDom = async (
-	componentAnchorId: string,
-	config: ResolvedSeiaConfig,
-): Promise<[Worker, ReactNode]> => {
-	const [worker, rs] = await execWorker(
-		componentAnchorId,
-		config,
-	)
-
-	const {
-		root,
-		paths: { dist, ssr },
-	} = config
-
-	const dom = await createFromReadableStream(rs, {
+export const renderRscPayloadStreamToDom = async (
+	stream: ReadableStream,
+	{ root, paths: { dist, ssr } }: ResolvedSeiaConfig,
+) =>
+	await createFromReadableStream(stream, {
 		ssrManifest: {
 			moduleMap: new Proxy(
 				{},
@@ -99,6 +89,20 @@ export const renderRscDom = async (
 			moduleLoading: null,
 		},
 	})
+
+export const renderRscDom = async (
+	componentAnchorId: string,
+	config: ResolvedSeiaConfig,
+): Promise<[Worker, ReactNode]> => {
+	const [worker, rs] = await execWorker(
+		componentAnchorId,
+		config,
+	)
+
+	const dom = await renderRscPayloadStreamToDom(
+		rs,
+		config,
+	)
 
 	return [worker, dom]
 }
