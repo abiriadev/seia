@@ -1,11 +1,12 @@
-import { Args, Command, Flags } from '@oclif/core'
+import { Args, Flags } from '@oclif/core'
 import { build } from '../build.js'
+import { SeiaCommand } from '../command.js'
 
-export default class Build extends Command {
+export default class Build extends SeiaCommand {
 	static override args = {}
 
 	static override description =
-		'Bundle the project along with SSR and RSC assets'
+		'Bundle the project along with SSR and RSC assets.'
 
 	static override examples = [
 		'<%= config.bin %> <%= command.id %>',
