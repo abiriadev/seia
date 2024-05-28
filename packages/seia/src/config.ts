@@ -13,37 +13,41 @@ const relativePath = z.custom<string>(
 )
 
 export const ResolvedSeiaConfigSchema = z.object({
-	root: z
-		.string()
-		.default(cwd)
-		.describe('Absolute path to the project root'),
-	src: relativePath
-		.default('src')
-		.describe('Source directory'),
-	entry: relativePath
-		.default('App.tsx')
-		.describe(
-			'Main entrypoint to resolve dependency graph.\nRelative to the project root.',
-		),
-	dist: relativePath
-		.default('dist')
-		.describe(
-			'Dist directory.\nRelative to the project root.',
-		),
-	ssr: relativePath
-		.default('ssr')
-		.describe(
-			'SSR output directory.\nRelative to the `dist`.',
-		),
-	rsc: relativePath
-		.default('rsc')
-		.describe(
-			'RSC output directory.\nRelative to the `dist`.',
-		),
 	mode: z
 		.enum(['development', 'production'])
 		.default('production')
 		.describe('Build mode'),
+	root: z
+		.string()
+		.default(cwd)
+		.describe('Absolute path to the project root'),
+	paths: z
+		.object({
+			src: relativePath
+				.default('src')
+				.describe('Source directory'),
+			entry: relativePath
+				.default('App.tsx')
+				.describe(
+					'Main entrypoint to resolve dependency graph.\nRelative to the project root.',
+				),
+			dist: relativePath
+				.default('dist')
+				.describe(
+					'Dist directory.\nRelative to the project root.',
+				),
+			ssr: relativePath
+				.default('ssr')
+				.describe(
+					'SSR output directory.\nRelative to the `dist`.',
+				),
+			rsc: relativePath
+				.default('rsc')
+				.describe(
+					'RSC output directory.\nRelative to the `dist`.',
+				),
+		})
+		.default({}),
 	serve: z
 		.object({
 			port: z
