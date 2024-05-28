@@ -56,7 +56,18 @@ export const resolveSeiaConfig = (
 export const mergeSeiaConfig = (
 	defaults: SeiaConfig,
 	overrides: SeiaConfig,
-) => {
+): SeiaConfig => {
+	return {
+		...defaults,
+		...overrides,
+	}
+}
+
+// TODO: make it recursive when the config type got complicated later
+export const extendResolvedSeiaConfig = (
+	defaults: ResolvedSeiaConfig,
+	overrides: SeiaConfig,
+): ResolvedSeiaConfig => {
 	return {
 		...defaults,
 		...overrides,
