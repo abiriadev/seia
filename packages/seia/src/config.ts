@@ -12,41 +12,43 @@ const relativePath = z.custom<string>(
 	val => typeof val === 'string' && !isAbsolute(val),
 )
 
-export const SeiaConfigSchema = z
-	.object({
-		entry: relativePath
-			.default('src/App.tsx')
-			.describe(
-				'Main entrypoint to resolve dependency graph.\nRelative to the project root.',
-			),
-		dist: relativePath
-			.default('dist')
-			.describe(
-				'Dist directory.\nRelative to the project root.',
-			),
-		serve: z.object({
-			port: z
-				.number()
-				.int()
-				.nonnegative()
-				.lt(1 << 16)
-				.default(5314)
-				.describe('Port number to run SSR server'),
-		}),
-	})
-	.partial()
+export const ResolvedSeiaConfigSchema = z.object({
+	root: z
+		.string()
+		.default(cwd)
+		.describe('Absolute path to the project root'),
+	entry: relativePath
+		.default('src/App.tsx')
+		.describe(
+			'Main entrypoint to resolve dependency graph.\nRelative to the project root.',
+		),
+	dist: relativePath
+		.default('dist')
+		.describe(
+			'Dist directory.\nRelative to the project root.',
+		),
+	mode: z
+		.enum(['development', 'production'])
+		.default('production')
+		.describe('Build mode'),
+	serve: z.object({
+		port: z
+			.number()
+			.int()
+			.nonnegative()
+			.lt(1 << 16)
+			.default(5314)
+			.describe('Port number to run SSR server'),
+	}),
+})
 
-export const ResolvedSeiaConfigSchema =
-	SeiaConfigSchema.extend({
-		root: z
-			.string()
-			.default(cwd)
-			.describe('Absolute path to the project root'),
-		mode: z
-			.enum(['development', 'production'])
-			.default('production')
-			.describe('Build mode'),
-	})
+// WARN: this code is using deprecated api.
+// well but, there's no workaround for now: https://github.com/colinhacks/zod/issues/2854
+export const SeiaConfigSchema =
+	ResolvedSeiaConfigSchema.omit({
+		root: true,
+		mode: true,
+	}).deepPartial()
 
 export const resolveSeiaConfig = (
 	config: SeiaConfig,
