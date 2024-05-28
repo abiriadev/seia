@@ -123,3 +123,4 @@ declare var process: {
 }
 
 declare var __SEIA_RSC_PAYLOAD: string
+declare var __SEIA_START_TIME: number
