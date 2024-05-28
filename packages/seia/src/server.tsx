@@ -77,7 +77,7 @@ app.get('/', async c => {
 })
 
 export const serve = async ({
-	port,
+	serve: { port },
 }: ResolvedSeiaConfig) => {
 	console.log(`http://localhost:${port}`)
 

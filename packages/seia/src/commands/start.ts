@@ -1,6 +1,6 @@
 import { Args, Flags } from '@oclif/core'
 import {
-	SeiaConfigSchema,
+	ResolvedSeiaConfigSchema,
 	extendResolvedSeiaConfig,
 } from '../config.js'
 import { serve } from '../server.js'
@@ -20,7 +20,8 @@ export default class Start extends SeiaCommand {
 		port: Flags.integer({
 			char: 'p',
 			description:
-				SeiaConfigSchema.shape.port.description,
+				ResolvedSeiaConfigSchema.shape.serve.removeDefault()
+					.shape.port.description,
 		}),
 	}
 
@@ -31,7 +32,9 @@ export default class Start extends SeiaCommand {
 
 		return await serve(
 			extendResolvedSeiaConfig(this.resolvedConfig, {
-				port,
+				serve: {
+					port,
+				},
 			}),
 		)
 	}
