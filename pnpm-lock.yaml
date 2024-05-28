@@ -62,6 +62,9 @@ importers:
       rollup-plugin-node-externals:
         specifier: ^7.1.2
         version: 7.1.2(rollup@4.18.0)
+      toml:
+        specifier: ^3.0.0
+        version: 3.0.0
       ts-pattern:
         specifier: ^5.1.1
         version: 5.1.2
@@ -4355,6 +4358,10 @@ packages:
       '@tokenizer/token': 0.3.0
       ieee754: 1.2.1
     dev: true
+
+  /toml@3.0.0:
+    resolution: {integrity: sha512-y/mWCZinnvxjTKYhJ+pYxwD0mRLVvOtdS2Awbgxln6iEnt4rk0yBxeSBHkGJcPucRiG0e55mwWp+g/05rsrd6w==}
+    dev: false
 
   /trim-repeated@2.0.0:
     resolution: {integrity: sha512-QUHBFTJGdOwmp0tbOG505xAgOp/YliZP/6UgafFXYZ26WT1bvQmSMJUvkeVSASuJJHbqsFbynTvkd5W8RBTipg==}
