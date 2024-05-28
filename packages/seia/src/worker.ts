@@ -38,10 +38,7 @@ const rs = renderToReadableStream(
 				const { path, anchor } =
 					mustParseAnchorId(anchorId)
 
-				const relativePath = trimPrefix(
-					path,
-					config.root,
-				)
+				const relativePath = trimPrefix(path, root)
 
 				console.log('rel', relativePath)
 
