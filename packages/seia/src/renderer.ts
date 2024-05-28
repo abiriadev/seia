@@ -3,7 +3,6 @@ import { Worker } from 'node:worker_threads'
 import { fileURLToPath } from 'node:url'
 import { join } from 'node:path'
 import { ReactNode } from 'react'
-import { cwd } from 'node:process'
 import { ResolvedSeiaConfig } from './config.js'
 
 const workerUrl = join(
@@ -46,6 +45,11 @@ export const renderRscDom = async (
 		config,
 	)
 
+	const {
+		root,
+		paths: { dist, ssr },
+	} = config
+
 	const dom = await createFromReadableStream(rs, {
 		ssrManifest: {
 			moduleMap: new Proxy(
@@ -58,13 +62,6 @@ export const renderRscDom = async (
 								get(_, name) {
 									const id = `${file.toString()}#${name.toString()}`
 
-									console.log(
-										'file',
-										file,
-										'name',
-										name,
-									)
-
 									if (
 										!__webpack_module_loading__.has(
 											id,
@@ -73,8 +70,12 @@ export const renderRscDom = async (
 										__webpack_module_loading__.set(
 											id,
 											import(
-												cwd() +
-													`/dist/ssr/${file.toString()}`
+												join(
+													root,
+													dist,
+													ssr,
+													file.toString(),
+												)
 											).then(
 												(m: any) =>
 													__webpack_module_cache__.set(
