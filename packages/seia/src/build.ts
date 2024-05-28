@@ -106,7 +106,9 @@ export const build = async (config: ResolvedSeiaConfig) => {
 		mergeConfig(defaultConfig, {
 			build: {
 				lib: {
-					entry: boundariesManifest,
+					entry: boundariesManifest.map(path =>
+						join(src, path),
+					),
 				},
 				outDir: 'dist/ssr',
 				ssr: true,
