@@ -17,8 +17,11 @@ export const ResolvedSeiaConfigSchema = z.object({
 		.string()
 		.default(cwd)
 		.describe('Absolute path to the project root'),
+	src: relativePath
+		.default('src')
+		.describe('Source directory'),
 	entry: relativePath
-		.default('src/App.tsx')
+		.default('App.tsx')
 		.describe(
 			'Main entrypoint to resolve dependency graph.\nRelative to the project root.',
 		),
