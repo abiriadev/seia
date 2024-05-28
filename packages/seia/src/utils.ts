@@ -1,4 +1,4 @@
-import { format, parse } from 'node:path'
+import { join, dirname, basename, extname } from 'node:path'
 
 export const trimPrefix = (
 	str: string,
@@ -10,7 +10,4 @@ export const changeExtension = (
 	path: string,
 	ext: string,
 ): string =>
-	format({
-		...parse(path),
-		ext,
-	})
+	join(dirname(path), basename(path, extname(path)) + ext)
