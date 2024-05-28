@@ -74,7 +74,11 @@ export const build = async (config: ResolvedSeiaConfig) => {
 	// RSC
 	await vite(
 		mergeConfig(defaultConfig, {
-			plugins: [rscTransform()],
+			plugins: [
+				rscTransform({
+					config,
+				}),
+			],
 			build: {
 				lib: {
 					entry,

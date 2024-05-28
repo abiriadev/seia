@@ -1,19 +1,20 @@
 import { transformSource } from 'react-server-dom-webpack/node-loader'
 import { type Plugin } from 'vite'
+import { ResolvedSeiaConfig } from '../config.js'
 // TODO: use swc
 // import { parse } from '@swc/core'
 
-export const rscTransform = (): Plugin => {
-	let _root: string | null = null
+export interface Config {
+	config: ResolvedSeiaConfig
+}
 
+export const rscTransform = ({
+	config: { root },
+}: Config): Plugin => {
 	return {
 		name: 'seia:rsc-transform',
-		configResolved({ root }) {
-			_root = root
-		},
 		async transform(code, id) {
-			if (!(_root && id.startsWith(_root)))
-				return null
+			if (!(root && id.startsWith(root))) return null
 
 			const { source } = await transformSource(
 				code,
