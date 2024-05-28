@@ -11,6 +11,7 @@ import {
 } from './renderer.js'
 import { renderToReadableStream } from 'react-dom/server.edge'
 import { ResolvedSeiaConfig } from './config.js'
+import { trimPrefix } from './utils.js'
 
 export const serve = async ({
 	root,
@@ -26,7 +27,7 @@ export const serve = async ({
 		serveStatic({
 			root: dist,
 			rewriteRequestPath: path =>
-				path.replace(/^\/@seia/, ''),
+				trimPrefix(path, '/@seia'),
 		}),
 	)
 
