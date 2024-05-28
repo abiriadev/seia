@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
-import {execute} from '@oclif/core'
+import { performance } from 'node:perf_hooks'
 
-await execute({dir: import.meta.url})
+globalThis.__SEIA_START_TIME = performance.now()
+
+import { execute } from '@oclif/core'
+
+await execute({ dir: import.meta.url })
