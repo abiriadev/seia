@@ -9,7 +9,7 @@
 		"./client": "./dist/client.js"
 	},
 	"bin": {
-		"seia": "./dist/cli.js"
+		"seia": "./bin/run.js"
 	},
 	"scripts": {
 		"build": "swc src -d dist --strip-leading-paths"
@@ -19,6 +19,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"@hono/node-server": "^1.11.1",
+		"@oclif/core": "^3.26.6",
 		"@rollup/pluginutils": "^5.1.0",
 		"@vitejs/plugin-react": "^4.2.1",
 		"hash-sum": "^2.0.0",
@@ -40,6 +41,13 @@
 		"@types/react": "^18.3.2",
 		"@types/react-dom": "^18.3.0",
 		"chokidar": "^3.6.0",
+		"oclif": "^4.11.3",
 		"typescript": "^5.4.5"
+	},
+	"oclif": {
+		"bin": "seia",
+		"commands": "./dist/commands",
+		"dirname": "seia",
+		"topicSeparator": " "
 	}
 }
