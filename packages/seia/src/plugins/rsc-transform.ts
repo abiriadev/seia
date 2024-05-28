@@ -4,15 +4,16 @@ import { type Plugin } from 'vite'
 // import { parse } from '@swc/core'
 
 export const rscTransform = (): Plugin => {
-	let base: string | null = null
+	let _root: string | null = null
 
 	return {
 		name: 'seia:rsc-transform',
-		configResolved({ base: _base }) {
-			base = _base
+		configResolved({ root }) {
+			_root = root
 		},
 		async transform(code, id) {
-			if (!(base && id.startsWith(base))) return null
+			if (!(_root && id.startsWith(_root)))
+				return null
 
 			const { source } = await transformSource(
 				code,
