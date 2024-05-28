@@ -11,10 +11,12 @@ import { renderToReadableStream } from 'react-dom/server.edge'
 import { ResolvedSeiaConfig } from './config.js'
 import { changeExtension, trimPrefix } from './utils.js'
 
-export const serve = async ({
-	paths: { entry, dist, rsc },
-	serve: { port },
-}: ResolvedSeiaConfig) => {
+export const serve = async (config: ResolvedSeiaConfig) => {
+	const {
+		paths: { entry, dist, rsc },
+		serve: { port },
+	} = config
+
 	const app = new Hono()
 
 	app.use(logger())
@@ -33,7 +35,7 @@ export const serve = async ({
 			changeExtension(entry, '.js') + '#App'
 
 		const [worker, stream] =
-			await renderRscPayloadStream(entryFile)
+			await renderRscPayloadStream(entryFile, config)
 
 		const __rsc = await new Response(stream).text()
 
@@ -47,7 +49,10 @@ export const serve = async ({
 		const entryFile =
 			changeExtension(entry, '.js') + '#App'
 
-		const [worker, dom] = await renderRscDom(entryFile)
+		const [worker, dom] = await renderRscDom(
+			entryFile,
+			config,
+		)
 
 		const ren = await renderToReadableStream(dom)
 

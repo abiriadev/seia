@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { join } from 'node:path'
 import { ReactNode } from 'react'
 import { cwd } from 'node:process'
+import { ResolvedConfig } from 'vite'
 
 const workerUrl = join(
 	fileURLToPath(new URL('.', import.meta.url)),
@@ -12,6 +13,7 @@ const workerUrl = join(
 
 const execWorker = async (
 	componentAnchorId: string,
+	config: ResolvedConfig,
 ): Promise<[Worker, ReadableStream]> =>
 	new Promise((resolve, reject) => {
 		const worker = new Worker(workerUrl, {
@@ -28,13 +30,18 @@ const execWorker = async (
 
 export const renderRscPayloadStream = async (
 	componentAnchorId: string,
+	config: ResolvedConfig,
 ): Promise<[Worker, ReadableStream]> =>
-	await execWorker(componentAnchorId)
+	await execWorker(componentAnchorId, config)
 
 export const renderRscDom = async (
 	componentAnchorId: string,
+	config: ResolvedConfig,
 ): Promise<[Worker, ReactNode]> => {
-	const [worker, rs] = await execWorker(componentAnchorId)
+	const [worker, rs] = await execWorker(
+		componentAnchorId,
+		config,
+	)
 
 	const dom = await createFromReadableStream(rs, {
 		ssrManifest: {
@@ -47,6 +54,13 @@ export const renderRscDom = async (
 							{
 								get(_, name) {
 									const id = `${file.toString()}#${name.toString()}`
+
+									console.log(
+										'file',
+										file,
+										'name',
+										name,
+									)
 
 									if (
 										!__webpack_module_loading__.has(
