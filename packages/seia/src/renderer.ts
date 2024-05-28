@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { join } from 'node:path'
 import { ReactNode } from 'react'
 import { cwd } from 'node:process'
-import { ResolvedConfig } from 'vite'
+import { ResolvedSeiaConfig } from './config.js'
 
 const workerUrl = join(
 	fileURLToPath(new URL('.', import.meta.url)),
@@ -13,7 +13,7 @@ const workerUrl = join(
 
 const execWorker = async (
 	componentAnchorId: string,
-	config: ResolvedConfig,
+	config: ResolvedSeiaConfig,
 ): Promise<[Worker, ReadableStream]> =>
 	new Promise((resolve, reject) => {
 		const worker = new Worker(workerUrl, {
@@ -30,13 +30,13 @@ const execWorker = async (
 
 export const renderRscPayloadStream = async (
 	componentAnchorId: string,
-	config: ResolvedConfig,
+	config: ResolvedSeiaConfig,
 ): Promise<[Worker, ReadableStream]> =>
 	await execWorker(componentAnchorId, config)
 
 export const renderRscDom = async (
 	componentAnchorId: string,
-	config: ResolvedConfig,
+	config: ResolvedSeiaConfig,
 ): Promise<[Worker, ReactNode]> => {
 	const [worker, rs] = await execWorker(
 		componentAnchorId,
