@@ -121,3 +121,5 @@ declare var process: {
 		NODE_ENV: string
 	}
 }
+
+declare var __SEIA_RSC_PAYLOAD: string

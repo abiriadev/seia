@@ -26,9 +26,14 @@ export const initClientModuleMap = (
 }
 
 export const run = async () => {
-	const f = await fetch('/@seia')
-
-	const res = await createFromReadableStream(f.body)
+	const embeddedStream = new Blob(
+		[globalThis.__SEIA_RSC_PAYLOAD],
+		{
+			type: 'text/plain',
+		},
+	).stream()
+	const res =
+		await createFromReadableStream(embeddedStream)
 
 	const root = document.getElementById('root')
 	if (!root) throw new Error('Root element not found')
