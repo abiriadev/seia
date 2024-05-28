@@ -1,4 +1,5 @@
 import './webpack-global.js'
+import { join } from 'node:path'
 import {
 	build as vite,
 	mergeConfig,
@@ -21,11 +22,19 @@ const defaultConfig = {
 }
 
 export const build = async (config: ResolvedSeiaConfig) => {
-	const entry = 'src/App.tsx'
+	const {
+		paths: { src, entry: entryFile },
+	} = config
+
+	const entry = join(src, entryFile)
 
 	const boundariesOutput = await vite(
 		mergeConfig(defaultConfig, {
-			plugins: [detectBoundaries()],
+			plugins: [
+				detectBoundaries({
+					config,
+				}),
+			],
 			build: {
 				lib: {
 					entry,
