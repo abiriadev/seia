@@ -11,6 +11,7 @@ import { renderToReadableStream } from 'react-dom/server.edge'
 import { ResolvedSeiaConfig } from './config.js'
 import { changeExtension, trimPrefix } from './utils.js'
 
+/** @jsxImportSource hono/jsx */
 export const serve = async (config: ResolvedSeiaConfig) => {
 	const {
 		paths: { entry, dist, rsc },
@@ -44,7 +45,6 @@ export const serve = async (config: ResolvedSeiaConfig) => {
 		return c.text(__rsc)
 	})
 
-	/** @jsxImportSource hono/jsx */
 	app.get('/', async c => {
 		const entryFile =
 			changeExtension(entry, '.js') + '#App'
