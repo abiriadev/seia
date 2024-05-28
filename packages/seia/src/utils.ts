@@ -1,0 +1,5 @@
+export const trimPrefix = (
+	str: string,
+	prefix: string,
+): string =>
+	str.startsWith(prefix) ? str.slice(prefix.length) : str
