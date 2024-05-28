@@ -132,7 +132,6 @@ export const build = async (config: ResolvedSeiaConfig) => {
 					fileName: 'client',
 				},
 				emptyOutDir: false,
-				minify: false,
 			},
 		} satisfies UserConfig),
 	)
