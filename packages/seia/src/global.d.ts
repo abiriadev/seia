@@ -117,3 +117,9 @@ declare var __webpack_chunk_load__: (
 declare var __webpack_require__: (
 	id: string,
 ) => Promise<any>
+
+declare var process: {
+	env: {
+		NODE_ENV: string
+	}
+}
