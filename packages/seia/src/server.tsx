@@ -4,12 +4,15 @@ import { serve as nodeServe } from '@hono/node-server'
 import { serveStatic } from '@hono/node-server/serve-static'
 import { logger } from 'hono/logger'
 import {
-	renderRscDom,
 	renderRscPayloadStream,
+	renderRscPayloadStreamToDom,
 } from './renderer.js'
 import { renderToReadableStream } from 'react-dom/server.edge'
 import { ResolvedSeiaConfig } from './config.js'
 import { changeExtension, trimPrefix } from './utils.js'
+
+const injectGlobal = (rscPayload: string) =>
+	`globalThis.__SEIA_RSC_PAYLOAD = \`${rscPayload}\``
 
 /** @jsxImportSource hono/jsx */
 export const serve = async (config: ResolvedSeiaConfig) => {
@@ -31,32 +34,27 @@ export const serve = async (config: ResolvedSeiaConfig) => {
 		}),
 	)
 
-	app.get('/@seia', async c => {
+	app.get('/', async c => {
 		const entryFile =
 			changeExtension(entry, '.js') + '#App'
 
 		const [worker, stream] =
 			await renderRscPayloadStream(entryFile, config)
 
-		const __rsc = await new Response(stream).text()
+		const [rscPayloadStream, domStream] = stream.tee()
 
-		await worker.terminate()
+		const rscPayload = await new Response(
+			rscPayloadStream,
+		).text()
 
-		return c.text(__rsc)
-	})
-
-	app.get('/', async c => {
-		const entryFile =
-			changeExtension(entry, '.js') + '#App'
-
-		const [worker, dom] = await renderRscDom(
-			entryFile,
+		const dom = await renderRscPayloadStreamToDom(
+			domStream,
 			config,
 		)
 
-		const ren = await renderToReadableStream(dom)
-
-		const __html = await new Response(ren).text()
+		const __html = await new Response(
+			await renderToReadableStream(dom),
+		).text()
 
 		await worker.terminate()
 
@@ -80,6 +78,13 @@ export const serve = async (config: ResolvedSeiaConfig) => {
 							id="root"
 							dangerouslySetInnerHTML={{
 								__html,
+							}}
+						/>
+						<script
+							dangerouslySetInnerHTML={{
+								__html: injectGlobal(
+									rscPayload,
+								),
 							}}
 						/>
 					</body>
