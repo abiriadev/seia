@@ -1,4 +1,8 @@
 import { Command } from '@oclif/core'
+import { readFile } from 'node:fs/promises'
+import { cwd } from 'node:process'
+import { join } from 'node:path'
+import { parse } from 'toml'
 import {
 	ResolvedSeiaConfig,
 	resolveSeiaConfig,
@@ -11,7 +15,16 @@ export abstract class SeiaCommand extends Command {
 
 	public async init(): Promise<void> {
 		await super.init()
-		this.resolvedConfig = resolveSeiaConfig({})
+		let configString
+		try {
+			configString = (
+				await readFile(join(cwd(), 'seia.toml'))
+			).toString()
+		} catch {
+			configString = ''
+		}
+		const config = parse(configString)
+		this.resolvedConfig = resolveSeiaConfig(config)
 	}
 
 	protected async catch(
