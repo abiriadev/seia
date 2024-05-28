@@ -27,6 +27,16 @@ export const ResolvedSeiaConfigSchema = z.object({
 		.describe(
 			'Dist directory.\nRelative to the project root.',
 		),
+	ssr: relativePath
+		.default('ssr')
+		.describe(
+			'SSR output directory.\nRelative to the `dist`.',
+		),
+	rsc: relativePath
+		.default('rsc')
+		.describe(
+			'RSC output directory.\nRelative to the `dist`.',
+		),
 	mode: z
 		.enum(['development', 'production'])
 		.default('production')
