@@ -5,28 +5,50 @@ import {
 	workerData,
 	type TransferListItem,
 } from 'node:worker_threads'
+import { join } from 'node:path'
 import { jsx } from 'react/jsx-runtime'
 import { AnchorId, mustParseAnchorId } from './anchor.js'
+import { ResolvedSeiaConfig } from './config.js'
+import { trimPrefix } from './utils.js'
 
-const { path, anchor } = mustParseAnchorId(
-	workerData as AnchorId,
-)
+const {
+	anchorId,
+	config: {
+		root,
+		paths: { dist, rsc },
+	},
+} = workerData as {
+	// relativePath, always RSC
+	anchorId: AnchorId
+	config: ResolvedSeiaConfig
+}
 
-const component = await import(path)
+const { path, anchor } = mustParseAnchorId(anchorId)
+
+const componentPath = join(root, dist, rsc, path)
+
+const component = (await import(componentPath))[anchor]
 
 const rs = renderToReadableStream(
-	jsx(component[anchor], {}),
+	jsx(component, {}),
 	new Proxy(
 		{},
 		{
 			get(_, anchorId: string) {
-				const { anchor } =
+				const { path, anchor } =
 					mustParseAnchorId(anchorId)
-				const id = 'C.js'
+
+				const relativePath = trimPrefix(
+					path,
+					config.root,
+				)
+
+				console.log('rel', relativePath)
+
 				return {
-					id,
+					id: path,
 					name: anchor,
-					chunks: [id],
+					chunks: [`${path}#${anchor}`],
 					async: true,
 				}
 			},
