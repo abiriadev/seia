@@ -1,5 +1,4 @@
 import { Plugin } from 'vite'
-import { join } from 'node:path'
 import { match } from 'ts-pattern'
 import { ResolvedSeiaConfig } from '../config.js'
 import { trimPrefix } from '../utils.js'
@@ -9,10 +8,7 @@ export interface Config {
 }
 
 export const detectBoundaries = ({
-	config: {
-		root,
-		paths: { src },
-	},
+	config: { root },
 }: Config): Plugin => {
 	const boundaries = new Set<string>()
 
@@ -41,9 +37,7 @@ export const detectBoundaries = ({
 					)
 					.otherwise(() => false),
 			)?.length &&
-				boundaries.add(
-					'.' + trimPrefix(id, join(root, src)),
-				)
+				boundaries.add('.' + trimPrefix(id, root))
 		},
 		buildEnd() {
 			this.emitFile({
