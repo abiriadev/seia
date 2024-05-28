@@ -17,6 +17,6 @@ export default class Build extends SeiaCommand {
 	public async run(): Promise<void> {
 		const {} = await this.parse(Build)
 
-		await build(this.config)
+		await build(this.resolvedConfig)
 	}
 }
