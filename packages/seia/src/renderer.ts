@@ -17,7 +17,10 @@ const execWorker = async (
 ): Promise<[Worker, ReadableStream]> =>
 	new Promise((resolve, reject) => {
 		const worker = new Worker(workerUrl, {
-			workerData: componentAnchorId,
+			workerData: {
+				anchorId: componentAnchorId,
+				config,
+			},
 			execArgv: ['-C', 'react-server'],
 		})
 
