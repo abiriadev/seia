@@ -2,8 +2,6 @@ import './webpack-global.js'
 import { Hono } from 'hono'
 import { serve as nodeServe } from '@hono/node-server'
 import { serveStatic } from '@hono/node-server/serve-static'
-import { cwd } from 'node:process'
-import { join } from 'node:path'
 import { logger } from 'hono/logger'
 import {
 	renderRscDom,
@@ -11,11 +9,10 @@ import {
 } from './renderer.js'
 import { renderToReadableStream } from 'react-dom/server.edge'
 import { ResolvedSeiaConfig } from './config.js'
-import { trimPrefix } from './utils.js'
+import { changeExtension, trimPrefix } from './utils.js'
 
 export const serve = async ({
-	root,
-	dist,
+	paths: { entry, dist, rsc },
 	serve: { port },
 }: ResolvedSeiaConfig) => {
 	const app = new Hono()
@@ -32,11 +29,8 @@ export const serve = async ({
 	)
 
 	app.get('/@seia', async c => {
-		const entryFile = join(
-			root,
-			dist,
-			'./rsc/App.js#App',
-		)
+		const entryFile =
+			changeExtension(entry, '.js') + '#App'
 
 		const [worker, stream] =
 			await renderRscPayloadStream(entryFile)
@@ -50,11 +44,8 @@ export const serve = async ({
 
 	/** @jsxImportSource hono/jsx */
 	app.get('/', async c => {
-		const entryFile = join(
-			root,
-			dist,
-			'./rsc/App.js#App',
-		)
+		const entryFile =
+			changeExtension(entry, '.js') + '#App'
 
 		const [worker, dom] = await renderRscDom(entryFile)
 
