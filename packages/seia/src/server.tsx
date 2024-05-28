@@ -10,6 +10,7 @@ import {
 	renderRscPayloadStream,
 } from './renderer.js'
 import { renderToReadableStream } from 'react-dom/server.edge'
+import { ResolvedSeiaConfig } from './config.js'
 
 const app = new Hono()
 
@@ -75,11 +76,13 @@ app.get('/', async c => {
 	)
 })
 
-export const serve = async () => {
-	console.log(`http://localhost:5314`)
+export const serve = async ({
+	port,
+}: ResolvedSeiaConfig) => {
+	console.log(`http://localhost:${port}`)
 
 	nodeServe({
 		fetch: app.fetch,
-		port: 5314,
+		port,
 	})
 }
