@@ -21,6 +21,7 @@
 		"@hono/node-server": "^1.11.1",
 		"@rollup/pluginutils": "^5.1.0",
 		"@vitejs/plugin-react": "^4.2.1",
+		"hash-sum": "^2.0.0",
 		"hono": "^4.3.9",
 		"react": "19.0.0-beta-26f2496093-20240514",
 		"react-dom": "19.0.0-beta-26f2496093-20240514",
@@ -33,6 +34,7 @@
 	"devDependencies": {
 		"@swc/cli": "^0.3.12",
 		"@swc/core": "^1.5.7",
+		"@types/hash-sum": "^1.0.2",
 		"@types/node": "^20.12.12",
 		"@types/react": "^18.3.2",
 		"@types/react-dom": "^18.3.0",
