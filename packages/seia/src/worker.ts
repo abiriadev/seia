@@ -9,13 +9,13 @@ import { join } from 'node:path'
 import { jsx } from 'react/jsx-runtime'
 import { AnchorId, mustParseAnchorId } from './anchor.js'
 import { ResolvedSeiaConfig } from './config.js'
-import { trimPrefix } from './utils.js'
+import { changeExtension, trimPrefix } from './utils.js'
 
 const {
 	anchorId,
 	config: {
 		root,
-		paths: { dist, rsc },
+		paths: { src, dist, rsc },
 	},
 } = workerData as {
 	// relativePath, always RSC
@@ -38,14 +38,17 @@ const rs = renderToReadableStream(
 				const { path, anchor } =
 					mustParseAnchorId(anchorId)
 
-				const relativePath = trimPrefix(path, root)
-
-				console.log('rel', relativePath)
+				const relativePath =
+					'.' +
+					changeExtension(
+						trimPrefix(path, join(root, src)),
+						'.js',
+					)
 
 				return {
-					id: path,
+					id: relativePath,
 					name: anchor,
-					chunks: [`${path}#${anchor}`],
+					chunks: [`${relativePath}#${anchor}`],
 					async: true,
 				}
 			},
