@@ -1,8 +1,8 @@
 import { isAbsolute } from 'node:path'
 import { cwd } from 'node:process'
-import { unknown, z } from 'zod'
+import { z } from 'zod'
 
-export type SeiaConfig = z.infer<typeof SeiaConfigSchema>
+export type SeiaConfig = z.input<typeof SeiaConfigSchema>
 
 export type ResolvedSeiaConfig = z.infer<
 	typeof ResolvedSeiaConfigSchema
@@ -31,15 +31,17 @@ export const ResolvedSeiaConfigSchema = z.object({
 		.enum(['development', 'production'])
 		.default('production')
 		.describe('Build mode'),
-	serve: z.object({
-		port: z
-			.number()
-			.int()
-			.nonnegative()
-			.lt(1 << 16)
-			.default(5314)
-			.describe('Port number to run SSR server'),
-	}),
+	serve: z
+		.object({
+			port: z
+				.number()
+				.int()
+				.nonnegative()
+				.lt(1 << 16)
+				.default(5314)
+				.describe('Port number to run SSR server'),
+		})
+		.default({}),
 })
 
 // WARN: this code is using deprecated api.
@@ -48,7 +50,7 @@ export const SeiaConfigSchema =
 	ResolvedSeiaConfigSchema.omit({
 		root: true,
 		mode: true,
-	}).deepPartial()
+	})
 
 export const resolveSeiaConfig = (
 	config: SeiaConfig,
