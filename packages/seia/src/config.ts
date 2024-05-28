@@ -24,13 +24,15 @@ export const SeiaConfigSchema = z
 			.describe(
 				'Dist directory.\nRelative to the project root.',
 			),
-		port: z
-			.number()
-			.int()
-			.nonnegative()
-			.lt(1 << 16)
-			.default(5314)
-			.describe('Port number to run SSR server'),
+		serve: z.object({
+			port: z
+				.number()
+				.int()
+				.nonnegative()
+				.lt(1 << 16)
+				.default(5314)
+				.describe('Port number to run SSR server'),
+		}),
 	})
 	.partial()
 
