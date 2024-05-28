@@ -2,9 +2,9 @@ import { isAbsolute } from 'node:path'
 import { cwd } from 'node:process'
 import { z } from 'zod'
 
-type SeiaConfig = z.infer<typeof SeiaConfigSchema>
+export type SeiaConfig = z.infer<typeof SeiaConfigSchema>
 
-type ResolvedSeiaConfig = z.infer<
+export type ResolvedSeiaConfig = z.infer<
 	typeof ResolvedSeiaConfigSchema
 >
 
@@ -12,7 +12,7 @@ const relativePath = z.custom<string>(
 	val => typeof val === 'string' && !isAbsolute(val),
 )
 
-const SeiaConfigSchema = z
+export const SeiaConfigSchema = z
 	.object({
 		entry: relativePath
 			.default('src/App.tsx')
@@ -34,16 +34,17 @@ const SeiaConfigSchema = z
 	})
 	.partial()
 
-const ResolvedSeiaConfigSchema = SeiaConfigSchema.extend({
-	root: z
-		.string()
-		.default(cwd)
-		.describe('Absolute path to the project root'),
-	mode: z
-		.enum(['development', 'production'])
-		.default('production')
-		.describe('Build mode'),
-})
+export const ResolvedSeiaConfigSchema =
+	SeiaConfigSchema.extend({
+		root: z
+			.string()
+			.default(cwd)
+			.describe('Absolute path to the project root'),
+		mode: z
+			.enum(['development', 'production'])
+			.default('production')
+			.describe('Build mode'),
+	})
 
 export const resolveSeiaConfig = (
 	config: SeiaConfig,
