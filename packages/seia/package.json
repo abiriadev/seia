@@ -22,6 +22,7 @@
 		"@oclif/core": "^3.26.6",
 		"@rollup/pluginutils": "^5.1.0",
 		"@vitejs/plugin-react": "^4.2.1",
+		"chalk": "^5.3.0",
 		"hash-sum": "^2.0.0",
 		"hono": "^4.3.9",
 		"react": "19.0.0-beta-26f2496093-20240514",
