@@ -1,7 +1,8 @@
 import { type Plugin } from 'vite'
+import { relative } from 'node:path'
 import sum from 'hash-sum'
 import { ResolvedSeiaConfig } from '../config.js'
-import { trimPrefix } from '../utils.js'
+import { changeExtension, trimPrefix } from '../utils.js'
 
 export interface Options {
 	clientBoundaries: Array<string>
@@ -10,7 +11,9 @@ export interface Options {
 
 export const injectClient = ({
 	clientBoundaries,
-	config: { root },
+	config: {
+		paths: { src },
+	},
 }: Options): Plugin => {
 	return {
 		name: 'seia:inject-client',
@@ -21,10 +24,7 @@ export const injectClient = ({
 		load(id) {
 			if (id === '\0client.js') {
 				const modules = clientBoundaries.map(
-					path => [
-						'_' + sum(path),
-						'.' + trimPrefix(path, root),
-					],
+					path => ['_' + sum(path), path],
 				)
 
 				const code = `
@@ -36,7 +36,10 @@ ${modules
 
 const clientModuleMap = {
 ${modules
-	.map(([id, path]) => `'${path}': ${id},`)
+	.map(
+		([id, path]) =>
+			`'${'./' + changeExtension(relative(src, path), '.js')}': ${id},`,
+	)
 	.join('\n')}
 }
 
