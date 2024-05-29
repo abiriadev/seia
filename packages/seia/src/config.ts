@@ -37,6 +37,13 @@ export const ResolvedSeiaConfigSchema = z.object({
 				.describe(
 					'Main entrypoint to resolve dependency graph.\nRelative to the project root.',
 				),
+			anchor: z
+				.string()
+				.regex(/^[\p{IDS}$_][\p{IDC}$]*$/v)
+				.default('default')
+				.describe(
+					'Name of exported item to be used as a main component',
+				),
 			dist: relativePath
 				.default('dist')
 				.describe(
