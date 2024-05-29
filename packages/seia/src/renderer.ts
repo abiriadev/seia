@@ -6,6 +6,7 @@ import { ReactNode } from 'react'
 import { createFromReadableStream } from 'react-server-dom-webpack/client.edge'
 
 import { ResolvedSeiaConfig } from './config.js'
+import './webpack-global.js'
 
 const workerUrl = join(
 	fileURLToPath(new URL('.', import.meta.url)),

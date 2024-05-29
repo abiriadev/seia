@@ -13,7 +13,6 @@ import {
 } from './renderer.js'
 import { changeExtension } from './utils-path.js'
 import { trimPrefix } from './utils.js'
-import './webpack-global.js'
 
 const injectGlobal = (rscPayload: string) =>
 	`globalThis.__SEIA_RSC_PAYLOAD = \`${rscPayload}\``
