@@ -1,0 +1,15 @@
+{
+	"$schema": "https://json.schemastore.org/prettierrc.json",
+	"semi": false,
+	"singleQuote": true,
+	"arrowParens": "avoid",
+	"htmlWhitespaceSensitivity": "ignore",
+	"overrides": [
+		{
+			"files": ".swcrc",
+			"options": {
+				"parser": "json"
+			}
+		}
+	]
+}
