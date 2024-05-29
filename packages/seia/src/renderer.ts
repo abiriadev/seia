@@ -45,7 +45,7 @@ export const renderRscPayloadStream = async (
 export const renderRscPayloadStreamToDom = async (
 	stream: ReadableStream,
 	{ root, paths: { dist, ssr } }: ResolvedSeiaConfig,
-) =>
+): Promise<ReactNode> =>
 	await createFromReadableStream(stream, {
 		ssrManifest: {
 			moduleMap: new Proxy(
