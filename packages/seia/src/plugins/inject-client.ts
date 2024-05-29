@@ -1,12 +1,12 @@
-import { type Plugin } from 'vite'
-import { relative } from 'node:path'
-import sum from 'hash-sum'
 import { ResolvedSeiaConfig } from '../config.js'
-import { isObject } from '../utils.js'
-import { changeExtension } from '../utils-path.js'
-import type { AstNodeLocation, ProgramNode } from 'rollup'
-import type { ImportDeclaration, Program, Property } from 'estree'
 import { name } from '../package.js'
+import { changeExtension } from '../utils-path.js'
+import { isObject } from '../utils.js'
+import type { ImportDeclaration, Program, Property } from 'estree'
+import sum from 'hash-sum'
+import { relative } from 'node:path'
+import type { AstNodeLocation, ProgramNode } from 'rollup'
+import { type Plugin } from 'vite'
 
 export interface Options {
 	clientBoundaries: Array<string>

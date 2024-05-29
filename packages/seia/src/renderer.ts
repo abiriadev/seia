@@ -1,9 +1,9 @@
-import { createFromReadableStream } from 'react-server-dom-webpack/client.edge'
-import { Worker } from 'node:worker_threads'
-import { fileURLToPath } from 'node:url'
-import { join } from 'node:path'
-import { ReactNode } from 'react'
 import { ResolvedSeiaConfig } from './config.js'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { Worker } from 'node:worker_threads'
+import { ReactNode } from 'react'
+import { createFromReadableStream } from 'react-server-dom-webpack/client.edge'
 
 const workerUrl = join(
 	fileURLToPath(new URL('.', import.meta.url)),

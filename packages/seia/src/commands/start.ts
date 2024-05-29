@@ -1,10 +1,10 @@
-import { Args, Flags } from '@oclif/core'
+import { SeiaCommand } from '../command.js'
 import {
 	ResolvedSeiaConfigSchema,
 	extendResolvedSeiaConfig,
 } from '../config.js'
 import { serve } from '../server.js'
-import { SeiaCommand } from '../command.js'
+import { Args, Flags } from '@oclif/core'
 
 export default class Start extends SeiaCommand {
 	static override args = {}

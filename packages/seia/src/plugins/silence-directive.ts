@@ -1,5 +1,5 @@
-import { Plugin } from 'vite'
 import { P, match } from 'ts-pattern'
+import { Plugin } from 'vite'
 
 export const silenceDirective = (): Plugin => {
 	return {

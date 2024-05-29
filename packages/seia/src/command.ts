@@ -1,9 +1,9 @@
+import { ResolvedSeiaConfig, resolveSeiaConfig } from './config.js'
 import { Command } from '@oclif/core'
 import { readFile } from 'node:fs/promises'
-import { cwd } from 'node:process'
 import { join } from 'node:path'
+import { cwd } from 'node:process'
 import { parse } from 'toml'
-import { ResolvedSeiaConfig, resolveSeiaConfig } from './config.js'
 
 export abstract class SeiaCommand extends Command {
 	static enableJsonFlag = true

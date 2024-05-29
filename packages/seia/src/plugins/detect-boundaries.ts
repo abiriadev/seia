@@ -1,7 +1,7 @@
-import { Plugin } from 'vite'
-import { match } from 'ts-pattern'
 import { ResolvedSeiaConfig } from '../config.js'
 import { trimPrefix } from '../utils.js'
+import { match } from 'ts-pattern'
+import { Plugin } from 'vite'
 
 export interface Config {
 	config: ResolvedSeiaConfig

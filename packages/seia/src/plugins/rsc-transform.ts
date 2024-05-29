@@ -1,10 +1,10 @@
-import { transformSource } from 'react-server-dom-webpack/node-loader'
-import { type Plugin } from 'vite'
 import { ResolvedSeiaConfig } from '../config.js'
-import { ImportDeclaration } from 'estree'
-import { match } from 'ts-pattern'
-import { generate } from 'astring'
 import { name } from '../package.js'
+import { generate } from 'astring'
+import { ImportDeclaration } from 'estree'
+import { transformSource } from 'react-server-dom-webpack/node-loader'
+import { match } from 'ts-pattern'
+import { type Plugin } from 'vite'
 
 export interface Config {
 	config: ResolvedSeiaConfig

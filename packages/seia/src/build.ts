@@ -1,13 +1,13 @@
+import { ResolvedSeiaConfig } from './config.js'
+import { detectBoundaries } from './plugins/detect-boundaries.js'
+import { injectClient } from './plugins/inject-client.js'
+import { rscTransform } from './plugins/rsc-transform.js'
+import { silenceDirective } from './plugins/silence-directive.js'
 import './webpack-global.js'
 import { join } from 'node:path'
-import { build as vite, mergeConfig, type UserConfig } from 'vite'
-import { detectBoundaries } from './plugins/detect-boundaries.js'
-import { P, match } from 'ts-pattern'
 import type { OutputAsset } from 'rollup'
-import { rscTransform } from './plugins/rsc-transform.js'
-import { injectClient } from './plugins/inject-client.js'
-import { ResolvedSeiaConfig } from './config.js'
-import { silenceDirective } from './plugins/silence-directive.js'
+import { P, match } from 'ts-pattern'
+import { type UserConfig, mergeConfig, build as vite } from 'vite'
 
 const defaultConfig = {
 	plugins: [silenceDirective()],
