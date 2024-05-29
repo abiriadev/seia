@@ -10,6 +10,7 @@ import type {
 	Program,
 	Property,
 } from 'estree'
+import { name } from '../package.js'
 
 export interface Options {
 	clientBoundaries: Array<string>
@@ -118,7 +119,7 @@ const injectManifest = (
 			],
 			source: {
 				type: 'Literal',
-				value: 'seia-js/client',
+				value: `${name}/client`,
 			},
 		},
 		...manifestArrary.map(

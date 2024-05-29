@@ -4,6 +4,7 @@ import { ResolvedSeiaConfig } from '../config.js'
 import { ImportDeclaration } from 'estree'
 import { match } from 'ts-pattern'
 import { generate } from 'astring'
+import { name } from '../package.js'
 
 export interface Config {
 	config: ResolvedSeiaConfig
@@ -41,8 +42,8 @@ export const rscTransform = ({
 							...impdec,
 							source: {
 								...impdec.source,
-								value: 'seia-js/runtime',
-								raw: `"seia-js/runtime"`,
+								value: `${name}/runtime`,
+								raw: `"${name}/runtime"`,
 							},
 						}),
 					)
