@@ -30,7 +30,8 @@ export const ResolvedSeiaConfigSchema = z.object({
 				.describe('Source directory'),
 			entry: relativePath
 				.default(() =>
-					existsSync('App.tsx')
+					// TODO: hardcoded path. should use config's `src` instead
+					existsSync('./src/' + 'App.tsx')
 						? 'App.tsx'
 						: 'App.jsx',
 				)
