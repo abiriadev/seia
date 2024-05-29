@@ -29,7 +29,7 @@ export default class Start extends SeiaCommand {
 			flags: { port },
 		} = await this.parse(Start)
 
-		return await serve(
+		await serve(
 			extendResolvedSeiaConfig(this.resolvedConfig, {
 				serve: {
 					port,
