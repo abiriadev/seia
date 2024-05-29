@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return, @typescript-eslint/return-await, @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-return, @typescript-eslint/return-await */
 // well, it seems that eslint can't read custom type declarations from global.d.ts
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'

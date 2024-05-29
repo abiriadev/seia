@@ -23,8 +23,9 @@ export const run = async () => {
 	const embeddedStream = new Blob([globalThis.__SEIA_RSC_PAYLOAD], {
 		type: 'text/plain',
 	}).stream()
-	const reactRootDom: ReactNode =
-		await createFromReadableStream(embeddedStream)
+	const reactRootDom = (await createFromReadableStream(
+		embeddedStream,
+	)) as ReactNode
 
 	const root = document.getElementById('root')
 	if (!root) throw new Error('Root element not found')
