@@ -31,28 +31,20 @@ export const serve = async (config: ResolvedSeiaConfig) => {
 		'/@seia/*',
 		serveStatic({
 			root: dist,
-			rewriteRequestPath: path =>
-				trimPrefix(path, '/@seia'),
+			rewriteRequestPath: path => trimPrefix(path, '/@seia'),
 		}),
 	)
 
 	app.get('/', async c => {
-		const entryFile =
-			changeExtension(entry, '.js') + '#App'
+		const entryFile = changeExtension(entry, '.js') + '#App'
 
-		const [worker, stream] =
-			await renderRscPayloadStream(entryFile, config)
+		const [worker, stream] = await renderRscPayloadStream(entryFile, config)
 
 		const [rscPayloadStream, domStream] = stream.tee()
 
-		const rscPayload = await new Response(
-			rscPayloadStream,
-		).text()
+		const rscPayload = await new Response(rscPayloadStream).text()
 
-		const dom = await renderRscPayloadStreamToDom(
-			domStream,
-			config,
-		)
+		const dom = await renderRscPayloadStreamToDom(domStream, config)
 
 		const __html = await new Response(
 			await renderToReadableStream(dom),
@@ -70,10 +62,7 @@ export const serve = async (config: ResolvedSeiaConfig) => {
 							content="width=device-width, initial-scale=1.0"
 						/>
 						<title>Seia SSR</title>
-						<script
-							type="module"
-							src="/@seia/client.js"
-						/>
+						<script type="module" src="/@seia/client.js" />
 					</head>
 					<body>
 						<div
@@ -84,9 +73,7 @@ export const serve = async (config: ResolvedSeiaConfig) => {
 						/>
 						<script
 							dangerouslySetInnerHTML={{
-								__html: injectGlobal(
-									rscPayload,
-								),
+								__html: injectGlobal(rscPayload),
 							}}
 						/>
 					</body>

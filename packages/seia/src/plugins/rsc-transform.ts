@@ -10,9 +10,7 @@ export interface Config {
 	config: ResolvedSeiaConfig
 }
 
-export const rscTransform = ({
-	config: { root },
-}: Config): Plugin => {
+export const rscTransform = ({ config: { root } }: Config): Plugin => {
 	return {
 		name: 'seia:rsc-transform',
 		async transform(code, id) {

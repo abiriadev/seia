@@ -7,9 +7,7 @@ export interface Config {
 	config: ResolvedSeiaConfig
 }
 
-export const detectBoundaries = ({
-	config: { root },
-}: Config): Plugin => {
+export const detectBoundaries = ({ config: { root } }: Config): Plugin => {
 	const boundaries = new Set<string>()
 
 	return {
@@ -28,8 +26,7 @@ export const detectBoundaries = ({
 						() => true,
 					)
 					.otherwise(() => false),
-			)?.length &&
-				boundaries.add('.' + trimPrefix(id, root))
+			)?.length && boundaries.add('.' + trimPrefix(id, root))
 		},
 		buildEnd() {
 			this.emitFile({

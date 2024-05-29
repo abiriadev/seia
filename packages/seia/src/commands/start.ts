@@ -12,16 +12,14 @@ export default class Start extends SeiaCommand {
 	static override description =
 		'Starts SSR and RSC server. The project should be compiled with `seia build` first.'
 
-	static override examples = [
-		'<%= config.bin %> <%= command.id %>',
-	]
+	static override examples = ['<%= config.bin %> <%= command.id %>']
 
 	static override flags = {
 		port: Flags.integer({
 			char: 'p',
 			description:
-				ResolvedSeiaConfigSchema.shape.serve.removeDefault()
-					.shape.port.description,
+				ResolvedSeiaConfigSchema.shape.serve.removeDefault().shape.port
+					.description,
 		}),
 	}
 

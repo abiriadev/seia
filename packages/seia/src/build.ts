@@ -1,10 +1,6 @@
 import './webpack-global.js'
 import { join } from 'node:path'
-import {
-	build as vite,
-	mergeConfig,
-	type UserConfig,
-} from 'vite'
+import { build as vite, mergeConfig, type UserConfig } from 'vite'
 import { detectBoundaries } from './plugins/detect-boundaries.js'
 import { P, match } from 'ts-pattern'
 import type { OutputAsset } from 'rollup'
@@ -57,26 +53,21 @@ export const build = async (config: ResolvedSeiaConfig) => {
 			],
 			output =>
 				match(
-					output.find(
-						(file): file is OutputAsset =>
-							match(file)
-								.with(
-									{
-										type: 'asset',
-										fileName:
-											'boundaries-manifest.json',
-									},
-									() => true,
-								)
-								.otherwise(() => false),
+					output.find((file): file is OutputAsset =>
+						match(file)
+							.with(
+								{
+									type: 'asset',
+									fileName: 'boundaries-manifest.json',
+								},
+								() => true,
+							)
+							.otherwise(() => false),
 					)?.source,
 				)
 					.with(
 						P.string,
-						source =>
-							JSON.parse(
-								source,
-							) as Array<string>,
+						source => JSON.parse(source) as Array<string>,
 					)
 					.run(),
 		)

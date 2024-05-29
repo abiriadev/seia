@@ -6,9 +6,7 @@ import { isObject } from './utils.js'
 
 export type SeiaConfig = z.input<typeof SeiaConfigSchema>
 
-export type ResolvedSeiaConfig = z.infer<
-	typeof ResolvedSeiaConfigSchema
->
+export type ResolvedSeiaConfig = z.infer<typeof ResolvedSeiaConfigSchema>
 
 const relativePath = z.custom<string>(
 	val => typeof val === 'string' && !isAbsolute(val),
@@ -19,21 +17,14 @@ export const ResolvedSeiaConfigSchema = z.object({
 		.enum(['development', 'production'])
 		.default('production')
 		.describe('Build mode'),
-	root: z
-		.string()
-		.default(cwd)
-		.describe('Absolute path to the project root'),
+	root: z.string().default(cwd).describe('Absolute path to the project root'),
 	paths: z
 		.object({
-			src: relativePath
-				.default('src')
-				.describe('Source directory'),
+			src: relativePath.default('src').describe('Source directory'),
 			entry: relativePath
 				.default(() =>
 					// TODO: hardcoded path. should use config's `src` instead
-					existsSync('./src/' + 'App.tsx')
-						? 'App.tsx'
-						: 'App.jsx',
+					existsSync('./src/' + 'App.tsx') ? 'App.tsx' : 'App.jsx',
 				)
 				.describe(
 					'Main entrypoint to resolve dependency graph.\nRelative to the project root.',
@@ -47,19 +38,13 @@ export const ResolvedSeiaConfigSchema = z.object({
 				),
 			dist: relativePath
 				.default('dist')
-				.describe(
-					'Dist directory.\nRelative to the project root.',
-				),
+				.describe('Dist directory.\nRelative to the project root.'),
 			ssr: relativePath
 				.default('ssr')
-				.describe(
-					'SSR output directory.\nRelative to the `dist`.',
-				),
+				.describe('SSR output directory.\nRelative to the `dist`.'),
 			rsc: relativePath
 				.default('rsc')
-				.describe(
-					'RSC output directory.\nRelative to the `dist`.',
-				),
+				.describe('RSC output directory.\nRelative to the `dist`.'),
 		})
 		.default({}),
 	serve: z
@@ -75,15 +60,12 @@ export const ResolvedSeiaConfigSchema = z.object({
 		.default({}),
 })
 
-export const SeiaConfigSchema =
-	ResolvedSeiaConfigSchema.omit({
-		root: true,
-		mode: true,
-	})
+export const SeiaConfigSchema = ResolvedSeiaConfigSchema.omit({
+	root: true,
+	mode: true,
+})
 
-export const resolveSeiaConfig = (
-	config: SeiaConfig,
-): ResolvedSeiaConfig => {
+export const resolveSeiaConfig = (config: SeiaConfig): ResolvedSeiaConfig => {
 	return ResolvedSeiaConfigSchema.parse(config)
 }
 
@@ -110,10 +92,7 @@ const mergeConfigRecursively = (
 
 		// recursively merge objects
 		if (isObject(existing) && isObject(value)) {
-			merged[key] = mergeConfigRecursively(
-				existing,
-				value,
-			)
+			merged[key] = mergeConfigRecursively(existing, value)
 			continue
 		}
 
@@ -132,7 +111,4 @@ export const extendResolvedSeiaConfig = (
 	defaults: ResolvedSeiaConfig,
 	overrides: SeiaConfig,
 ): ResolvedSeiaConfig =>
-	mergeConfigRecursively(
-		defaults,
-		overrides,
-	) as ResolvedSeiaConfig
+	mergeConfigRecursively(defaults, overrides) as ResolvedSeiaConfig

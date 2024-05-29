@@ -13,9 +13,7 @@ export const silenceDirective = (): Plugin => {
 							{
 								code: 'MODULE_LEVEL_DIRECTIVE',
 								message: P.when(msg =>
-									msg.includes(
-										'use client',
-									),
+									msg.includes('use client'),
 								),
 							},
 							{

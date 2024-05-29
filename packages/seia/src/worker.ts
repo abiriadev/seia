@@ -8,11 +8,7 @@ import {
 import { join } from 'node:path'
 import { jsx } from 'react/jsx-runtime'
 import { ResolvedSeiaConfig } from './config.js'
-import {
-	trimPrefix,
-	AnchorId,
-	mustParseAnchorId,
-} from './utils.js'
+import { trimPrefix, AnchorId, mustParseAnchorId } from './utils.js'
 import { changeExtension } from './utils-path.js'
 
 const {
@@ -39,15 +35,11 @@ const rs = renderToReadableStream(
 		{},
 		{
 			get(_, anchorId: string) {
-				const { path, anchor } =
-					mustParseAnchorId(anchorId)
+				const { path, anchor } = mustParseAnchorId(anchorId)
 
 				const relativePath =
 					'.' +
-					changeExtension(
-						trimPrefix(path, join(root, src)),
-						'.js',
-					)
+					changeExtension(trimPrefix(path, join(root, src)), '.js')
 
 				return {
 					id: relativePath,
@@ -60,8 +52,6 @@ const rs = renderToReadableStream(
 	),
 )
 
-parentPort?.postMessage(rs, [
-	rs as unknown as TransferListItem,
-])
+parentPort?.postMessage(rs, [rs as unknown as TransferListItem])
 
 parentPort?.on('message', () => {})

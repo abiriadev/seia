@@ -52,11 +52,7 @@ export const renderRscPayloadStreamToDom = async (
 								get(_, name) {
 									const id = `${file.toString()}#${name.toString()}`
 
-									if (
-										!__webpack_module_loading__.has(
-											id,
-										)
-									) {
+									if (!__webpack_module_loading__.has(id)) {
 										__webpack_module_loading__.set(
 											id,
 											import(
@@ -66,12 +62,11 @@ export const renderRscPayloadStreamToDom = async (
 													ssr,
 													file.toString(),
 												)
-											).then(
-												(m: any) =>
-													__webpack_module_cache__.set(
-														id,
-														m,
-													),
+											).then((m: any) =>
+												__webpack_module_cache__.set(
+													id,
+													m,
+												),
 											),
 										)
 									}
@@ -94,15 +89,9 @@ export const renderRscDom = async (
 	componentAnchorId: string,
 	config: ResolvedSeiaConfig,
 ): Promise<[Worker, ReactNode]> => {
-	const [worker, rs] = await execWorker(
-		componentAnchorId,
-		config,
-	)
+	const [worker, rs] = await execWorker(componentAnchorId, config)
 
-	const dom = await renderRscPayloadStreamToDom(
-		rs,
-		config,
-	)
+	const dom = await renderRscPayloadStreamToDom(rs, config)
 
 	return [worker, dom]
 }

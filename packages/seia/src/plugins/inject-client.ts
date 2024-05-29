@@ -5,11 +5,7 @@ import { ResolvedSeiaConfig } from '../config.js'
 import { isObject } from '../utils.js'
 import { changeExtension } from '../utils-path.js'
 import type { AstNodeLocation, ProgramNode } from 'rollup'
-import type {
-	ImportDeclaration,
-	Program,
-	Property,
-} from 'estree'
+import type { ImportDeclaration, Program, Property } from 'estree'
 import { name } from '../package.js'
 
 export interface Options {
@@ -17,29 +13,20 @@ export interface Options {
 	config: ResolvedSeiaConfig
 }
 
-export const injectClient = ({
-	clientBoundaries,
-	config,
-}: Options): Plugin => {
+export const injectClient = ({ clientBoundaries, config }: Options): Plugin => {
 	return {
 		name: 'seia:inject-client',
 		resolveId(source) {
-			if (source.endsWith('\0client.js'))
-				return '\0client.js'
+			if (source.endsWith('\0client.js')) return '\0client.js'
 		},
 		load(id) {
 			if (id === '\0client.js') {
 				const rawAst = injectManifest(
-					clientBoundaries.map(path => [
-						'_' + sum(path),
-						path,
-					]),
+					clientBoundaries.map(path => ['_' + sum(path), path]),
 					config,
 				)
 
-				const ast = injectSpan(
-					rawAst,
-				) as ProgramNode
+				const ast = injectSpan(rawAst) as ProgramNode
 
 				return {
 					code: '',
@@ -68,14 +55,12 @@ type InjectedNode<T> =
 			: T
 
 const injectSpan = <T>(node: T): InjectedNode<T> => {
-	if (Array.isArray(node))
-		return node.map(injectSpan) as InjectedNode<T>
+	if (Array.isArray(node)) return node.map(injectSpan) as InjectedNode<T>
 
 	if (isObject(node)) {
 		for (const key in node) {
 			const value = node[key]
-			;(node as Record<string, unknown>)[key] =
-				injectSpan(value)
+			;(node as Record<string, unknown>)[key] = injectSpan(value)
 		}
 
 		return s(node) as InjectedNode<T>
@@ -159,10 +144,7 @@ const injectManifest = (
 									value:
 										'./' +
 										changeExtension(
-											relative(
-												src,
-												path,
-											),
+											relative(src, path),
 											'.js',
 										),
 								},

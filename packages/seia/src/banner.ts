@@ -16,9 +16,7 @@ const seiaBgChalk = chalk.bgHex(seiaColor)
 
 const indent = '  '
 
-export const makeBanner = ({
-	serve: { port },
-}: ResolvedSeiaConfig) => {
+export const makeBanner = ({ serve: { port } }: ResolvedSeiaConfig) => {
 	return `\n${seiaChalk(
 		seiaBanner
 			.split('\n')
@@ -28,10 +26,7 @@ export const makeBanner = ({
 		' SEIA.js ',
 	)} ${seiaChalk(`v${version}`)}  ${chalk.dim(
 		`ready in ${chalk.bold(
-			Math.ceil(
-				performance.now() -
-					globalThis.__SEIA_START_TIME,
-			),
+			Math.ceil(performance.now() - globalThis.__SEIA_START_TIME),
 		)} ms`,
 	)}\n\n${indent}${chalk.green('➜')} ${chalk.bold(
 		'Local',

@@ -8,9 +8,7 @@ export default class Build extends SeiaCommand {
 	static override description =
 		'Bundle the project along with SSR and RSC assets.'
 
-	static override examples = [
-		'<%= config.bin %> <%= command.id %>',
-	]
+	static override examples = ['<%= config.bin %> <%= command.id %>']
 
 	static override flags = {}
 

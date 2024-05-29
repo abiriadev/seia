@@ -1,14 +1,8 @@
-export const trimPrefix = (
-	str: string,
-	prefix: string,
-): string =>
+export const trimPrefix = (str: string, prefix: string): string =>
 	str.startsWith(prefix) ? str.slice(prefix.length) : str
 
-export const isObject = (
-	value: unknown,
-): value is Record<string, unknown> =>
-	Object.prototype.toString.call(value) ===
-	'[object Object]'
+export const isObject = (value: unknown): value is Record<string, unknown> =>
+	Object.prototype.toString.call(value) === '[object Object]'
 
 // valid JavaScript identifier
 export type Anchor = string

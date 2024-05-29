@@ -1,9 +1,6 @@
 interface TemporaryReference<T> {}
 
-type TemporaryReferenceSet = WeakMap<
-	TemporaryReference<any>,
-	string
->
+type TemporaryReferenceSet = WeakMap<TemporaryReference<any>, string>
 
 declare module 'react-server-dom-webpack/node-loader' {
 	export type Source = string
@@ -75,17 +72,11 @@ declare module 'react-server-dom-webpack/client.edge' {
 }
 
 declare module 'react-server-dom-webpack/client.browser' {
-	type CallServerCallback = <A, T>(
-		string,
-		args: A,
-	) => Promise<T>
+	type CallServerCallback = <A, T>(string, args: A) => Promise<T>
 
 	interface Reference {}
 
-	type TemporaryReferenceSet = Map<
-		string,
-		Reference | symbol
-	>
+	type TemporaryReferenceSet = Map<string, Reference | symbol>
 
 	export type Options = {
 		callServer?: CallServerCallback
@@ -111,9 +102,7 @@ declare module 'react-dom/server.edge' {
 
 declare var __webpack_module_loading__: Map<string, any>
 declare var __webpack_module_cache__: Map<string, any>
-declare var __webpack_chunk_load__: (
-	id: string,
-) => Promise<any>
+declare var __webpack_chunk_load__: (id: string) => Promise<any>
 declare var __webpack_require__: (id: string) => any
 
 declare var __SEIA_RSC_PAYLOAD: string

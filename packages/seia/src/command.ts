@@ -3,10 +3,7 @@ import { readFile } from 'node:fs/promises'
 import { cwd } from 'node:process'
 import { join } from 'node:path'
 import { parse } from 'toml'
-import {
-	ResolvedSeiaConfig,
-	resolveSeiaConfig,
-} from './config.js'
+import { ResolvedSeiaConfig, resolveSeiaConfig } from './config.js'
 
 export abstract class SeiaCommand extends Command {
 	static enableJsonFlag = true
@@ -17,9 +14,7 @@ export abstract class SeiaCommand extends Command {
 		await super.init()
 		let configString
 		try {
-			configString = (
-				await readFile(join(cwd(), 'seia.toml'))
-			).toString()
+			configString = (await readFile(join(cwd(), 'seia.toml'))).toString()
 		} catch {
 			configString = ''
 		}
@@ -27,9 +22,7 @@ export abstract class SeiaCommand extends Command {
 		this.resolvedConfig = resolveSeiaConfig(config)
 	}
 
-	protected async catch(
-		err: Error & { exitCode?: number },
-	): Promise<any> {
+	protected async catch(err: Error & { exitCode?: number }): Promise<any> {
 		return super.catch(err)
 	}
 
