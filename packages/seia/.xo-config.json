@@ -13,6 +13,7 @@
 			{
 				"default": "array-simple"
 			}
-		]
+		],
+		"no-bitwise": "off"
 	}
 }
