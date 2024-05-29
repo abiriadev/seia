@@ -14,20 +14,23 @@ export const detectBoundaries = ({ config: { root } }: Config): Plugin => {
 	return {
 		name: 'seia:detect-boundaries',
 		moduleParsed({ id, ast }) {
-			ast?.body.filter(node =>
-				match(node)
-					.with(
-						{
-							type: 'ExpressionStatement',
-							expression: {
-								type: 'Literal',
-								value: 'use client',
+			if (
+				ast?.body.filter(node =>
+					match(node)
+						.with(
+							{
+								type: 'ExpressionStatement',
+								expression: {
+									type: 'Literal',
+									value: 'use client',
+								},
 							},
-						},
-						() => true,
-					)
-					.otherwise(() => false),
-			)?.length && boundaries.add('.' + trimPrefix(id, root))
+							() => true,
+						)
+						.otherwise(() => false),
+				)?.length
+			)
+				boundaries.add('.' + trimPrefix(id, root))
 		},
 		buildEnd() {
 			this.emitFile({
