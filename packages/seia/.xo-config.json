@@ -14,6 +14,9 @@
 				"default": "array-simple"
 			}
 		],
-		"no-bitwise": "off"
+		"no-bitwise": "off",
+		"import/no-unassigned-import": "off",
+		"no-confusing-void-expression": "off",
+		"no-return-await": "off"
 	}
 }
