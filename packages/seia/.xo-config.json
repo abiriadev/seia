@@ -1,3 +1,12 @@
 {
-	"prettier": true
+	"prettier": true,
+	"rules": {
+		"import/order": [
+			"warn",
+			{
+				"newlines-between": "always"
+			}
+		],
+		"@typescript-eslint/consistent-type-definitions": "off"
+	}
 }
