@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention, no-var */
 
-type ReactNode = import('react').ReactNode
-
 type TemporaryReferenceSet = WeakMap<Record<string, unknown>, string>
 
 declare module 'react-server-dom-webpack/node-loader' {
@@ -68,7 +66,7 @@ declare module 'react-server-dom-webpack/client.edge' {
 	export function createFromReadableStream(
 		stream: ReadableStream,
 		options: Options,
-	): ReactNode
+	): Promise<ReactNode>
 }
 
 declare module 'react-server-dom-webpack/client.browser' {
