@@ -17,6 +17,7 @@
 		"no-bitwise": "off",
 		"import/no-unassigned-import": "off",
 		"no-confusing-void-expression": "off",
-		"no-return-await": "off"
+		"no-return-await": "off",
+		"unicorn/no-await-expression-member": "off"
 	}
 }
