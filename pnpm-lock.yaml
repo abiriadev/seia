@@ -58,8 +58,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       hono:
-        specifier: ^4.3.9
-        version: 4.3.10
+        specifier: ^4.4.0
+        version: 4.4.0
       react:
         specifier: 19.0.0-beta-26f2496093-20240514
         version: 19.0.0-beta-26f2496093-20240514
@@ -4534,8 +4534,8 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /hono@4.3.10:
-    resolution: {integrity: sha512-67NRwEpFljCRkdl4th4LH+DKj/skEqtRJE9otdp88CGTIMZ7uG2Avn5DTkKsGwjnm2LxkoIlA+bQfFLg33psvg==}
+  /hono@4.4.0:
+    resolution: {integrity: sha512-Bb2GHk8jmlLIuxc3U+7UBGOoA5lByJTAFnRdH2N2fqEVy9TEQzJ9saIJUQ/ZqBvEvgEFe7UjPFNSFi8cyeU+3Q==}
     engines: {node: '>=16.0.0'}
     dev: false
 
