@@ -1,6 +1,18 @@
 {
 	"$schema": "https://typedoc.org/schema.json",
 	"entryPoints": ["./src/index.ts"],
+	"name": "Seia",
+	"includeVersion": true,
+	"gitRemote": "origin",
+	"readme": "../../README.md",
+	"navigationLinks": {
+		"GitHub": "https://github.com/abiriadev/seia"
+	},
+	"validation": {
+		"notExported": true,
+		"invalidLink": true,
+		"notDocumented": true
+	},
 	"plugin": ["typedoc-material-theme"],
 	"themeColor": "#fab359"
 }
