@@ -1,23 +1,46 @@
 {
 	"name": "seia.js",
 	"version": "0.0.0",
-	"description": "Lightweight SSR framework for React Server Components",
 	"type": "module",
+	"description": "Lightweight SSR framework for React Server Components",
+	"keywords": [
+		"seia",
+		"react",
+		"RSC",
+		"react-server-components",
+		"ssr",
+		"vite",
+		"framework",
+		"lightweight"
+	],
+	"homepage": "https://seia.dev",
+	"bugs": "https://github.com/abiriadev/seia/issues",
+	"license": "MIT",
+	"author": {
+		"name": "Abiria",
+		"email": "oro3673@gmail.com"
+	},
+	"files": [
+		"dist"
+	],
+	"main": "./dist/index.js",
+	"bin": {
+		"seia": "./dist/seia.js"
+	},
 	"exports": {
 		".": "./dist/index.js",
 		"./runtime": "./dist/runtime.js",
 		"./client": "./dist/client.js"
 	},
-	"bin": {
-		"seia": "./dist/seia.js"
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/abiria/seia.git",
+		"directory": "packages/seia"
 	},
 	"scripts": {
 		"build": "swc src -d dist --strip-leading-paths",
 		"build:tsc": "tsc"
 	},
-	"keywords": [],
-	"author": "Abiria",
-	"license": "MIT",
 	"dependencies": {
 		"@hono/node-server": "^1.11.1",
 		"@oclif/core": "^3.26.6",
