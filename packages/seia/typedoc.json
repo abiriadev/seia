@@ -13,6 +13,6 @@
 		"invalidLink": true,
 		"notDocumented": true
 	},
-	"plugin": ["typedoc-material-theme"],
+	"plugin": ["typedoc-material-theme", "typedoc-plugin-zod"],
 	"themeColor": "#fab359"
 }

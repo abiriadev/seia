@@ -109,6 +109,9 @@ importers:
       typedoc-material-theme:
         specifier: ^1.0.2
         version: 1.0.2(typedoc@0.25.13)
+      typedoc-plugin-zod:
+        specifier: ^1.1.2
+        version: 1.1.2(typedoc@0.25.13)
       typescript:
         specifier: ^5.4.5
         version: 5.4.5
@@ -6357,6 +6360,14 @@ packages:
       typedoc: ^0.25.3
     dependencies:
       '@material/material-color-utilities': 0.2.7
+      typedoc: 0.25.13(typescript@5.4.5)
+    dev: true
+
+  /typedoc-plugin-zod@1.1.2(typedoc@0.25.13):
+    resolution: {integrity: sha512-jsmuYg1xsGjwKdhKN4tgRYORnbKpU7v5B1ZpsazMH5lUsI6ZLxBqAY5iiZ06oz/01gHOsAdhpABgWD97MOjKQA==}
+    peerDependencies:
+      typedoc: 0.23.x || 0.24.x || 0.25.x
+    dependencies:
       typedoc: 0.25.13(typescript@5.4.5)
     dev: true
 
