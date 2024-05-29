@@ -6,15 +6,15 @@ import { z } from 'zod'
 
 import { isObject } from './utils.js'
 
-export type SeiaConfig = z.input<typeof SeiaConfigSchema>
+export type SeiaConfig = z.input<typeof seiaConfigSchema>
 
-export type ResolvedSeiaConfig = z.infer<typeof ResolvedSeiaConfigSchema>
+export type ResolvedSeiaConfig = z.infer<typeof resolvedSeiaConfigSchema>
 
 const relativePath = z.custom<string>(
-	val => typeof val === 'string' && !isAbsolute(val),
+	value => typeof value === 'string' && !isAbsolute(value),
 )
 
-export const ResolvedSeiaConfigSchema = z.object({
+export const resolvedSeiaConfigSchema = z.object({
 	mode: z
 		.enum(['development', 'production'])
 		.default('production')
@@ -26,7 +26,7 @@ export const ResolvedSeiaConfigSchema = z.object({
 			entry: relativePath
 				.default(() =>
 					// TODO: hardcoded path. should use config's `src` instead
-					existsSync('./src/' + 'App.tsx') ? 'App.tsx' : 'App.jsx',
+					existsSync('./src/App.tsx') ? 'App.tsx' : 'App.jsx',
 				)
 				.describe(
 					'Main entrypoint to resolve dependency graph.\nRelative to the project root.',
@@ -62,23 +62,25 @@ export const ResolvedSeiaConfigSchema = z.object({
 		.default({}),
 })
 
-export const SeiaConfigSchema = ResolvedSeiaConfigSchema.omit({
+export const seiaConfigSchema = resolvedSeiaConfigSchema.omit({
 	root: true,
 	mode: true,
 })
 
 export const resolveSeiaConfig = (config: SeiaConfig): ResolvedSeiaConfig => {
-	return ResolvedSeiaConfigSchema.parse(config)
+	return resolvedSeiaConfigSchema.parse(config)
 }
 
-// heavily inspired by: https://github.com/vitejs/vite/blob/15a6ebb414e3155583e3e9ad970afbdb598b0609/packages/vite/src/node/utils.ts#L1071-L1128
+// Heavily inspired by: https://github.com/vitejs/vite/blob/15a6ebb414e3155583e3e9ad970afbdb598b0609/packages/vite/src/node/utils.ts#L1071-L1128
 const mergeConfigRecursively = (
-	defaults: Record<string, any>,
-	overrides: Record<string, any>,
-): Record<string, any> => {
-	const merged: Record<string, any> = { ...defaults }
+	defaults: Record<string, unknown>,
+	overrides: Record<string, unknown>,
+): Record<string, unknown> => {
+	const merged: Record<string, unknown> = { ...defaults }
 
 	for (const key in overrides) {
+		if (!Object.hasOwn(overrides, key)) continue
+
 		const value = overrides[key]
 
 		// ignore nullish
@@ -86,13 +88,13 @@ const mergeConfigRecursively = (
 
 		const existing = merged[key]
 
-		// accept new when existing one is nullish
+		// Accept new when existing one is nullish
 		if (existing === undefined || existing === null) {
 			merged[key] = value
 			continue
 		}
 
-		// recursively merge objects
+		// Recursively merge objects
 		if (isObject(existing) && isObject(value)) {
 			merged[key] = mergeConfigRecursively(existing, value)
 			continue
