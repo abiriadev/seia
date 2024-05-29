@@ -106,6 +106,41 @@ const mergeConfigRecursively = (
 	return merged
 }
 
+/**
+ * Smartly merge two {@link SeiaConfig}s.
+ *
+ * This function will merge two configs recursively, leaving the unspecified fields as is.
+ *
+ * This function is useful when you want to change only a few fields from the base config.
+ *
+ * The result will be a new object, and the original objects will not be mutated.
+ *
+ * This function does not perform validation. If you want to validate and produce a fully resolved config, use {@link resolveSeiaConfig} instead.
+ *
+ * @category Config
+ *
+ * @returns The merged config object.
+ *
+ * @example
+ * ```ts
+ * mergeSeiaConfig({
+ *     paths: {
+ *         src: '.',
+ *     }
+ * }, {
+ *     paths: {
+ *         entry: 'Page.tsx',
+ *     }
+ * })
+ * // will be evaluated to:
+ * // {
+ * //     paths: {
+ * //         src: '.',
+ * //         entry: 'Page.tsx',
+ * //     }
+ * // }
+ * ```
+ */
 export const mergeSeiaConfig = (
 	defaults: SeiaConfig,
 	overrides: SeiaConfig,
