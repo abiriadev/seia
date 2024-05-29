@@ -1,5 +1,5 @@
 import { P, match } from 'ts-pattern'
-import { Plugin } from 'vite'
+import { type Plugin } from 'vite'
 
 export const silenceDirective = (): Plugin => {
 	return {
@@ -12,14 +12,14 @@ export const silenceDirective = (): Plugin => {
 						P.union(
 							{
 								code: 'MODULE_LEVEL_DIRECTIVE',
-								message: P.when(msg =>
-									msg.includes('use client'),
+								message: P.when(message =>
+									message.includes('use client'),
 								),
 							},
 							{
 								code: 'SOURCEMAP_ERROR',
-								message: P.when(msg =>
-									msg.includes(
+								message: P.when(message =>
+									message.includes(
 										`Error when using sourcemap for reporting an error: Can't resolve original location of error.`,
 									),
 								),

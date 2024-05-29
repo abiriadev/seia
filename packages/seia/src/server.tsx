@@ -6,7 +6,7 @@ import { logger } from 'hono/logger'
 import { renderToReadableStream } from 'react-dom/server.edge'
 
 import { makeBanner } from './banner.js'
-import { ResolvedSeiaConfig } from './config.js'
+import { type ResolvedSeiaConfig } from './config.js'
 import {
 	renderRscPayloadStream,
 	renderRscPayloadStreamToDom,
