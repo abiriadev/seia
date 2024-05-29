@@ -7,9 +7,13 @@ import {
 } from 'node:worker_threads'
 import { join } from 'node:path'
 import { jsx } from 'react/jsx-runtime'
-import { AnchorId, mustParseAnchorId } from './anchor.js'
 import { ResolvedSeiaConfig } from './config.js'
-import { changeExtension, trimPrefix } from './utils.js'
+import {
+	changeExtension,
+	trimPrefix,
+	AnchorId,
+	mustParseAnchorId,
+} from './utils.js'
 
 const {
 	anchorId,

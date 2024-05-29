@@ -1,6 +1,6 @@
 import './process-polyfill.js'
 import './webpack-global.js'
-import { parseAnchorId } from './anchor.js'
+import { parseAnchorId } from './utils.js'
 import { hydrateRoot } from 'react-dom/client'
 import { createFromReadableStream } from 'react-server-dom-webpack/client.browser'
 
