@@ -2,7 +2,8 @@ import { type Plugin } from 'vite'
 import { relative } from 'node:path'
 import sum from 'hash-sum'
 import { ResolvedSeiaConfig } from '../config.js'
-import { changeExtension, isObject } from '../utils.js'
+import { isObject } from '../utils.js'
+import { changeExtension } from '../utils-path.js'
 import type { AstNodeLocation, ProgramNode } from 'rollup'
 import type {
 	ImportDeclaration,
