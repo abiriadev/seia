@@ -49,8 +49,6 @@
 		"chalk": "^5.3.0",
 		"hash-sum": "^2.0.0",
 		"hono": "^4.4.0",
-		"react": "19.0.0-beta-26f2496093-20240514",
-		"react-dom": "19.0.0-beta-26f2496093-20240514",
 		"react-server-dom-webpack": "19.0.0-beta-26f2496093-20240514",
 		"toml": "^3.0.0",
 		"ts-pattern": "^5.1.2",
@@ -67,9 +65,15 @@
 		"@types/react-dom": "^18.3.0",
 		"chokidar": "^3.6.0",
 		"oclif": "^4.11.3",
+		"react": "19.0.0-beta-26f2496093-20240514",
+		"react-dom": "19.0.0-beta-26f2496093-20240514",
 		"rollup": "^4.18.0",
 		"typescript": "^5.4.5",
 		"xo": "^0.58.0"
+	},
+	"peerDependencies": {
+		"react": "19.0.0-beta-26f2496093-20240514",
+		"react-dom": "19.0.0-beta-26f2496093-20240514"
 	},
 	"oclif": {
 		"bin": "seia",
