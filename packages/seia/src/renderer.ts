@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return, @typescript-eslint/return-await, @typescript-eslint/no-unsafe-assignment */
+// well, it seems that eslint can't read custom type declarations from global.d.ts
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Worker } from 'node:worker_threads'
 
-import { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { createFromReadableStream } from 'react-server-dom-webpack/client.edge'
 
-import { ResolvedSeiaConfig } from './config.js'
+import { type ResolvedSeiaConfig } from './config.js'
 import './webpack-global.js'
 
 const workerUrl = join(
@@ -26,18 +28,19 @@ const execWorker = async (
 			execArgv: ['-C', 'react-server'],
 		})
 
-		worker.on('error', async e => {
+		worker.on('error', async error => {
 			await worker.terminate()
-			reject(e)
+			reject(error)
 		})
-		worker.on('message', rs => resolve([worker, rs]))
+		worker.on('message', rs => {
+			resolve([worker, rs])
+		})
 	})
 
 export const renderRscPayloadStream = async (
 	componentAnchorId: string,
 	config: ResolvedSeiaConfig,
-): Promise<[Worker, ReadableStream]> =>
-	await execWorker(componentAnchorId, config)
+): Promise<[Worker, ReadableStream]> => execWorker(componentAnchorId, config)
 
 export const renderRscPayloadStreamToDom = async (
 	stream: ReadableStream,
