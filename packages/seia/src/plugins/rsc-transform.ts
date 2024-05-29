@@ -1,8 +1,8 @@
 import { transformSource } from 'react-server-dom-webpack/node-loader'
 import { type Plugin } from 'vite'
 import { ResolvedSeiaConfig } from '../config.js'
-// TODO: use swc
-// import { parse } from '@swc/core'
+import { ImportDeclaration } from 'estree'
+import { match } from 'ts-pattern'
 
 export interface Config {
 	config: ResolvedSeiaConfig
@@ -25,20 +25,35 @@ export const rscTransform = ({
 				async (source: string) => ({ source }),
 			)
 
-			// TODO: use swc transformer?
-			// but swc deprecated transformer
-			// const res = await parse(source, {
-			// 	target: 'es2022',
-			// 	syntax: 'typescript',
-			// 	tsx: true,
-			// 	decorators: true,
-			// 	dynamicImport: true,
-			// })
+			const ast = this.parse(source)
 
-			return source.replace(
-				/react-server-dom-webpack\/server(\.\w+)?/,
-				'seia-js/runtime',
-			)
+			ast.body = ast.body
+				.filter((stmt): stmt is ImportDeclaration =>
+					match(stmt)
+						.with(
+							{
+								type: 'ImportDeclaration',
+								source: {
+									value: 'react-server-dom-webpack/server',
+								},
+							},
+							() => true,
+						)
+						.otherwise(() => false),
+				)
+				.map(
+					(impdec): ImportDeclaration => ({
+						...impdec,
+						source: {
+							...impdec.source,
+							value: 'seia-ja/runtime',
+						},
+					}),
+				)
+
+			return {
+				ast,
+			}
 		},
 	}
 }
