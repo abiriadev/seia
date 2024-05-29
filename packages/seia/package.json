@@ -25,7 +25,7 @@
 	],
 	"main": "./dist/index.js",
 	"bin": {
-		"seia": "./dist/seia.js"
+		"seia": "./dist/bin/seia.js"
 	},
 	"exports": {
 		".": "./dist/index.js",
