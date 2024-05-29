@@ -16,9 +16,8 @@ import {
 	seiaBanner,
 	seiaBgChalk,
 	seiaChalk,
-	seiaColor,
-	version,
 } from './constants.js'
+import { version } from './package.js'
 
 const injectGlobal = (rscPayload: string) =>
 	`globalThis.__SEIA_RSC_PAYLOAD = \`${rscPayload}\``
