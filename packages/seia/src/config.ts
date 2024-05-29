@@ -62,8 +62,6 @@ export const ResolvedSeiaConfigSchema = z.object({
 		.default({}),
 })
 
-// WARN: this code is using deprecated api.
-// well but, there's no workaround for now: https://github.com/colinhacks/zod/issues/2854
 export const SeiaConfigSchema =
 	ResolvedSeiaConfigSchema.omit({
 		root: true,
