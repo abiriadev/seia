@@ -2,13 +2,13 @@ import { type Plugin } from 'vite'
 import { relative } from 'node:path'
 import sum from 'hash-sum'
 import { ResolvedSeiaConfig } from '../config.js'
-import { changeExtension } from '../utils.js'
+import { changeExtension, isObject } from '../utils.js'
+import type { AstNodeLocation, ProgramNode } from 'rollup'
 import type {
 	ImportDeclaration,
 	Program,
 	Property,
 } from 'estree'
-import { generate } from 'astring'
 
 export interface Options {
 	clientBoundaries: Array<string>
@@ -27,7 +27,7 @@ export const injectClient = ({
 		},
 		load(id) {
 			if (id === '\0client.js') {
-				const ast = injectManifest(
+				const rawAst = injectManifest(
 					clientBoundaries.map(path => [
 						'_' + sum(path),
 						path,
@@ -35,15 +35,52 @@ export const injectClient = ({
 					config,
 				)
 
-				const code = generate(ast, {})
+				// const code = generate(ast)
+				const ast = injectSpan(
+					rawAst,
+				) as ProgramNode
 
 				return {
-					code,
-					ast,
+					code: '',
+					ast, // <- timeout bug
 				}
 			}
 		},
 	}
+}
+
+const dummySpan: AstNodeLocation = {
+	start: 0,
+	end: 0,
+}
+
+const s = <T>(v: T): T & AstNodeLocation => ({
+	...v,
+	...dummySpan,
+})
+
+type InjectedNode<T> =
+	T extends Array<infer U>
+		? Array<InjectedNode<U>>
+		: T extends Record<string, unknown>
+			? T & AstNodeLocation
+			: T
+
+const injectSpan = <T>(node: T): InjectedNode<T> => {
+	if (Array.isArray(node))
+		return node.map(injectSpan) as InjectedNode<T>
+
+	if (isObject(node)) {
+		for (const key in node) {
+			const value = node[key]
+			;(node as Record<string, unknown>)[key] =
+				injectSpan(value)
+		}
+
+		return s(node) as InjectedNode<T>
+	}
+
+	return node as InjectedNode<T>
 }
 
 const injectManifest = (
