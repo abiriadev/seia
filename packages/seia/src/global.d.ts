@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention, no-var */
 
+type ReactNode = import('react').ReactNode
+
 type TemporaryReferenceSet = WeakMap<Record<string, unknown>, string>
 
 declare module 'react-server-dom-webpack/node-loader' {
