@@ -1,6 +1,7 @@
 import { isAbsolute } from 'node:path'
 import { cwd } from 'node:process'
 import { z } from 'zod'
+import { isObject } from './utils.js'
 
 export type SeiaConfig = z.input<typeof SeiaConfigSchema>
 
@@ -74,12 +75,6 @@ export const resolveSeiaConfig = (
 ): ResolvedSeiaConfig => {
 	return ResolvedSeiaConfigSchema.parse(config)
 }
-
-const isObject = (
-	value: unknown,
-): value is Record<string, any> =>
-	Object.prototype.toString.call(value) ===
-	'[object Object]'
 
 // heavily inspired by: https://github.com/vitejs/vite/blob/15a6ebb414e3155583e3e9ad970afbdb598b0609/packages/vite/src/node/utils.ts#L1071-L1128
 const mergeConfigRecursively = (

@@ -11,3 +11,9 @@ export const changeExtension = (
 	ext: string,
 ): string =>
 	join(dirname(path), basename(path, extname(path)) + ext)
+
+export const isObject = (
+	value: unknown,
+): value is Record<string, unknown> =>
+	Object.prototype.toString.call(value) ===
+	'[object Object]'
