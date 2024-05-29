@@ -1,6 +1,6 @@
-interface TemporaryReference<T> {}
+/* eslint-disable @typescript-eslint/naming-convention, no-var */
 
-type TemporaryReferenceSet = WeakMap<TemporaryReference<any>, string>
+type TemporaryReferenceSet = WeakMap<{}, string>
 
 declare module 'react-server-dom-webpack/node-loader' {
 	export type Source = string
@@ -32,9 +32,7 @@ declare module 'react-server-dom-webpack/server.edge' {
 
 	type ClientReferenceManifestEntry = ImportManifestEntry
 
-	export type ClientManifest = {
-		[id: string]: ClientReferenceManifestEntry
-	}
+	export type ClientManifest = Record<string, ClientReferenceManifestEntry>
 
 	type Options = {
 		environmentName?: string
@@ -72,11 +70,10 @@ declare module 'react-server-dom-webpack/client.edge' {
 }
 
 declare module 'react-server-dom-webpack/client.browser' {
+	// eslint-disable-next-line unicorn/prevent-abbreviations
 	type CallServerCallback = <A, T>(string, args: A) => Promise<T>
 
-	interface Reference {}
-
-	type TemporaryReferenceSet = Map<string, Reference | symbol>
+	type TemporaryReferenceSet = Map<string, {} | symbol>
 
 	export type Options = {
 		callServer?: CallServerCallback
