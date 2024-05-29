@@ -50,8 +50,8 @@ export const rscTransform = ({ config: { root } }: Config): Plugin => {
 			)
 
 			return {
+				// TODO: maybe we can provide our own source map and AST after `runtime` transform?
 				code: generate(ast),
-				ast,
 			}
 		},
 	}
