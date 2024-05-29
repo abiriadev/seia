@@ -5,12 +5,13 @@ import {
 	workerData,
 } from 'node:worker_threads'
 
+import { type ComponentType } from 'react'
 import { renderToReadableStream } from 'react-server-dom-webpack/server.edge'
 import { jsx } from 'react/jsx-runtime'
 
-import { ResolvedSeiaConfig } from './config.js'
+import { type ResolvedSeiaConfig } from './config.js'
 import { changeExtension } from './utils-path.js'
-import { AnchorId, mustParseAnchorId, trimPrefix } from './utils.js'
+import { type AnchorId, mustParseAnchorId, trimPrefix } from './utils.js'
 import './webpack-global.js'
 
 const {
@@ -20,7 +21,7 @@ const {
 		paths: { src, dist, rsc },
 	},
 } = workerData as {
-	// relativePath, always RSC
+	// RelativePath, always RSC
 	anchorId: AnchorId
 	config: ResolvedSeiaConfig
 }
@@ -29,7 +30,9 @@ const { path, anchor } = mustParseAnchorId(anchorId)
 
 const componentPath = join(root, dist, rsc, path)
 
-const component = (await import(componentPath))[anchor]
+const component = (
+	(await import(componentPath)) as Record<string, ComponentType>
+)[anchor]
 
 const rs = renderToReadableStream(
 	jsx(component, {}),
@@ -56,4 +59,5 @@ const rs = renderToReadableStream(
 
 parentPort?.postMessage(rs, [rs as unknown as TransferListItem])
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 parentPort?.on('message', () => {})
