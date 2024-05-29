@@ -35,14 +35,13 @@ export const injectClient = ({
 					config,
 				)
 
-				// const code = generate(ast)
 				const ast = injectSpan(
 					rawAst,
 				) as ProgramNode
 
 				return {
 					code: '',
-					ast, // <- timeout bug
+					ast,
 				}
 			}
 		},
