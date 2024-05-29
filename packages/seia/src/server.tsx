@@ -1,3 +1,4 @@
+/** @jsxImportSource hono/jsx */
 import { serve as nodeServe } from '@hono/node-server'
 import { serveStatic } from '@hono/node-server/serve-static'
 import { Hono } from 'hono'
@@ -17,7 +18,6 @@ import './webpack-global.js'
 const injectGlobal = (rscPayload: string) =>
 	`globalThis.__SEIA_RSC_PAYLOAD = \`${rscPayload}\``
 
-/** @jsxImportSource hono/jsx */
 export const serve = async (config: ResolvedSeiaConfig) => {
 	const {
 		paths: { entry, dist },
@@ -54,32 +54,30 @@ export const serve = async (config: ResolvedSeiaConfig) => {
 		await worker.terminate()
 
 		return c.html(
-			(
-				<html>
-					<head>
-						<meta charSet="UTF-8" />
-						<meta
-							name="viewport"
-							content="width=device-width, initial-scale=1.0"
-						/>
-						<title>Seia SSR</title>
-						<script type="module" src="/@seia/client.js" />
-					</head>
-					<body>
-						<div
-							id="root"
-							dangerouslySetInnerHTML={{
-								__html,
-							}}
-						/>
-						<script
-							dangerouslySetInnerHTML={{
-								__html: injectGlobal(rscPayload),
-							}}
-						/>
-					</body>
-				</html>
-			).toString(),
+			<html>
+				<head>
+					<meta charSet="UTF-8" />
+					<meta
+						name="viewport"
+						content="width=device-width, initial-scale=1.0"
+					/>
+					<title>Seia SSR</title>
+					<script type="module" src="/@seia/client.js" />
+				</head>
+				<body>
+					<div
+						id="root"
+						dangerouslySetInnerHTML={{
+							__html,
+						}}
+					/>
+					<script
+						dangerouslySetInnerHTML={{
+							__html: injectGlobal(rscPayload),
+						}}
+					/>
+				</body>
+			</html>,
 		)
 	})
 
