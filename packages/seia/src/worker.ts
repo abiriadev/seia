@@ -9,11 +9,11 @@ import { join } from 'node:path'
 import { jsx } from 'react/jsx-runtime'
 import { ResolvedSeiaConfig } from './config.js'
 import {
-	changeExtension,
 	trimPrefix,
 	AnchorId,
 	mustParseAnchorId,
 } from './utils.js'
+import { changeExtension } from './utils-path.js'
 
 const {
 	anchorId,

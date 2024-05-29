@@ -1,6 +1,5 @@
 import './webpack-global.js'
 import { Hono } from 'hono'
-import { performance } from 'node:perf_hooks'
 import { serve as nodeServe } from '@hono/node-server'
 import { serveStatic } from '@hono/node-server/serve-static'
 import { logger } from 'hono/logger'
@@ -10,14 +9,9 @@ import {
 } from './renderer.js'
 import { renderToReadableStream } from 'react-dom/server.edge'
 import { ResolvedSeiaConfig } from './config.js'
-import { changeExtension, trimPrefix } from './utils.js'
-import chalk from 'chalk'
-import {
-	seiaBanner,
-	seiaBgChalk,
-	seiaChalk,
-} from './constants.js'
-import { version } from './package.js'
+import { trimPrefix } from './utils.js'
+import { changeExtension } from './utils-path.js'
+import { makeBanner } from './banner.js'
 
 const injectGlobal = (rscPayload: string) =>
 	`globalThis.__SEIA_RSC_PAYLOAD = \`${rscPayload}\``
@@ -25,7 +19,7 @@ const injectGlobal = (rscPayload: string) =>
 /** @jsxImportSource hono/jsx */
 export const serve = async (config: ResolvedSeiaConfig) => {
 	const {
-		paths: { entry, dist, rsc },
+		paths: { entry, dist },
 		serve: { port },
 	} = config
 
@@ -101,23 +95,7 @@ export const serve = async (config: ResolvedSeiaConfig) => {
 		)
 	})
 
-	console.log()
-	console.log(
-		seiaChalk(
-			seiaBanner
-				.split('\n')
-				.map(line => `  ${line}`)
-				.join('\n'),
-		),
-	)
-	console.log()
-	console.log(
-		`  ${seiaBgChalk.black(' SEIA.js ')} ${seiaChalk(`v${version}`)}  ${chalk.dim(`ready in ${chalk.bold(Math.ceil(performance.now() - globalThis.__SEIA_START_TIME))} ms`)}`,
-	)
-	console.log()
-	console.log(
-		`  ${chalk.green('➜')} ${chalk.bold('Local')} \t${chalk.blue(`http://localhost:${port}`)}`,
-	)
+	console.log(makeBanner(config))
 
 	nodeServe({
 		fetch: app.fetch,
