@@ -2,7 +2,7 @@ import { performance } from 'node:perf_hooks'
 
 import chalk from 'chalk'
 
-import { ResolvedSeiaConfig } from './config.js'
+import { type ResolvedSeiaConfig } from './config.js'
 import { version } from './package.js'
 
 const seiaBanner = `  "m             #  m    mmmmm
