@@ -1,5 +1,3 @@
-import { Args, Flags } from '@oclif/core'
-
 import { build } from '../build.js'
 import { SeiaCommand } from '../command.js'
 
@@ -14,7 +12,7 @@ export default class Build extends SeiaCommand {
 	static override flags = {}
 
 	public async run(): Promise<void> {
-		const {} = await this.parse(Build)
+		await this.parse(Build)
 
 		await build(this.resolvedConfig)
 	}
