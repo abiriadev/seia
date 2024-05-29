@@ -5,6 +5,7 @@
 	"includeVersion": true,
 	"gitRemote": "origin",
 	"readme": "../../README.md",
+	"hideGenerator": true,
 	"navigationLinks": {
 		"GitHub": "https://github.com/abiriadev/seia"
 	},
