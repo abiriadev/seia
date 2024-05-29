@@ -3,6 +3,7 @@ import { type Plugin } from 'vite'
 import { ResolvedSeiaConfig } from '../config.js'
 import { ImportDeclaration } from 'estree'
 import { match } from 'ts-pattern'
+import { generate } from 'astring'
 
 export interface Config {
 	config: ResolvedSeiaConfig
@@ -27,31 +28,29 @@ export const rscTransform = ({
 
 			const ast = this.parse(source)
 
-			ast.body = ast.body
-				.filter((stmt): stmt is ImportDeclaration =>
-					match(stmt)
-						.with(
-							{
-								type: 'ImportDeclaration',
-								source: {
-									value: 'react-server-dom-webpack/server',
-								},
+			ast.body = ast.body.map(stmt =>
+				match(stmt)
+					.with(
+						{
+							type: 'ImportDeclaration',
+							source: {
+								value: 'react-server-dom-webpack/server',
 							},
-							() => true,
-						)
-						.otherwise(() => false),
-				)
-				.map(
-					(impdec): ImportDeclaration => ({
-						...impdec,
-						source: {
-							...impdec.source,
-							value: 'seia-ja/runtime',
 						},
-					}),
-				)
+						(impdec): ImportDeclaration => ({
+							...impdec,
+							source: {
+								...impdec.source,
+								value: 'seia-js/runtime',
+								raw: `"seia-js/runtime"`,
+							},
+						}),
+					)
+					.otherwise(_ => _),
+			)
 
 			return {
+				code: generate(ast),
 				ast,
 			}
 		},
