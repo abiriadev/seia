@@ -1,5 +1,5 @@
 {
-	"name": "seia-js",
+	"name": "seia.js",
 	"version": "0.0.0",
 	"description": "Lightweight SSR framework for React Server Components",
 	"type": "module",
