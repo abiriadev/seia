@@ -70,7 +70,8 @@
 		"@types/react-dom": "^18.3.0",
 		"chokidar": "^3.6.0",
 		"oclif": "^4.11.3",
-		"typescript": "^5.4.5"
+		"typescript": "^5.4.5",
+		"xo": "^0.58.0"
 	},
 	"oclif": {
 		"bin": "seia",
