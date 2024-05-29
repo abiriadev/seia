@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention, no-var */
 
-type TemporaryReferenceSet = WeakMap<{}, string>
+type TemporaryReferenceSet = WeakMap<Record<string, unknown>, string>
 
 declare module 'react-server-dom-webpack/node-loader' {
 	export type Source = string
@@ -26,7 +26,7 @@ declare module 'react-server-dom-webpack/node-loader' {
 declare module 'react-server-dom-webpack/server.edge' {
 	type ImportManifestEntry = {
 		id: string
-		chunks: Array<string>
+		chunks: string[]
 		name: string
 	}
 
@@ -73,7 +73,7 @@ declare module 'react-server-dom-webpack/client.browser' {
 	// eslint-disable-next-line unicorn/prevent-abbreviations
 	type CallServerCallback = <A, T>(string, args: A) => Promise<T>
 
-	type TemporaryReferenceSet = Map<string, {} | symbol>
+	type TemporaryReferenceSet = Map<string, Record<string, unknown> | symbol>
 
 	export type Options = {
 		callServer?: CallServerCallback
