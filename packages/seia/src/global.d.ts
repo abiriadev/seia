@@ -116,11 +116,5 @@ declare var __webpack_chunk_load__: (
 ) => Promise<any>
 declare var __webpack_require__: (id: string) => any
 
-declare var process: {
-	env: {
-		NODE_ENV: string
-	}
-}
-
 declare var __SEIA_RSC_PAYLOAD: string
 declare var __SEIA_START_TIME: number
