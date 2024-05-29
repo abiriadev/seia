@@ -5,13 +5,13 @@ import sum from 'hash-sum'
 import type { AstNodeLocation, ProgramNode } from 'rollup'
 import { type Plugin } from 'vite'
 
-import { ResolvedSeiaConfig } from '../config.js'
+import { type ResolvedSeiaConfig } from '../config.js'
 import { name } from '../package.js'
 import { changeExtension } from '../utils-path.js'
 import { isObject } from '../utils.js'
 
 export interface Options {
-	clientBoundaries: Array<string>
+	clientBoundaries: string[]
 	config: ResolvedSeiaConfig
 }
 
@@ -61,6 +61,8 @@ const injectSpan = <T>(node: T): InjectedNode<T> => {
 
 	if (isObject(node)) {
 		for (const key in node) {
+			if (!Object.hasOwn(node, key)) continue
+
 			const value = node[key]
 			;(node as Record<string, unknown>)[key] = injectSpan(value)
 		}
