@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs'
 import { isAbsolute } from 'node:path'
 import { cwd } from 'node:process'
 import { z } from 'zod'
@@ -28,7 +29,11 @@ export const ResolvedSeiaConfigSchema = z.object({
 				.default('src')
 				.describe('Source directory'),
 			entry: relativePath
-				.default('App.tsx')
+				.default(() =>
+					existsSync('App.tsx')
+						? 'App.tsx'
+						: 'App.jsx',
+				)
 				.describe(
 					'Main entrypoint to resolve dependency graph.\nRelative to the project root.',
 				),
