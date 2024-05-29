@@ -1,3 +1,4 @@
+import { type ReactNode } from 'react'
 import { hydrateRoot } from 'react-dom/client'
 import { createFromReadableStream } from 'react-server-dom-webpack/client.browser'
 
@@ -22,10 +23,11 @@ export const run = async () => {
 	const embeddedStream = new Blob([globalThis.__SEIA_RSC_PAYLOAD], {
 		type: 'text/plain',
 	}).stream()
-	const res = await createFromReadableStream(embeddedStream)
+	const reactRootDom: ReactNode =
+		await createFromReadableStream(embeddedStream)
 
 	const root = document.getElementById('root')
 	if (!root) throw new Error('Root element not found')
 
-	hydrateRoot(root, res)
+	hydrateRoot(root, reactRootDom)
 }
