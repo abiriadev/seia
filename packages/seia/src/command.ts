@@ -5,7 +5,11 @@ import { cwd } from 'node:process'
 import { Command } from '@oclif/core'
 import { parse } from 'toml'
 
-import { ResolvedSeiaConfig, resolveSeiaConfig } from './config.js'
+import {
+	type ResolvedSeiaConfig,
+	type SeiaConfig,
+	resolveSeiaConfig,
+} from './config.js'
 
 export abstract class SeiaCommand extends Command {
 	static enableJsonFlag = true
@@ -20,12 +24,13 @@ export abstract class SeiaCommand extends Command {
 		} catch {
 			configString = ''
 		}
-		const config = parse(configString)
-		this.resolvedConfig = resolveSeiaConfig(config)
+
+		const rawConfig = parse(configString) as SeiaConfig
+		this.resolvedConfig = resolveSeiaConfig(rawConfig)
 	}
 
-	protected async catch(err: Error & { exitCode?: number }): Promise<any> {
-		return super.catch(err)
+	protected async catch(error: Error & { exitCode?: number }): Promise<any> {
+		return super.catch(error)
 	}
 
 	protected async finally(_?: Error): Promise<any> {
