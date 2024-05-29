@@ -63,11 +63,11 @@
 		"@types/estree": "^1.0.5",
 		"@types/hash-sum": "^1.0.2",
 		"@types/node": "^20.12.12",
-		"rollup": "^4.18.0",
 		"@types/react": "^18.3.2",
 		"@types/react-dom": "^18.3.0",
 		"chokidar": "^3.6.0",
 		"oclif": "^4.11.3",
+		"rollup": "^4.18.0",
 		"typescript": "^5.4.5",
 		"xo": "^0.58.0"
 	},
