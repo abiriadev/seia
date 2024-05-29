@@ -11,8 +11,10 @@ import type { OutputAsset } from 'rollup'
 import { rscTransform } from './plugins/rsc-transform.js'
 import { injectClient } from './plugins/inject-client.js'
 import { ResolvedSeiaConfig } from './config.js'
+import { silenceDirective } from './plugins/silence-directive.js'
 
 const defaultConfig = {
+	plugins: [silenceDirective()],
 	build: {
 		target: 'esnext',
 		lib: {
