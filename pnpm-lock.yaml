@@ -51,12 +51,6 @@ importers:
       hono:
         specifier: ^4.4.0
         version: 4.4.0
-      react:
-        specifier: 19.0.0-beta-26f2496093-20240514
-        version: 19.0.0-beta-26f2496093-20240514
-      react-dom:
-        specifier: 19.0.0-beta-26f2496093-20240514
-        version: 19.0.0-beta-26f2496093-20240514(react@19.0.0-beta-26f2496093-20240514)
       react-server-dom-webpack:
         specifier: 19.0.0-beta-26f2496093-20240514
         version: 19.0.0-beta-26f2496093-20240514(react-dom@19.0.0-beta-26f2496093-20240514)(react@19.0.0-beta-26f2496093-20240514)(webpack@5.91.0)
@@ -100,6 +94,12 @@ importers:
       oclif:
         specifier: ^4.11.3
         version: 4.11.3
+      react:
+        specifier: 19.0.0-beta-26f2496093-20240514
+        version: 19.0.0-beta-26f2496093-20240514
+      react-dom:
+        specifier: 19.0.0-beta-26f2496093-20240514
+        version: 19.0.0-beta-26f2496093-20240514(react@19.0.0-beta-26f2496093-20240514)
       rollup:
         specifier: ^4.18.0
         version: 4.18.0
@@ -5521,7 +5521,6 @@ packages:
     dependencies:
       react: 19.0.0-beta-26f2496093-20240514
       scheduler: 0.25.0-beta-26f2496093-20240514
-    dev: false
 
   /react-server-dom-webpack@19.0.0-beta-26f2496093-20240514(react-dom@19.0.0-beta-26f2496093-20240514)(react@19.0.0-beta-26f2496093-20240514)(webpack@5.91.0):
     resolution: {integrity: sha512-GsM56JSYt2jBEDqdAVYjrS4Msto2MnsXvAjXqLcMz9a3L8EgF1PcD/yhBQg/jVexhVldo/B76NIGR09Sv1wIvQ==}
@@ -5541,7 +5540,6 @@ packages:
   /react@19.0.0-beta-26f2496093-20240514:
     resolution: {integrity: sha512-ZsU/WjNZ6GfzMWsq2DcGjElpV9it8JmETHm9mAJuOJNhuJcWJxt8ltCJabONFRpDFq1A/DP0d0KFj9CTJVM4VA==}
     engines: {node: '>=0.10.0'}
-    dev: false
 
   /read-pkg-up@7.0.1:
     resolution: {integrity: sha512-zK0TB7Xd6JpCLmlLmufqykGE+/TlOePD6qKClNW7hHDKFh/J7/7gCWGR7joEQEW1bKq3a3yUZSObOoWLFQ4ohg==}
@@ -5732,7 +5730,6 @@ packages:
 
   /scheduler@0.25.0-beta-26f2496093-20240514:
     resolution: {integrity: sha512-vDwOytLHFnA3SW2B1lNcbO+/qKVyLCX+KLpm+tRGNDsXpyxzRgkIaYGWmX+S70AJGchUHCtuqQ50GFeFgDbXUw==}
-    dev: false
 
   /schema-utils@3.3.0:
     resolution: {integrity: sha512-pN/yOAvcC+5rQ5nERGuwrjLlYvLTbCibnZ1I7B1LaiAz9BRBlE9GMgE/eqV30P7aJQUf7Ddimy/RsbYO/GrVGg==}
