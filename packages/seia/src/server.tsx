@@ -17,6 +17,9 @@ import { trimPrefix } from './utils.js'
 const injectGlobal = (rscPayload: string) =>
 	`globalThis.__SEIA_RSC_PAYLOAD = \`${rscPayload}\``
 
+/**
+ * Start Seia SSR server.
+ */
 export const serve = async (config: ResolvedSeiaConfig) => {
 	const {
 		paths: { entry, dist },

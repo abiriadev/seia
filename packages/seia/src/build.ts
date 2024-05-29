@@ -20,6 +20,9 @@ const defaultConfig = {
 	},
 }
 
+/**
+ * Build the Seia project with the given configuration.
+ */
 export const build = async (config: ResolvedSeiaConfig) => {
 	const {
 		paths: { src, entry: entryFile },

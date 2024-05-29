@@ -8,10 +8,17 @@ import { isObject } from './utils.js'
 
 // TODO: well, typedoc doesn't support z.inter/z.input type well.
 // we can manually write the type every time, but it's too much work.
+// also, we can't document each field in the schema, because the type is inferred, not directly written.
 // maybe we can completely rewrite the config resolver without zod, but as of
 // now, we will stick with zod.
+/**
+ * The configuration object for the Seia CLI.
+ */
 export type SeiaConfig = z.input<typeof seiaConfigSchema>
 
+/**
+ * The resolved configuration object for the Seia CLI.
+ */
 export type ResolvedSeiaConfig = z.infer<typeof resolvedSeiaConfigSchema>
 
 const relativePath = z.custom<string>(
@@ -71,6 +78,15 @@ export const seiaConfigSchema = resolvedSeiaConfigSchema.omit({
 	mode: true,
 })
 
+/**
+ * Resolve the given {@link SeiaConfig} to a fully resolved {@link ResolvedSeiaConfig}.
+ *
+ * This function will fill in the default values for unspecified fields.
+ *
+ * Additionally, this function will perform validation on the given config object.
+ *
+ * In addition to the {@link SeiaConfig} fields, the resolved config will also contain additional fields such as `root` and `mode`.
+ */
 export const resolveSeiaConfig = (config: SeiaConfig): ResolvedSeiaConfig => {
 	return resolvedSeiaConfigSchema.parse(config)
 }
@@ -150,6 +166,19 @@ export const mergeSeiaConfig = (
 	overrides: SeiaConfig,
 ): SeiaConfig => mergeConfigRecursively(defaults, overrides)
 
+/**
+ * Extend the already resolved {@link ResolvedSeiaConfig} with additional fields.
+ *
+ * This function will merge two configs recursively, resulting in a fully resolved config.
+ *
+ * This function is useful when you want to change only a few fields from the resolved config.
+ *
+ * The result will be a new object, and the original objects will not be mutated.
+ *
+ * @category Config
+ *
+ * @returns The merged config object.
+ */
 export const extendResolvedSeiaConfig = (
 	defaults: ResolvedSeiaConfig,
 	overrides: SeiaConfig,
