@@ -6,6 +6,10 @@ import { z } from 'zod'
 
 import { isObject } from './utils.js'
 
+// TODO: well, typedoc doesn't support z.inter/z.input type well.
+// we can manually write the type every time, but it's too much work.
+// maybe we can completely rewrite the config resolver without zod, but as of
+// now, we will stick with zod.
 export type SeiaConfig = z.input<typeof seiaConfigSchema>
 
 export type ResolvedSeiaConfig = z.infer<typeof resolvedSeiaConfigSchema>
