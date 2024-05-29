@@ -1,15 +1,17 @@
-import { ResolvedSeiaConfig } from './config.js'
-import { changeExtension } from './utils-path.js'
-import { AnchorId, mustParseAnchorId, trimPrefix } from './utils.js'
-import './webpack-global.js'
 import { join } from 'node:path'
 import {
 	type TransferListItem,
 	parentPort,
 	workerData,
 } from 'node:worker_threads'
+
 import { renderToReadableStream } from 'react-server-dom-webpack/server.edge'
 import { jsx } from 'react/jsx-runtime'
+
+import { ResolvedSeiaConfig } from './config.js'
+import { changeExtension } from './utils-path.js'
+import { AnchorId, mustParseAnchorId, trimPrefix } from './utils.js'
+import './webpack-global.js'
 
 const {
 	anchorId,

@@ -1,3 +1,9 @@
+import { serve as nodeServe } from '@hono/node-server'
+import { serveStatic } from '@hono/node-server/serve-static'
+import { Hono } from 'hono'
+import { logger } from 'hono/logger'
+import { renderToReadableStream } from 'react-dom/server.edge'
+
 import { makeBanner } from './banner.js'
 import { ResolvedSeiaConfig } from './config.js'
 import {
@@ -7,11 +13,6 @@ import {
 import { changeExtension } from './utils-path.js'
 import { trimPrefix } from './utils.js'
 import './webpack-global.js'
-import { serve as nodeServe } from '@hono/node-server'
-import { serveStatic } from '@hono/node-server/serve-static'
-import { Hono } from 'hono'
-import { logger } from 'hono/logger'
-import { renderToReadableStream } from 'react-dom/server.edge'
 
 const injectGlobal = (rscPayload: string) =>
 	`globalThis.__SEIA_RSC_PAYLOAD = \`${rscPayload}\``

@@ -1,8 +1,10 @@
-import { isObject } from './utils.js'
 import { existsSync } from 'node:fs'
 import { isAbsolute } from 'node:path'
 import { cwd } from 'node:process'
+
 import { z } from 'zod'
+
+import { isObject } from './utils.js'
 
 export type SeiaConfig = z.input<typeof SeiaConfigSchema>
 

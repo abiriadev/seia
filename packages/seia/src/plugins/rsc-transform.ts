@@ -1,10 +1,11 @@
-import { ResolvedSeiaConfig } from '../config.js'
-import { name } from '../package.js'
 import { generate } from 'astring'
 import { ImportDeclaration } from 'estree'
 import { transformSource } from 'react-server-dom-webpack/node-loader'
 import { match } from 'ts-pattern'
 import { type Plugin } from 'vite'
+
+import { ResolvedSeiaConfig } from '../config.js'
+import { name } from '../package.js'
 
 export interface Config {
 	config: ResolvedSeiaConfig
