@@ -26,6 +26,7 @@
 					"null": false
 				}
 			}
-		]
+		],
+		"unicorn/prefer-query-selector": "off"
 	}
 }
