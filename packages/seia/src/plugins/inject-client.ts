@@ -1,5 +1,6 @@
 import { relative } from 'node:path'
 
+import { generate } from 'astring'
 import type { ImportDeclaration, Program, Property } from 'estree'
 import sum from 'hash-sum'
 import type { AstNodeLocation, ProgramNode } from 'rollup'
@@ -19,7 +20,11 @@ export const injectClient = ({ clientBoundaries, config }: Options): Plugin => {
 	return {
 		name: 'seia:inject-client',
 		resolveId(source) {
-			if (source.endsWith('\0client.js')) return '\0client.js'
+			if (source.endsWith('\0client.js'))
+				return {
+					id: '\0client.js',
+					moduleSideEffects: true,
+				}
 		},
 		load(id) {
 			if (id === '\0client.js') {
@@ -30,9 +35,11 @@ export const injectClient = ({ clientBoundaries, config }: Options): Plugin => {
 
 				const ast = injectSpan(rawAst) as ProgramNode
 
+				// TODO: well... sourcemap issue again.
+				const code = generate(ast)
+
 				return {
-					code: '',
-					ast,
+					code,
 				}
 			}
 		},
