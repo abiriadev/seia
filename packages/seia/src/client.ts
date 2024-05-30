@@ -1,10 +1,13 @@
+// sort-imports-ignore
+import './process-polyfill.js'
+// sort-imports-ignore
+import './webpack-global.js'
+
 import { type ReactNode } from 'react'
 import { hydrateRoot } from 'react-dom/client'
 import { createFromReadableStream } from 'react-server-dom-webpack/client.browser'
 
-import './process-polyfill.js'
 import { parseAnchorId } from './utils.js'
-import './webpack-global.js'
 
 export const initClientModuleMap = (
 	clientModuleMap: Record<string, Record<string, unknown>>,
