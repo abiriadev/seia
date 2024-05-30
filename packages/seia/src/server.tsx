@@ -64,6 +64,7 @@ export const serve = async (config: ResolvedSeiaConfig) => {
 						content="width=device-width, initial-scale=1.0"
 					/>
 					<title>Seia SSR</title>
+					<link rel="stylesheet" href="/@seia/style.css" />
 					<script type="module" src="/@seia/client.js" />
 				</head>
 				<body>
