@@ -62,7 +62,7 @@ export const build = async (config: ResolvedSeiaConfig) => {
 		} satisfies UserConfig),
 	)
 
-	// boundariesOutput should be array
+	// BoundariesOutput should be array
 	if (!Array.isArray(rawBoundariesOutput))
 		throw new Error('boundariesOutput is not an array')
 
@@ -104,7 +104,7 @@ export const build = async (config: ResolvedSeiaConfig) => {
 	)
 
 	// Flush bundled style assets
-	styleAssets.forEach(asset => writeAsset(asset, config))
+	await Promise.all(styleAssets.map(async asset => writeAsset(asset, config)))
 
 	// RSC
 	await vite(
@@ -129,7 +129,7 @@ export const build = async (config: ResolvedSeiaConfig) => {
 	)
 
 	// SSR
-	if (boundariesManifest.length !== 0)
+	if (boundariesManifest.length > 0)
 		await vite(
 			mergeConfig(defaultConfig, {
 				plugins: [filterCss()],

@@ -1,8 +1,8 @@
 // Seia public api
 
 export {
-	ResolvedSeiaConfig,
-	SeiaConfig,
+	type ResolvedSeiaConfig,
+	type SeiaConfig,
 	extendResolvedSeiaConfig,
 	mergeSeiaConfig,
 	resolveSeiaConfig,
