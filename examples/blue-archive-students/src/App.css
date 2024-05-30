@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: 'GlowSansSC-Normal-Heavy_diff';
+	src: url(https://gcore.jsdelivr.net/gh/CeriseBouquet/static@master/fonts/RoGSans_sliced/RoGSanSrfStd-Bd_latin.woff2);
+}
