@@ -1,4 +1,5 @@
-import { join } from 'node:path'
+import { mkdir, writeFile } from 'node:fs/promises'
+import { dirname, join } from 'node:path'
 
 import type { OutputAsset } from 'rollup'
 import { P, match } from 'ts-pattern'
@@ -20,6 +21,17 @@ const defaultConfig = {
 	},
 }
 
+const writeAsset = async (
+	{ fileName, source }: OutputAsset,
+	{ root, paths: { dist } }: ResolvedSeiaConfig,
+): Promise<void> => {
+	const resolvedDestination = join(root, dist, fileName)
+
+	await mkdir(dirname(resolvedDestination), { recursive: true })
+
+	return writeFile(resolvedDestination, source)
+}
+
 /**
  * Build the Seia project with the given configuration.
  */
@@ -30,7 +42,7 @@ export const build = async (config: ResolvedSeiaConfig) => {
 
 	const entry = join(src, entryFile)
 
-	const boundariesOutput = await vite(
+	const rawBoundariesOutput = await vite(
 		mergeConfig(defaultConfig, {
 			plugins: [
 				detectBoundaries({
@@ -48,31 +60,48 @@ export const build = async (config: ResolvedSeiaConfig) => {
 		} satisfies UserConfig),
 	)
 
-	const boundariesManifest = match(boundariesOutput)
-		.with(
-			[
-				{
-					output: P.select(),
-				},
-			],
-			output =>
-				match(
-					output.find((file): file is OutputAsset =>
-						match(file)
-							.with(
-								{
-									type: 'asset',
-									fileName: 'boundaries-manifest.json',
-								},
-								() => true,
-							)
-							.otherwise(() => false),
-					)?.source,
-				)
-					.with(P.string, source => JSON.parse(source) as string[])
-					.run(),
-		)
+	// boundariesOutput should be array
+	if (!Array.isArray(rawBoundariesOutput))
+		throw new Error('boundariesOutput is not an array')
+
+	const [{ output: boundariesOutput }] = rawBoundariesOutput
+
+	const assets = boundariesOutput.filter(
+		(file): file is OutputAsset => file.type === 'asset',
+	)
+
+	const boundariesManifest = match(
+		assets.find(({ fileName }) => fileName === 'boundaries-manifest.json')
+			?.source,
+	)
+		.with(P.string, source => JSON.parse(source) as string[])
 		.run()
+
+	const styleAssets = assets.filter(({ fileName }) =>
+		fileName.endsWith('.css'),
+	)
+
+	// Hydration
+	await vite(
+		mergeConfig(defaultConfig, {
+			plugins: [
+				injectClient({
+					clientBoundaries: boundariesManifest,
+					config,
+				}),
+			],
+			build: {
+				lib: {
+					entry: '\0client.js',
+					fileName: 'client',
+				},
+				emptyOutDir: true,
+			},
+		} satisfies UserConfig),
+	)
+
+	// Flush bundled style assets
+	styleAssets.forEach(asset => writeAsset(asset, config))
 
 	// RSC
 	await vite(
@@ -111,23 +140,4 @@ export const build = async (config: ResolvedSeiaConfig) => {
 				},
 			} satisfies UserConfig),
 		)
-
-	// Hydration
-	await vite(
-		mergeConfig(defaultConfig, {
-			plugins: [
-				injectClient({
-					clientBoundaries: boundariesManifest,
-					config,
-				}),
-			],
-			build: {
-				lib: {
-					entry: '\0client.js',
-					fileName: 'client',
-				},
-				emptyOutDir: false,
-			},
-		} satisfies UserConfig),
-	)
 }
