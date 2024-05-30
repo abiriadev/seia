@@ -1,5 +1,9 @@
 'use client'
 
+// This is explicit client component.
+// It has local state, which is not possible in server components.
+// It will be rendered on SSR server with the `students` data fetched by the server component,
+// and then it will be hydrated on the client side, enabling interactive filter functionality.
 import { matchSorter } from 'match-sorter'
 import { useState } from 'react'
 
@@ -13,6 +17,7 @@ export interface StudentProps {
 }
 
 export const Students = ({ students }: StudentProps) => {
+	// we define state!
 	const [search, setSearch] = useState<string | null>(null)
 
 	const filteredStudents = search

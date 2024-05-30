@@ -1,3 +1,4 @@
+// This is server component, producing static footer markup.
 import { Stack } from './Stack'
 
 const linkMap = {

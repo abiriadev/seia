@@ -1,3 +1,4 @@
+// This is indirect client component, since it's rendered by the `Students` client component.
 import { BlueArchiveStudent } from './types'
 
 // 코드 색상 = 폭발 #920008, 관통 #bc6f0e, 신비 #1F6095

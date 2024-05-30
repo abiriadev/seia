@@ -1,3 +1,5 @@
+// This is shared component, since it's used in both server and client components.
+// Thus, the code for `Stack` would be duplicated in both server and client bundle.
 import { Children, ElementType, PropsWithChildren, ReactNode } from 'react'
 
 export interface StackProps extends PropsWithChildren {
