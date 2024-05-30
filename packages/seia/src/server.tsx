@@ -22,7 +22,7 @@ const injectGlobal = (rscPayload: string) =>
  */
 export const serve = async (config: ResolvedSeiaConfig) => {
 	const {
-		paths: { entry, dist },
+		paths: { entry, dist, anchor },
 		serve: { port },
 	} = config
 
@@ -39,7 +39,7 @@ export const serve = async (config: ResolvedSeiaConfig) => {
 	)
 
 	app.get('/', async c => {
-		const entryFile = changeExtension(entry, '.js') + '#App'
+		const entryFile = changeExtension(entry, '.js') + '#' + anchor
 
 		const [worker, stream] = await renderRscPayloadStream(entryFile, config)
 
