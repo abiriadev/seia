@@ -15,7 +15,13 @@ export const rscTransform = ({ config: { root } }: Config): Plugin => {
 	return {
 		name: 'seia:rsc-transform',
 		async transform(code, id) {
-			if (!(root && id.startsWith(root))) return null
+			if (
+				!(
+					id.startsWith(root) &&
+					(id.endsWith('.jsx') || id.endsWith('.tsx'))
+				)
+			)
+				return null
 
 			const { source } = await transformSource(
 				code,
