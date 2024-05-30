@@ -29,5 +29,13 @@
 		],
 		"unicorn/prefer-query-selector": "off",
 		"unicorn/no-array-callback-reference": "off"
-	}
+	},
+	"overrides": [
+		{
+			"files": ["./src/client.ts"],
+			"rules": {
+				"capitalized-comments": "off"
+			}
+		}
+	]
 }

@@ -1,6 +1,5 @@
 // sort-imports-ignore
 import './process-polyfill.js'
-// sort-imports-ignore
 import './webpack-global.js'
 
 import { type ReactNode } from 'react'
