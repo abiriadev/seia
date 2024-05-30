@@ -7,6 +7,7 @@ import { type UserConfig, mergeConfig, build as vite } from 'vite'
 
 import { type ResolvedSeiaConfig } from './config.js'
 import { detectBoundaries } from './plugins/detect-boundaries.js'
+import { filterCss } from './plugins/filter-css.js'
 import { injectClient } from './plugins/inject-client.js'
 import { rscTransform } from './plugins/rsc-transform.js'
 import { silenceDirective } from './plugins/silence-directive.js'
@@ -86,6 +87,7 @@ export const build = async (config: ResolvedSeiaConfig) => {
 	await vite(
 		mergeConfig(defaultConfig, {
 			plugins: [
+				filterCss(),
 				injectClient({
 					clientBoundaries: boundariesManifest,
 					config,
@@ -108,6 +110,7 @@ export const build = async (config: ResolvedSeiaConfig) => {
 	await vite(
 		mergeConfig(defaultConfig, {
 			plugins: [
+				filterCss(),
 				rscTransform({
 					config,
 				}),
@@ -129,6 +132,7 @@ export const build = async (config: ResolvedSeiaConfig) => {
 	if (boundariesManifest.length !== 0)
 		await vite(
 			mergeConfig(defaultConfig, {
+				plugins: [filterCss()],
 				build: {
 					lib: {
 						entry: boundariesManifest,
