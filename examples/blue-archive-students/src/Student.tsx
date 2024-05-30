@@ -28,7 +28,14 @@ export const Studnet = ({
 				{name}
 			</h2>
 			<div className="grid grid-cols-[60px_1fr] justify-items-center items-center bg-white">
-				<img src={imageSchool} alt={school} />
+				<img
+					src={
+						imageSchool === 'https:undefined'
+							? undefined
+							: imageSchool
+					}
+					alt={school}
+				/>
 				<span className="font-semibold">{school}</span>
 			</div>
 		</article>
