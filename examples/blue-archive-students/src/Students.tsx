@@ -1,3 +1,5 @@
+'use client'
+
 import { matchSorter } from 'match-sorter'
 import { useState } from 'react'
 
@@ -11,15 +13,13 @@ export interface StudentProps {
 }
 
 export const Students = ({ students }: StudentProps) => {
-	const [studentsState, setStudentsState] =
-		useState<Array<BlueArchiveStudent>>(students)
 	const [search, setSearch] = useState<string | null>(null)
 
 	const filteredStudents = search
-		? matchSorter(studentsState, search, {
+		? matchSorter(students, search, {
 				keys: ['name'],
 			})
-		: studentsState
+		: students
 
 	return (
 		<>
