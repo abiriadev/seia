@@ -96,20 +96,21 @@ export const build = async (config: ResolvedSeiaConfig) => {
 	)
 
 	// SSR
-	await vite(
-		mergeConfig(defaultConfig, {
-			build: {
-				lib: {
-					entry: boundariesManifest,
+	if (boundariesManifest.length !== 0)
+		await vite(
+			mergeConfig(defaultConfig, {
+				build: {
+					lib: {
+						entry: boundariesManifest,
+					},
+					outDir: 'dist/ssr',
+					ssr: true,
 				},
-				outDir: 'dist/ssr',
-				ssr: true,
-			},
-			ssr: {
-				external: true,
-			},
-		} satisfies UserConfig),
-	)
+				ssr: {
+					external: true,
+				},
+			} satisfies UserConfig),
+		)
 
 	// Hydration
 	await vite(
