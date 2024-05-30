@@ -1,3 +1,4 @@
+import './App.css'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import { Students } from './Students'
