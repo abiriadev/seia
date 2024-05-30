@@ -50,6 +50,7 @@ export const build = async (config: ResolvedSeiaConfig) => {
 				}),
 			],
 			build: {
+				cssMinify: true,
 				lib: {
 					entry,
 				},
