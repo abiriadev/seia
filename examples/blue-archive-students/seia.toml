@@ -1,0 +1,13 @@
+# Seia supports sane defaults out of the box, but you can customize it for your
+# project by creating a `seia.toml` file in the root of your project.
+
+# [paths]
+# src = "src"
+# entry = "App.tsx"
+# anchor = "default"
+# dist = "dist"
+# ssr = "ssr"
+# rsc = "rsc"
+
+# [serve]
+# port = 5314
