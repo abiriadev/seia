@@ -1,0 +1,23 @@
+{
+	"name": "blue-archive-students",
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"build": "seia build",
+		"start": "seia start"
+	},
+	"author": "Abiria",
+	"license": "MIT",
+	"dependencies": {
+		"react": "19.0.0-beta-26f2496093-20240514",
+		"react-dom": "19.0.0-beta-26f2496093-20240514",
+		"seia.js": "workspace:*",
+		"undici": "^6.18.1"
+	},
+	"devDependencies": {
+		"@types/react": "^18.3.2",
+		"autoprefixer": "^10.4.19",
+		"postcss": "^8.4.38",
+		"tailwindcss": "^3.4.3"
+	}
+}
