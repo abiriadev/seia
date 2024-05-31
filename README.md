@@ -157,6 +157,17 @@ Seia(<ruby>百合<rt>ゆり</rt></ruby><ruby>園<rt>ぞの</rt></ruby>セイア)
 
 The port number `5314` is a [L33T](https://en.wikipedia.org/wiki/Leet) of "SEIA". This choice is inspired by [Vite using port 5173](https://github.com/vitejs/vite/pull/8148).
 
+## :pray: Special Thanks
+
+-   The [React](https://react.dev) team for RSC, and webpack version of its implementation.
+-   [Rollup](https://rollupjs.org) by [Rich Harris](https://github.com/Rich-Harris) and [Vite](https://vitejs.dev) by [Evan You](https://evanyou.me) for best toolchain ever.
+-   [SWC](https://swc.rs) by [kdy1](https://github.com/kdy1).
+-   [Next.js](https://nextjs.org/) by [Vercel](https://vercel.com) for inspiration.
+-   [vite-rsc](https://github.com/cyco130/vite-rsc) by [nksaraf](https://github.com/nksaraf) for inspiration.
+-   [Waku](https://github.com/dai-shi/waku) by [Daishi Kato](https://github.com/dai-shi) for inspiration. A lot of part was inspired by Waku.
+-   [Vike](https://vike.dev) by [brillout](https://github.com/brillout) for inspiration.
+-   [Hono](https://hono.dev/) by [Yusuke Wada](https://yusu.ke)
+
 ## :scroll: License
 
 [![MIT](https://img.shields.io/github/license/abiriadev/pia?color=fab359&style=for-the-badge)](./LICENSE)
