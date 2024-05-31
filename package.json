@@ -11,6 +11,7 @@
 	"author": "Abiria",
 	"license": "MIT",
 	"devDependencies": {
+		"@changesets/cli": "^2.27.5",
 		"@trivago/prettier-plugin-sort-imports": "^4.3.0",
 		"prettier": "^3.2.5",
 		"turbo": "^1.13.3"
