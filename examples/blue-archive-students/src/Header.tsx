@@ -1,5 +1,6 @@
 // This is server component.
 // It reads(!) `package.json` with native `node:fs` module.
+// Try changing the version in `package.json` and refresh the page without build, you will see the version updated.
 import { readFile } from 'node:fs/promises'
 
 export const Header = async () => {
