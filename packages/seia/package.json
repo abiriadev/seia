@@ -1,6 +1,6 @@
 {
 	"name": "seia.js",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"type": "module",
 	"description": "Lightweight SSR framework for React Server Components",
 	"keywords": [
@@ -21,7 +21,8 @@
 		"email": "oro3673@gmail.com"
 	},
 	"files": [
-		"dist"
+		"dist",
+		"CHANGELOG.md"
 	],
 	"main": "./dist/index.js",
 	"bin": {
@@ -42,6 +43,7 @@
 		"build:tsc": "tsc",
 		"doc": "typedoc",
 		"format": "prettier -w .",
+		"prepack": "cp ../../README.md .",
 		"lint": "xo"
 	},
 	"dependencies": {
