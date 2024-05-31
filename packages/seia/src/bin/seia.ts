@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { performance } from 'node:perf_hooks'
 
 import { execute } from '@oclif/core'
