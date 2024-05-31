@@ -81,7 +81,7 @@ const injectSpan = <T>(node: T): InjectedNode<T> => {
 }
 
 const injectManifest = (
-	manifestArrary: Array<[string, string]>,
+	manifestArray: Array<[string, string]>,
 	{ paths: { src } }: ResolvedSeiaConfig,
 ): Program => ({
 	type: 'Program',
@@ -118,7 +118,7 @@ const injectManifest = (
 				value: `${name}/client`,
 			},
 		},
-		...manifestArrary.map(
+		...manifestArray.map(
 			([id, path]): ImportDeclaration => ({
 				type: 'ImportDeclaration',
 				specifiers: [
@@ -147,7 +147,7 @@ const injectManifest = (
 					},
 					init: {
 						type: 'ObjectExpression',
-						properties: manifestArrary.map(
+						properties: manifestArray.map(
 							([id, path]): Property => ({
 								type: 'Property',
 								key: {
