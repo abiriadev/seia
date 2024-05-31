@@ -132,7 +132,7 @@ Your support is invaluable for the ongoing maintenance and improvement of Seia. 
 -   [x] RSC & SSR code splitting.
 -   [x] Minimize client bundle.
 -   [ ] CommonJS modules.
--   [x] Provide configuration options.
+-   [x] Provide configuration options and config file.
 -   [ ] Vite HMR and fast refresh.
 -   [ ] Support existing routing solutions, along with RSC.
 -   [ ] Streaming and Suspense.
@@ -146,6 +146,7 @@ Your support is invaluable for the ongoing maintenance and improvement of Seia. 
 -   [ ] Rewrite `react-server-dom-webpack` dependency to pure Vite plugin.
 -   [ ] Show build-time error when using client-side API without `"use client"`.
 -   [ ] Add benchmarks.
+-   [ ] Telemetry.
 -   [ ] Remove hacks and webpack polyfills.
 -   [ ] Allow user to use Seia as a hono middleware.
 
