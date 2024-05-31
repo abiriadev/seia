@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build typedoc
-        run: pnpm --filter seia.js run doc
+        run: pnpm --filter seia.js run doc --gaID ${{ secrets.GA_MEASUREMENT_ID }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
