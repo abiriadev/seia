@@ -134,6 +134,7 @@ Your support is invaluable for the ongoing maintenance and improvement of Seia. 
 -   [ ] CommonJS modules.
 -   [x] Provide configuration options and config file.
 -   [ ] Vite HMR and fast refresh.
+-   [ ] Stream RSC payload when navigating pages.
 -   [ ] Support existing routing solutions, along with RSC.
 -   [ ] Streaming and Suspense.
 -   [x] Provide CLI.
