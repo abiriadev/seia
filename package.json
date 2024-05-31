@@ -4,7 +4,8 @@
 	"description": "Seia monorepo",
 	"type": "module",
 	"scripts": {
-		"build": ""
+		"build": "turbo build",
+		"format": "prettier -w ."
 	},
 	"keywords": [],
 	"author": "Abiria",

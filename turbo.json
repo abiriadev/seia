@@ -1,10 +1,20 @@
 {
 	"$schema": "https://turbo.build/schema.json",
 	"pipeline": {
+		"topo": {
+			"dependsOn": ["^topo"]
+		},
 		"build": {
+			"dependsOn": ["^build"],
 			"outputs": ["dist/**"]
 		},
-		"build:tsc": {},
-		"lint": {}
+		"build:tsc": {
+			"dependsOn": ["topo"]
+		},
+		"//#format": {},
+		"format": {},
+		"lint": {
+			"dependsOn": ["format"]
+		}
 	}
 }
