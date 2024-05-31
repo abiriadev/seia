@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-require('../dist/seia.js')
+import '../dist/bin/seia.js'
 
 // https://github.com/vercel/turbo/discussions/446
