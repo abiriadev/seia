@@ -136,6 +136,7 @@ Your support is invaluable for the ongoing maintenance and improvement of Seia. 
 -   [ ] Vite HMR and fast refresh.
 -   [ ] Stream RSC payload when navigating pages.
 -   [ ] Support existing routing solutions, along with RSC.
+-   [ ] Way to edit header or layout, for example like changing `<title>`.
 -   [ ] Streaming and Suspense.
 -   [x] Provide CLI.
 -   [ ] Use user's Vite config and plugins.
