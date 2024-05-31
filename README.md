@@ -132,6 +132,7 @@ Your support is invaluable for the ongoing maintenance and improvement of Seia. 
 -   [x] RSC & SSR code splitting.
 -   [x] Minimize client bundle.
 -   [ ] CommonJS modules.
+-   [x] Provide configuration options.
 -   [ ] Vite HMR and fast refresh.
 -   [ ] Support existing routing solutions, along with RSC.
 -   [ ] Streaming and Suspense.
