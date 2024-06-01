@@ -5,7 +5,9 @@
 	"type": "module",
 	"scripts": {
 		"build": "turbo build",
-		"format": "prettier -w ."
+		"format": "prettier -w .",
+		"publish": "changesets publish",
+		"version": "changesets version"
 	},
 	"keywords": [],
 	"author": "Abiria",
