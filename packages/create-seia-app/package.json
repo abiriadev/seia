@@ -28,9 +28,7 @@
 		"csa": "./bin/run.js"
 	},
 	"oclif": {
-		"bin": "create-seia-app",
-		"commands": "./dist/commands",
-		"dirname": "create-seia-app",
-		"topicSeparator": " "
+		"strategy": "single",
+		"target": "./dist/bin/index.js"
 	}
 }
