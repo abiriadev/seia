@@ -6,8 +6,8 @@
 	"scripts": {
 		"build": "turbo build",
 		"format": "prettier -w .",
-		"publish": "changesets publish",
-		"version": "changesets version"
+		"publish": "changeset publish",
+		"version": "changeset version"
 	},
 	"keywords": [],
 	"author": "Abiria",
