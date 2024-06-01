@@ -2,7 +2,6 @@
 	"name": "create-seia-app",
 	"version": "0.1.0",
 	"description": "Create Seia.js apps with one command",
-	"main": "dist/index.js",
 	"scripts": {
 		"build": "swc src -d dist --strip-leading-paths"
 	},
@@ -25,7 +24,8 @@
 	},
 	"type": "module",
 	"bin": {
-		"create-seia-app": "./bin/run.js"
+		"create-seia-app": "./bin/run.js",
+		"csa": "./bin/run.js"
 	},
 	"oclif": {
 		"bin": "create-seia-app",
@@ -34,4 +34,3 @@
 		"topicSeparator": " "
 	}
 }
-
