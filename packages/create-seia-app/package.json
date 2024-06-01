@@ -1,0 +1,23 @@
+{
+	"name": "create-seia-app",
+	"version": "0.1.0",
+	"description": "Create Seia.js apps with one command",
+	"main": "dist/index.js",
+	"scripts": {
+		"build": "swc src/index.ts -d dist"
+	},
+	"keywords": [],
+	"author": "Abiria",
+	"license": "MIT",
+	"dependencies": {
+		"prompts": "^2.4.2"
+	},
+	"devDependencies": {
+		"@swc/cli": "^0.3.12",
+		"@swc/core": "^1.5.24",
+		"@types/node": "^20.12.12",
+		"@types/prompts": "^2.4.9",
+		"chokidar": "^3.6.0",
+		"typescript": "^5.4.5"
+	}
+}
