@@ -19,5 +19,6 @@
 		"@types/prompts": "^2.4.9",
 		"chokidar": "^3.6.0",
 		"typescript": "^5.4.5"
-	}
+	},
+	"type": "module"
 }
