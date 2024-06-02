@@ -1,3 +1,5 @@
+import { cp } from 'node:fs/promises'
+
 import { Args, Command, Flags } from '@oclif/core'
 import prompts from 'prompts'
 
@@ -31,5 +33,17 @@ export default class Index extends Command {
 				initial: true,
 			},
 		])
+
+		const template = ts ? 'typescript' : 'javascript'
+
+		await cp(`${import.meta.dirname}/../templates/${template}`, name, {
+			recursive: true,
+		})
+
+		const indent = '  '
+
+		console.log(
+			`\n${indent}Created project ${name} with ${template} template!\n\n${indent}$ cd ${name}\n${indent}$ npm install\n${indent}$ npm run build\n${indent}$ npm run start\n\n${indent}Happy hacking! 🚀`,
+		)
 	}
 }
