@@ -32,7 +32,7 @@ _Lightweight SSR framework for React Server Components_
 
 Create a new empty React project or use your existing one. If you're unsure how to start, follow the [Vite's official template](https://vitejs.dev/guide/#scaffolding-your-first-vite-project).
 
-They, install Seia:
+Then, install Seia:
 
 ```sh
 $ npm install seia.js
