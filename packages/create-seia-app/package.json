@@ -26,6 +26,7 @@
 	"type": "module",
 	"bin": {
 		"create-seia-app": "./bin/create-seia-app.js",
+		"create-seia": "./bin/create-seia-app.js",
 		"csa": "./bin/create-seia-app.js"
 	},
 	"oclif": {
