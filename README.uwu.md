@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://static.wikia.nocookie.net/blue-archive/images/4/48/Seia_Halo.png" width="128" />
+<img src="https://static.wikia.nocookie.net/blue-archive/images/1/10/Seia_Icon.png" width="128" />
 
 # Seia
 
