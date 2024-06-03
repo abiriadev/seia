@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://static.wikia.nocookie.net/blue-archive/images/1/10/Seia_Icon.png" width="128" />
+<img src="https://static.wikia.nocookie.net/blue-archive/images/4/48/Seia_Halo.png" width="128" />
 
 # Seia
 
@@ -154,8 +154,7 @@ Your support is invaluable for the ongoing maintenance and improvement of Seia. 
 
 ## :raising_hand: Where's the name from?
 
-[Yurizono
-Seia(<ruby>百合<rt>ゆり</rt></ruby><ruby>園<rt>ぞの</rt></ruby>セイア)](https://bluearchive.fandom.com/wiki/Yurizono_Seia), member of the [Tea Party](https://bluearchive.fandom.com/wiki/Tea_Party) at [Trinity](https://bluearchive.fandom.com/wiki/Trinity_General_School) in the [Blue Archive](https://bluearchive.nexon.com/home).
+[Yurizono Seia(<ruby>百合<rt>ゆり</rt></ruby><ruby>園<rt>ぞの</rt></ruby>セイア)](https://bluearchive.fandom.com/wiki/Yurizono_Seia), member of the [Tea Party](https://bluearchive.fandom.com/wiki/Tea_Party) at [Trinity](https://bluearchive.fandom.com/wiki/Trinity_General_School) in the [Blue Archive](https://bluearchive.nexon.com/home).
 
 ## :grey_question: What does the default port number `5314` mean?
 
