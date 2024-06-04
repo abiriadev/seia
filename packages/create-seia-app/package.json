@@ -1,0 +1,65 @@
+{
+	"name": "create-seia-app",
+	"version": "0.0.0",
+	"type": "module",
+	"description": "Create Seia.js apps with one command",
+	"keywords": [
+		"seia",
+		"react",
+		"boilerplate",
+		"scaffold",
+		"code-generation"
+	],
+	"homepage": "https://seia.dev",
+	"bugs": "https://github.com/abiriadev/seia/issues",
+	"license": "MIT",
+	"author": {
+		"name": "Abiria",
+		"email": "oro3673@gmail.com"
+	},
+	"files": [
+		"dist",
+		"templates",
+		"CHANGELOG.md"
+	],
+	"main": "./dist/index.js",
+	"bin": {
+		"create-seia-app": "./bin/create-seia-app.js",
+		"create-seia": "./bin/create-seia-app.js",
+		"csa": "./bin/create-seia-app.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/abiriadev/seia.git",
+		"directory": "packages/create-seia-app"
+	},
+	"scripts": {
+		"build": "swc src -d dist --strip-leading-paths",
+		"build:tsc": "tsc",
+		"format": "prettier -w .",
+		"lint": "xo",
+		"prepack": "cp ../../README.md ."
+	},
+	"dependencies": {
+		"@oclif/core": "^3.26.6",
+		"liquidjs": "^10.13.1",
+		"prompts": "^2.4.2",
+		"walkdir": "^0.4.1"
+	},
+	"devDependencies": {
+		"@swc/cli": "^0.3.12",
+		"@swc/core": "^1.5.24",
+		"@types/node": "^20.12.12",
+		"@types/prompts": "^2.4.9",
+		"chokidar": "^3.6.0",
+		"oclif": "^4.11.3",
+		"prettier": "^3.2.5",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.4.5",
+		"xo": "^0.58.0"
+	},
+	"oclif": {
+		"default": ".",
+		"commands": "./dist"
+	}
+}
