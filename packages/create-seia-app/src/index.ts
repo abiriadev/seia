@@ -1,7 +1,14 @@
-import { cp } from 'node:fs/promises'
+import { cp, rm, writeFile } from 'node:fs/promises'
 
 import { Args, Command, Flags } from '@oclif/core'
+import { Liquid } from 'liquidjs'
 import prompts from 'prompts'
+import walkdir from 'walkdir'
+
+interface Context {
+	name: string
+	package: string
+}
 
 export default class Index extends Command {
 	static override args = {
@@ -13,6 +20,28 @@ export default class Index extends Command {
 	static override examples = ['<%= config.bin %>', '<%= config.bin %> <Name>']
 
 	static override flags = {}
+
+	static templateExtension = '.liquid'
+
+	async render(path: string, context: Context) {
+		const liquid = new Liquid()
+
+		for (const template of await walkdir.async(path, {
+			filter: (_, files) =>
+				files.filter(file =>
+					file.endsWith(this.constructor.templateExtension),
+				),
+		})) {
+			await writeFile(
+				template.slice(0, -this.constructor.templateExtension.length),
+				await liquid.renderFile(template, {
+					name: 'kimo',
+				}),
+			)
+
+			await rm(template)
+		}
+	}
 
 	public async run(): Promise<void> {
 		const { args, flags } = await this.parse(Index)
@@ -39,6 +68,13 @@ export default class Index extends Command {
 		await cp(`${import.meta.dirname}/../templates/${template}`, name, {
 			recursive: true,
 		})
+
+		const context = {
+			name,
+			package: name,
+		}
+
+		await this.render(name, context)
 
 		const indent = '  '
 
