@@ -53,6 +53,7 @@
 		"@types/prompts": "^2.4.9",
 		"chokidar": "^3.6.0",
 		"oclif": "^4.11.3",
+		"prettier": "^3.2.5",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.4.5",
 		"xo": "^0.58.0"
