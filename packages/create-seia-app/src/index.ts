@@ -27,6 +27,12 @@ export default class Index extends Command {
 		return name.trim()
 	}
 
+	static isValidPackageName(name: string) {
+		return /^(?:@[a-z\d\-*~][a-z\d\-*._~]*\/)?[a-z\d\-~][a-z\d\-._~]*$/.test(
+			name,
+		)
+	}
+
 	async render(path: string, context: Context) {
 		const liquid = new Liquid()
 
@@ -47,11 +53,21 @@ export default class Index extends Command {
 	public async run(): Promise<void> {
 		const { args, flags } = await this.parse(Index)
 
-		const { name, ts } = await prompts([
+		const {
+			name,
+			package: _package,
+			ts,
+		} = await prompts([
 			{
 				type: args.name ? null : 'text',
 				name: 'name',
 				message: 'Project name:',
+				initial: 'seia-app',
+			},
+			{
+				type: prev => (Index.isValidPackageName(prev) ? 'text' : null),
+				name: 'package',
+				message: 'Package name:',
 				initial: 'seia-app',
 			},
 			{
@@ -72,7 +88,7 @@ export default class Index extends Command {
 
 		const context = {
 			name,
-			package: name,
+			package: _package,
 		}
 
 		await this.render(name, context)
