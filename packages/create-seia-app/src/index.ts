@@ -65,7 +65,7 @@ export default class Index extends Command {
 				initial: 'seia-app',
 			},
 			{
-				type: prev => (Index.isValidPackageName(prev) ? 'text' : null),
+				type: prev => (Index.isValidPackageName(prev) ? null : 'text'),
 				name: 'package',
 				message: 'Package name:',
 				initial: 'seia-app',
