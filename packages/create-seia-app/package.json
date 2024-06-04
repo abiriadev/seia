@@ -1,15 +1,45 @@
 {
 	"name": "create-seia-app",
 	"version": "0.1.0",
+	"type": "module",
 	"description": "Create Seia.js apps with one command",
+	"keywords": [
+		"seia",
+		"react",
+		"boilerplate",
+		"scaffold",
+		"code-generation"
+	],
+	"homepage": "https://seia.dev",
+	"bugs": "https://github.com/abiriadev/seia/issues",
+	"license": "MIT",
+	"author": {
+		"name": "Abiria",
+		"email": "oro3673@gmail.com"
+	},
+	"files": [
+		"dist",
+		"templates",
+		"CHANGELOG.md"
+	],
 	"main": "./dist/index.js",
+	"bin": {
+		"create-seia-app": "./bin/create-seia-app.js",
+		"create-seia": "./bin/create-seia-app.js",
+		"csa": "./bin/create-seia-app.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/abiriadev/seia.git",
+		"directory": "packages/create-seia-app"
+	},
 	"scripts": {
 		"build": "swc src -d dist --strip-leading-paths",
-		"lint": "xo"
+		"build:tsc": "tsc",
+		"format": "prettier -w .",
+		"lint": "xo",
+		"prepack": "cp ../../README.md ."
 	},
-	"keywords": [],
-	"author": "Abiria",
-	"license": "MIT",
 	"dependencies": {
 		"@oclif/core": "^3.26.6",
 		"liquidjs": "^10.13.1",
@@ -26,12 +56,6 @@
 		"ts-node": "^10.9.2",
 		"typescript": "^5.4.5",
 		"xo": "^0.58.0"
-	},
-	"type": "module",
-	"bin": {
-		"create-seia-app": "./bin/create-seia-app.js",
-		"create-seia": "./bin/create-seia-app.js",
-		"csa": "./bin/create-seia-app.js"
 	},
 	"oclif": {
 		"default": ".",
