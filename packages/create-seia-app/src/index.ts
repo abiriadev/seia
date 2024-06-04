@@ -1,7 +1,7 @@
 import { cp, rm, writeFile } from 'node:fs/promises'
 
 import { Args, Command, Flags } from '@oclif/core'
-import { Context, Liquid } from 'liquidjs'
+import { Liquid } from 'liquidjs'
 import prompts from 'prompts'
 import walkdir from 'walkdir'
 
@@ -23,17 +23,20 @@ export default class Index extends Command {
 
 	static templateExtension = '.liquid'
 
+	static normalizeProjectName(name: string) {
+		return name.trim()
+	}
+
 	async render(path: string, context: Context) {
 		const liquid = new Liquid()
 
+		// TODO: use Promise.all to parallelize
 		for (const template of await walkdir.async(path, {
 			filter: (_, files) =>
-				files.filter(file =>
-					file.endsWith(this.constructor.templateExtension),
-				),
+				files.filter(file => file.endsWith(Index.templateExtension)),
 		})) {
 			await writeFile(
-				template.slice(0, -this.constructor.templateExtension.length),
+				template.slice(0, -Index.templateExtension.length),
 				await liquid.renderFile(template, context),
 			)
 
