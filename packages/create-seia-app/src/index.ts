@@ -43,7 +43,7 @@ export default class Index extends Command {
 		})) {
 			await writeFile(
 				template.slice(0, -Index.templateExtension.length),
-				await liquid.renderFile(template, context),
+				(await liquid.renderFile(template, context)) as string,
 			)
 
 			await rm(template)
@@ -53,11 +53,7 @@ export default class Index extends Command {
 	public async run(): Promise<void> {
 		const { args, flags } = await this.parse(Index)
 
-		const {
-			name,
-			package: _package,
-			ts,
-		} = await prompts([
+		const result = await prompts([
 			{
 				type: args.name ? null : 'text',
 				name: 'name',
@@ -65,7 +61,8 @@ export default class Index extends Command {
 				initial: 'seia-app',
 			},
 			{
-				type: prev => (Index.isValidPackageName(prev) ? null : 'text'),
+				type: (previous: string) =>
+					Index.isValidPackageName(previous) ? null : 'text',
 				name: 'package',
 				message: 'Package name:',
 				initial: 'seia-app',
@@ -79,6 +76,16 @@ export default class Index extends Command {
 				initial: true,
 			},
 		])
+
+		const {
+			name,
+			package: _package,
+			ts,
+		} = result as {
+			name: string
+			package: string
+			ts: boolean
+		}
 
 		const template = ts ? 'typescript' : 'javascript'
 
