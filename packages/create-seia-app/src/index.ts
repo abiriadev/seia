@@ -1,7 +1,7 @@
 import { cp, rm, writeFile } from 'node:fs/promises'
 
 import { Args, Command, Flags } from '@oclif/core'
-import { Liquid } from 'liquidjs'
+import { Context, Liquid } from 'liquidjs'
 import prompts from 'prompts'
 import walkdir from 'walkdir'
 
@@ -34,9 +34,7 @@ export default class Index extends Command {
 		})) {
 			await writeFile(
 				template.slice(0, -this.constructor.templateExtension.length),
-				await liquid.renderFile(template, {
-					name: 'kimo',
-				}),
+				await liquid.renderFile(template, context),
 			)
 
 			await rm(template)
@@ -51,7 +49,7 @@ export default class Index extends Command {
 				type: args.name ? null : 'text',
 				name: 'name',
 				message: 'Project name:',
-				initial: '',
+				initial: 'seia-app',
 			},
 			{
 				type: 'toggle',
