@@ -4,7 +4,8 @@
 	"description": "Create Seia.js apps with one command",
 	"main": "./dist/index.js",
 	"scripts": {
-		"build": "swc src -d dist --strip-leading-paths"
+		"build": "swc src -d dist --strip-leading-paths",
+		"lint": "xo"
 	},
 	"keywords": [],
 	"author": "Abiria",
@@ -23,7 +24,8 @@
 		"chokidar": "^3.6.0",
 		"oclif": "^4.11.3",
 		"ts-node": "^10.9.2",
-		"typescript": "^5.4.5"
+		"typescript": "^5.4.5",
+		"xo": "^0.58.0"
 	},
 	"type": "module",
 	"bin": {
