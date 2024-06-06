@@ -1,3 +1,5 @@
+import process from 'node:process'
+
 import { Args, Flags } from '@oclif/core'
 
 import { SeiaCommand } from '../command.js'
@@ -28,6 +30,9 @@ export default class Start extends SeiaCommand {
 		const {
 			flags: { port },
 		} = await this.parse(Start)
+
+		// HACK: Force server to run in production mode
+		process.env.NODE_ENV = 'production'
 
 		await serve(
 			extendResolvedSeiaConfig(this.resolvedConfig, {
