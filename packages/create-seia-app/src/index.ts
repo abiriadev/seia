@@ -1,4 +1,6 @@
 import { cp, rm, writeFile } from 'node:fs/promises'
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 import { Args, Command, Flags } from '@oclif/core'
 import { Liquid } from 'liquidjs'
@@ -89,7 +91,11 @@ export default class Index extends Command {
 
 		const template = ts ? 'typescript' : 'javascript'
 
-		await cp(`${import.meta.dirname}/../templates/${template}`, name, {
+		const currentFilename = fileURLToPath(import.meta.url)
+
+		const currentDirname = dirname(currentFilename)
+
+		await cp(`${currentDirname}/../templates/${template}`, name, {
 			recursive: true,
 		})
 
