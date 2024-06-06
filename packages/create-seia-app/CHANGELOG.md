@@ -1,5 +1,11 @@
 # create-seia-app
 
+## 0.1.4
+
+### Patch Changes
+
+- 8af865b: Follow up seia.js version
+
 ## 0.1.3
 
 ### Patch Changes
