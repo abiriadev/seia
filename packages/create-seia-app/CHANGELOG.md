@@ -1,5 +1,11 @@
 # create-seia-app
 
+## 0.1.3
+
+### Patch Changes
+
+- 58513d0: Replace unstable APIs with compatible alternative
+
 ## 0.1.2
 
 ### Patch Changes
