@@ -1,5 +1,11 @@
 # seia.js
 
+## 0.1.3
+
+### Patch Changes
+
+- daca655: Fix JSX runtime issue on yarn berry
+
 ## 0.1.2
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # blue-archive-students
 
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies [daca655]
+  - seia.js@0.1.3
+
 ## 1.0.2
 
 ### Patch Changes
