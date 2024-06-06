@@ -1,5 +1,11 @@
 # create-seia-app
 
+## 0.1.2
+
+### Patch Changes
+
+- 4b4e0a1: Fix dist not found error caused by manual publishing
+
 ## 0.1.1
 
 ### Patch Changes
