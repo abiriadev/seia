@@ -28,7 +28,7 @@ _Lightweight SSR framework for React Server Components_
 -   **TypeScript support**: Comes with type-safe API and hooks out of the box, but allows you to use JavaScript if you prefer.
 -   **Deploy anywhere**: Deploy your SSR server to Vercel, Netlify, Cloudflare Workers and anywhere [Hono](https://hono.dev) supports.
 
-## :rocket: create-seia-app
+## :rocket: Quickstart
 
 We provide the `create-seia-app` wizard to help you get your new project up and running quickly
 
