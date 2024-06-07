@@ -67,7 +67,16 @@ $ npm install seia.js
 > Seia currently requires `react` and `react-dom` as peer dependencies with the exact version `19.0.0-beta-26f2496093-20240514`.  
 > Once React 19 has a stable release, Seia will be updated to support the stable version.
 
-After the installation, you can follow the same steps as outlined in the [Quickstart Guide](#rocket-quickstart) to build the project and start the SSR server.
+After installing Seia, you can optionally add the following commands to your `package.json`'s `scripts` section for convenience.
+
+```json
+"scripts": {
+	"build": "seia build",
+	"start": "seia start"
+}
+```
+
+Then, you can follow the same steps as outlined in the [Quickstart Guide](#rocket-quickstart) to build the project and start the SSR server.
 
 ## :question: What is Server Components?
 
