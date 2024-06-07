@@ -33,7 +33,7 @@ _Lightweight SSR framework for React Server Components_
 We provide the `create-seia-app` wizard to help you get your new project up and running quickly
 
 ```sh
-$ npm create seia-app
+$ npm create seia-app # yarn create seia-app or pnpm create seia-app
 ```
 
 After running the command, it will start to ask you a few questions. Choose the options that best suit your needs. Once you've made your selections, a new project will be created with the specified settings.
@@ -41,14 +41,14 @@ After running the command, it will start to ask you a few questions. Choose the 
 Navigate into your newly created project directory and install the dependencies. After that, build your project using the following command:
 
 ```sh
-$ npx seia build
+$ npm run build # yarn build or pnpm build
 ```
 
 This will generate a `dist` folder containing the server and client bundles. To start the SSR server, use:
 
 
 ```sh
-$ npx seia start
+$ npm start # yarn start or pnpm start
 ```
 
 If everything is set up correctly, you should see the server running at http://localhost:5314.
@@ -62,9 +62,6 @@ First, install Seia as a dependency to your project:
 ```sh
 $ npm install seia.js
 ```
-
-> [!TIP]
-> You can use any package manager you prefer, such as `yarn` or `pnpm`.
 
 > [!IMPORTANT]  
 > Seia currently requires `react` and `react-dom` as peer dependencies with the exact version `19.0.0-beta-26f2496093-20240514`.  
