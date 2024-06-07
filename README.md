@@ -59,6 +59,18 @@ $ npx seia start
 
 If there are no errors, you should see the server running at http://localhost:5314.
 
+## :rocket: create-seia-app
+
+For an easier start, you can use create-seia-app.
+
+Please type the following command in the terminal:
+
+```sh
+$ npx create-seia-app
+```
+
+After entering the command, the terminal will ask you a few questions. Choose according to your preferences. Once you have made your selections, a project will be created based on your settings!
+
 ## :question: What is Server Components?
 
 [React Server Components](https://react.dev/reference/rsc/server-components) is a new concept first introduced in React 18 that allows you to render components on the server, but not on the client. What does that mean?
