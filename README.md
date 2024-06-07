@@ -28,6 +28,31 @@ _Lightweight SSR framework for React Server Components_
 -   **TypeScript support**: Comes with type-safe API and hooks out of the box, but allows you to use JavaScript if you prefer.
 -   **Deploy anywhere**: Deploy your SSR server to Vercel, Netlify, Cloudflare Workers and anywhere [Hono](https://hono.dev) supports.
 
+## :rocket: create-seia-app
+
+We provide the `create-seia-app` wizard to help you get your new project up and running quickly
+
+```sh
+$ npm create seia-app
+```
+
+After running the command, it will start to ask you a few questions. Choose the options that best suit your needs. Once you've made your selections, a new project will be created with the specified settings.
+
+Navigate into your newly created project directory and install the dependencies. After that, build your project using the following command:
+
+```sh
+$ npx seia build
+```
+
+This will generate a `dist` folder containing the server and client bundles. To start the SSR server, use:
+
+
+```sh
+$ npx seia start
+```
+
+If everything is set up correctly, you should see the server running at http://localhost:5314.
+
 ## :zap: Getting Started
 
 Create a new empty React project or use your existing one. If you're unsure how to start, follow the [Vite's official template](https://vitejs.dev/guide/#scaffolding-your-first-vite-project).
@@ -58,31 +83,6 @@ $ npx seia start
 ```
 
 If there are no errors, you should see the server running at http://localhost:5314.
-
-## :rocket: create-seia-app
-
-We provide the `create-seia-app` wizard to help you get your new project up and running quickly
-
-```sh
-$ npm create seia-app
-```
-
-After running the command, it will start to ask you a few questions. Choose the options that best suit your needs. Once you've made your selections, a new project will be created with the specified settings.
-
-Navigate into your newly created project directory and install the dependencies. After that, build your project using the following command:
-
-```sh
-$ npx seia build
-```
-
-This will generate a `dist` folder containing the server and client bundles. To start the SSR server, use:
-
-
-```sh
-$ npx seia start
-```
-
-If everything is set up correctly, you should see the server running at http://localhost:5314.
 
 ## :question: What is Server Components?
 
