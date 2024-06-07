@@ -171,6 +171,10 @@ The port number `5314` is a [L33T](https://en.wikipedia.org/wiki/Leet) of "SEIA"
 -   [Vike](https://vike.dev) by [brillout](https://github.com/brillout) for inspiration.
 -   [Hono](https://hono.dev/) by [Yusuke Wada](https://yusu.ke)
 
+## :sparkling_heart: Sponsors
+
+<img src="https://raw.githubusercontent.com/abiriadev/sponsor/main/assets/sponsors.svg" />
+
 ## :scroll: License
 
 [![MIT](https://img.shields.io/github/license/abiriadev/pia?color=fab359&style=for-the-badge)](./LICENSE)
