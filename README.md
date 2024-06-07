@@ -119,7 +119,7 @@ const Counter = () => {
 }
 ```
 
-## :rocket: Try Demo
+## :fire: Try Demo
 
 You can try a simple demo of Seia with the [Blue Archive Students](./examples/blue-archive-students) sample. This project is a simple SSR application that fetches and displays the list of students of the [Blue Archive](https://bluearchive.nexon.com/home).
 
