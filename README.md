@@ -11,7 +11,7 @@
 
 _Lightweight SSR framework for React Server Components_
 
-[Getting started](#getting-started) •
+[Quickstart](#rocket-quickstart) •
 [Try demo](./examples/blue-archive-students) •
 [Documentation](https://seia.dev) •
 [Community](https://github.com/abiriadev/seia/discussions)
@@ -28,36 +28,55 @@ _Lightweight SSR framework for React Server Components_
 -   **TypeScript support**: Comes with type-safe API and hooks out of the box, but allows you to use JavaScript if you prefer.
 -   **Deploy anywhere**: Deploy your SSR server to Vercel, Netlify, Cloudflare Workers and anywhere [Hono](https://hono.dev) supports.
 
-## :zap: Getting Started
+## :rocket: Quickstart
 
-Create a new empty React project or use your existing one. If you're unsure how to start, follow the [Vite's official template](https://vitejs.dev/guide/#scaffolding-your-first-vite-project).
+We provide the `create-seia-app` wizard to help you get your new project up and running quickly
 
-Then, install Seia:
+```sh
+$ npm create seia-app # yarn create seia-app or pnpm create seia-app
+```
+
+After running the command, it will start to ask you a few questions. Choose the options that best suit your needs. Once you've made your selections, a new project will be created with the specified settings.
+
+Navigate into your newly created project directory and install the dependencies. After that, build your project using the following command:
+
+```sh
+$ npm run build # yarn build or pnpm build
+```
+
+This will generate a `dist` folder containing the server and client bundles. To start the SSR server, use:
+
+
+```sh
+$ npm start # yarn start or pnpm start
+```
+
+If everything is set up correctly, you should see the server running at http://localhost:5314.
+
+## :zap: Migrate from Vite
+
+If you already have a Vite project and want to migrate it to Seia, follow these steps.
+
+First, install Seia as a dependency to your project:
 
 ```sh
 $ npm install seia.js
 ```
 
-> [!TIP]
-> You can use any package manager you prefer, such as `yarn` or `pnpm`.
-
 > [!IMPORTANT]  
 > Seia currently requires `react` and `react-dom` as peer dependencies with the exact version `19.0.0-beta-26f2496093-20240514`.  
 > Once React 19 has a stable release, Seia will be updated to support the stable version.
 
-After installation, build your project with the following command:
+After installing Seia, you can optionally add the following commands to your `package.json`'s `scripts` section for convenience.
 
-```sh
-$ npx seia build
+```json
+"scripts": {
+	"build": "seia build",
+	"start": "seia start"
+}
 ```
 
-This will generate a `dist` folder containing the server and client bundles. To start the SSR server, use:
-
-```sh
-$ npx seia start
-```
-
-If there are no errors, you should see the server running at http://localhost:5314.
+Then, you can follow the same steps as outlined in the [Quickstart Guide](#rocket-quickstart) to build the project and start the SSR server.
 
 ## :question: What is Server Components?
 
@@ -106,7 +125,7 @@ const Counter = () => {
 }
 ```
 
-## :rocket: Try Demo
+## :fire: Try Demo
 
 You can try a simple demo of Seia with the [Blue Archive Students](./examples/blue-archive-students) sample. This project is a simple SSR application that fetches and displays the list of students of the [Blue Archive](https://bluearchive.nexon.com/home).
 
