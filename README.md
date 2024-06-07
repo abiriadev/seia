@@ -61,15 +61,28 @@ If there are no errors, you should see the server running at http://localhost:53
 
 ## :rocket: create-seia-app
 
-For an easier start, you can use create-seia-app.
-
-Please type the following command in the terminal:
+We provide the `create-seia-app` wizard to help you get your new project up and running quickly
 
 ```sh
-$ npx create-seia-app
+$ npm create seia-app
 ```
 
-After entering the command, the terminal will ask you a few questions. Choose according to your preferences. Once you have made your selections, a project will be created based on your settings!
+After running the command, it will start to ask you a few questions. Choose the options that best suit your needs. Once you've made your selections, a new project will be created with the specified settings.
+
+Navigate into your newly created project directory and install the dependencies. After that, build your project using the following command:
+
+```sh
+$ npx seia build
+```
+
+This will generate a `dist` folder containing the server and client bundles. To start the SSR server, use:
+
+
+```sh
+$ npx seia start
+```
+
+If everything is set up correctly, you should see the server running at http://localhost:5314.
 
 ## :question: What is Server Components?
 
