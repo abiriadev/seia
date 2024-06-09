@@ -11,6 +11,8 @@
 		"build:tsc": {
 			"dependsOn": ["topo"]
 		},
+		"//#test": {},
+		"//#coverage": {},
 		"//#format": {},
 		"format": {},
 		"lint": {
