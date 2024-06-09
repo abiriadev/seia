@@ -118,3 +118,11 @@ body:
         2. install dependencies.
         3. run some commands.
         4. open the browser and see the result.
+  - type: textarea
+    attributes:
+      label: Related Issues
+      description: |
+        Provide any related issues or context that can help us understand the bug.
+      placeholder: |
+        - #123 - description
+        - #456 - description
