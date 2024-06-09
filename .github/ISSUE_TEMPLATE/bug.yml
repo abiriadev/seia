@@ -122,7 +122,7 @@ body:
     attributes:
       label: Related Issues
       description: |
-        Provide any related issues or context that can help us understand the bug.
+        Provide any related issues, PR, discussion, or context that can help us understand the bug.
       placeholder: |
         - #123 - description
         - #456 - description
