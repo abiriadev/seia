@@ -14,7 +14,7 @@ _Lightweight SSR framework for React Server Components_
 [Quickstart](#rocket-quickstart) •
 [Try demo](./examples/blue-archive-students) •
 [Documentation](https://seia.dev) •
-[Community](https://github.com/abiriadev/seia/discussions)
+[Community](https://discord.gg/xuSH6QuQwG)
 
 </div>
 
@@ -134,6 +134,10 @@ You can try a simple demo of Seia with the [Blue Archive Students](./examples/bl
 ## :book: Documentation
 
 For comprehensive details about the Seia API, configuration, and more, please visit the [API documentation](https://seia.dev).
+
+## :busts_in_silhouette: Join the Community
+
+Become part of the community by joining our official [Discord server](https://discord.gg/xuSH6QuQwG)!
 
 ## :heart: Support
 
