@@ -44,6 +44,5 @@ body:
         Please link to the specific section of the documentation you are referring to, including an anchor if possible.
 
         Alternatively, you can provide a permalink to the source.
-      value: |
     validations:
       required: true
