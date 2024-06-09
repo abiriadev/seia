@@ -1,0 +1,38 @@
+name: Enhancement Suggestion
+description: |
+  Have an idea to improve the project? Share your suggestions for new features or improvements here.
+assignees:
+  - abiriadev
+labels:
+  - enhancement
+title: "[Feat]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to help us improve!
+  - type: textarea
+    attributes:
+      label: Problem
+      description: |
+        Describe the problem or limitation you are experiencing.
+        
+        What issue or need is driving your suggestion?
+  - type: textarea
+    attributes:
+      label: Suggestion
+      description: |
+        Provide your suggestion for how to solve the problem or enhance the project.
+        
+        Include details on the proposed solution or improvement.
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: Willingness to Contribute
+      description: |
+        Are you willing to actively contribute to implementing this enhancement?
+      options:
+        - label: I'm willing to actively contribute to it
+    validations:
+      required: true
