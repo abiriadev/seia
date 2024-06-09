@@ -46,3 +46,11 @@ body:
         Alternatively, you can provide a permalink to the source.
     validations:
       required: true
+  - type: textarea
+    attributes:
+      label: Related Issues
+      description: |
+        Provide any related issues, PR, discussion, or context that can help us understand your suggestion.
+      placeholder: |
+        - #123 - description
+        - #456 - description
