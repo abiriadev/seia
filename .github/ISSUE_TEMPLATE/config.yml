@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/abiriadev/seia/discussions
+    about: Do you have a question? You can start a new discussion here!
+  - name: Discord Community
+    url: https://discord.gg/xuSH6QuQwG
+    about: If you prefer Discord, join the official server and ask there!
