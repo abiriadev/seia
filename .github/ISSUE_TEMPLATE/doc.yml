@@ -26,15 +26,15 @@ body:
   - type: dropdown
     attributes:
       label: Type
-      description: A
+      description: |
+        Select the type(s) of documentation issue.
+
+        Leave blank if not applicable.
       multiple: true
       options:
         - Typo
         - Undocumented
         - Outdated
-        - n/a
-    validations:
-      require: true
   - type: textarea
     attributes:
       label: Description
