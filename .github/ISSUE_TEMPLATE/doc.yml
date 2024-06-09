@@ -1,0 +1,49 @@
+name: Update docs
+description: |
+  Have you found a mistake in the documentation or have an idea to improve it? Share your suggestions for better documentation here.
+assignees:
+  - abiriadev
+labels:
+  - documentation
+title: "[Doc]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to improve our doc!
+  - type: checkboxes
+    attributes:
+      label: Prerequisites
+      description: |
+        Have you searched for existing issues?
+        
+        Please ensure your issue hasn't been reported yet.
+      options:
+        - label: I've checked for existing issues
+          required: true
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Type
+      description: A
+      multiple: true
+      options:
+        - Typo
+        - Undocumented
+        - Outdated
+        - n/a
+    validations:
+      require: true
+  - type: textarea
+    attributes:
+      label: Description
+      description: |
+        Describe which part of the documentation is incorrect and how you would like to improve it.
+
+        Please link to the specific section of the documentation you are referring to, including an anchor if possible.
+
+        Alternatively, you can provide a permalink to the source.
+      value: |
+    validations:
+      required: true
