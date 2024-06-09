@@ -76,6 +76,7 @@
 		"typedoc-material-theme": "^1.0.2",
 		"typedoc-plugin-zod": "^1.1.2",
 		"typescript": "^5.4.5",
+		"vitest": "^1.6.0",
 		"xo": "^0.58.0"
 	},
 	"peerDependencies": {
