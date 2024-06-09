@@ -24,8 +24,10 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install
+      - name: Run lints
+        run: pnpm exec turbo run lint
       - name: Run tests
-        run: pnpm exec turbo test
+        run: pnpm exec turbo run test
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
