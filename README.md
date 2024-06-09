@@ -14,6 +14,7 @@ _Lightweight SSR framework for React Server Components_
 [Quickstart](#rocket-quickstart) •
 [Try demo](./examples/blue-archive-students) •
 [Documentation](https://seia.dev) •
+[Wiki](https://github.com/abiriadev/seia/wiki) •
 [Community](https://discord.gg/xuSH6QuQwG)
 
 </div>
