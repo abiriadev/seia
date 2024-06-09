@@ -36,3 +36,11 @@ body:
         - label: I'm willing to actively contribute to it
     validations:
       required: true
+  - type: textarea
+    attributes:
+      label: Related Issues
+      description: |
+        Provide any related issues, PR, discussion, or context that can help us understand your suggestion.
+      placeholder: |
+        - #123 - description
+        - #456 - description
