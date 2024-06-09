@@ -28,6 +28,8 @@ jobs:
         run: pnpm exec turbo run lint
       - name: Run tests
         run: pnpm exec turbo run test
+      - name: Run tests
+        run: pnpm exec turbo run coverage
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
