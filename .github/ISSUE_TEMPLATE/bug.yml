@@ -1,0 +1,120 @@
+name: Bug report
+description: |
+  Something is broken and you have a reliable reproduction? Let us know here.
+assignees:
+  - abiriadev
+labels:
+  - bug
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug!
+  - type: checkboxes
+    attributes:
+      label: Prerequisites
+      description: |
+        Have you searched for existing issues?
+        
+        Please ensure your issue hasn't been reported yet.
+      options:
+        - label: I've checked for existing issues
+          required: true
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ## Issue Overview
+  - type: textarea
+    attributes:
+      label: Bug Description
+      description: |
+        What exactly happened?
+        
+        Please provide a detailed description of the issue.
+
+        _If multiple independent bugs occurred simultaneously, please report each issue separately._
+      value: |
+        <!--
+        Describe the bug you encountered.
+
+        Use screenshots or GIFs if possible, as they are intuitive ways to convey the problem.
+        -->
+        
+        <!--
+        ```ts
+        Copy and paste any relevant error messages, log output, or other pertinent information.
+
+        Use multiple code blocks for multiple messages.
+        ```
+        -->
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: |
+        What was the expected behavior?
+        
+        Describe the expected outcome or your suggestion.
+
+        _You can skip this if it's obvious that the issue is an error._
+      value: |
+        This is an error, and should not occur.
+  - type: markdown
+    attributes:
+      value: |
+        ## Environment Details & Steps to Reproduce
+  - type: input
+    attributes:
+      label: Version Information
+      description: |
+        Which version of Seia/Node.js are you using?
+        
+        Type the following command in your terminal and paste the result:
+        
+        ```sh
+        seia --version
+        ```
+      placeholder: |
+        seia.js/0.1.3 linux-x64 node-v22.2.0
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Package Manager
+      description: |
+        Which package manager and version are you using?
+        
+        Type the following commands in your terminal:
+
+        ```sh
+        npm --version
+        yarn --version
+        pnpm --version
+        ```
+
+        Have you tested with other package managers? Is this issue specific to a package manager? You can provide multiple managers & versions in this case.
+        
+        _Note: Some issues only arise with Yarn Berry._
+      placeholder: pnpm@9.1.4
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Reproduction Steps
+      description: |
+        How can we reproduce the issue?
+        
+        Provide detailed steps or a reproducible scenario to help us understand and replicate the problem.
+
+        If you have a reproduction repository, please provide its link.
+
+        If you have a dockerfile, that's also great. provide it too.
+      placeholder: |
+        1. clone the reproduction repository.
+        2. install dependencies.
+        3. run some commands.
+        4. open the browser and see the result.
