@@ -42,7 +42,7 @@
 	},
 	"dependencies": {
 		"@oclif/core": "^3.26.6",
-		"liquidjs": "^10.13.1",
+		"liquidjs": "^10.25.0",
 		"prompts": "^2.4.2",
 		"walkdir": "^0.4.1"
 	},
