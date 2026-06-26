@@ -201,4 +201,4 @@ The port number `5314` is a [L33T](https://en.wikipedia.org/wiki/Leet) of "SEIA"
 
 ## :scroll: License
 
-[![MIT](https://img.shields.io/github/license/abiriadev/pia?color=fab359&style=for-the-badge)](./LICENSE)
+[![MIT](https://img.shields.io/github/license/abiriadev/seia?color=fab359&style=for-the-badge)](./LICENSE)
